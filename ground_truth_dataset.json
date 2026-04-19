@@ -1,0 +1,1205 @@
+{
+  "dataset_version": "2.0",
+  "created_date": "2026-04-18",
+  "description": "Ground truth dataset for Dose Certa prescription interpretation evaluation. 30 synthetic prescriptions produced by three methods: 10 manually in Canva (free visual creativity), 15 via Python script (10 HTML templates, reproducible), and 5 handwritten on paper (external validity). 10 fictional doctors across different specialties.",
+  "composition": {
+    "by_production_method": {
+      "canva_manual": 10,
+      "script": 15,
+      "manuscrita_real": 5
+    },
+    "by_num_medications": {
+      "1_med": 8,
+      "2_meds": 8,
+      "3_meds": 7,
+      "4_or_more": 7
+    },
+    "by_complexity": {
+      "simple": 14,
+      "complex": 16
+    },
+    "adversarial_cases": 10,
+    "doctors_count": 10,
+    "prescriptions_per_doctor": 3
+  },
+  "fictional_doctors": [
+    {
+      "name": "Dr. Ricardo Almeida",
+      "crm": "CRM/RS 12345",
+      "specialty": "Clínica Médica"
+    },
+    {
+      "name": "Dra. Juliana Costa",
+      "crm": "CRM/SP 23456",
+      "specialty": "Cardiologia"
+    },
+    {
+      "name": "Dr. Fernando Oliveira",
+      "crm": "CRM/MG 34567",
+      "specialty": "Endocrinologia"
+    },
+    {
+      "name": "Dra. Patrícia Souza",
+      "crm": "CRM/RS 45678",
+      "specialty": "Clínica Médica"
+    },
+    {
+      "name": "Dr. Marcos Lima",
+      "crm": "CRM/RS 56789",
+      "specialty": "Geriatria"
+    },
+    {
+      "name": "Dra. Beatriz Mendes",
+      "crm": "CRM/RJ 67890",
+      "specialty": "Ginecologia"
+    },
+    {
+      "name": "Dr. Thiago Ferreira",
+      "crm": "CRM/PR 78901",
+      "specialty": "Ortopedia"
+    },
+    {
+      "name": "Dra. Camila Ribeiro",
+      "crm": "CRM/SC 89012",
+      "specialty": "Infectologia"
+    },
+    {
+      "name": "Dr. Leonardo Santos",
+      "crm": "CRM/RS 90123",
+      "specialty": "Pneumologia"
+    },
+    {
+      "name": "Dra. Sofia Nogueira",
+      "crm": "CRM/RS 01234",
+      "specialty": "Neurologia"
+    }
+  ],
+  "prescriptions": [
+    {
+      "prescription_id": "P001",
+      "production_method": "canva_manual",
+      "num_medications": 1,
+      "complexity": "simple",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "João Silva",
+        "prescription_date": "2024-01-15",
+        "doctor_name": "Dr. Ricardo Almeida",
+        "doctor_crm": "CRM/RS 12345",
+        "doctor_specialty": "Clínica Médica",
+        "medications": [
+          {
+            "name": "Losartana Potássica",
+            "dosage": "50mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": 30,
+            "instructions": "tomar pela manhã em jejum"
+          }
+        ]
+      },
+      "render_notes": "CANVA — estilo clássico, fonte Arial 11pt, cabeçalho centralizado. Layout tradicional de clínica médica."
+    },
+    {
+      "prescription_id": "P002",
+      "production_method": "canva_manual",
+      "num_medications": 1,
+      "complexity": "simple",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Maria Santos",
+        "prescription_date": "2025-02-03",
+        "doctor_name": "Dra. Patrícia Souza",
+        "doctor_crm": "CRM/RS 45678",
+        "doctor_specialty": "Clínica Médica",
+        "medications": [
+          {
+            "name": "Sinvastatina",
+            "dosage": "20mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": 90,
+            "instructions": "tomar à noite"
+          }
+        ]
+      },
+      "render_notes": "CANVA — estilo moderno com cores suaves, layout em duas colunas (cabeçalho lateral esquerdo)."
+    },
+    {
+      "prescription_id": "P003",
+      "production_method": "canva_manual",
+      "num_medications": 1,
+      "complexity": "simple",
+      "adversarial_notes": "Usa abreviações VO (via oral) e jej. (jejum) — testa capacidade do Gemini de interpretar siglas médicas.",
+      "ground_truth": {
+        "patient_name": "Pedro Oliveira",
+        "prescription_date": "2024-02-10",
+        "doctor_name": "Dr. Fernando Oliveira",
+        "doctor_crm": "CRM/MG 34567",
+        "doctor_specialty": "Endocrinologia",
+        "medications": [
+          {
+            "name": "Levotiroxina Sódica",
+            "dosage": "100mcg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": 180,
+            "instructions": "VO 1x/dia em jej., 30min antes do café"
+          }
+        ]
+      },
+      "render_notes": "CANVA — estilo endocrinologista, incluir logo fictício da clínica (círculo com iniciais FO). Fonte serif como Times New Roman."
+    },
+    {
+      "prescription_id": "P004",
+      "production_method": "canva_manual",
+      "num_medications": 2,
+      "complexity": "simple",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Ana Costa",
+        "prescription_date": "2026-01-20",
+        "doctor_name": "Dra. Camila Ribeiro",
+        "doctor_crm": "CRM/SC 89012",
+        "doctor_specialty": "Infectologia",
+        "medications": [
+          {
+            "name": "Amoxicilina",
+            "dosage": "500mg",
+            "route": "oral",
+            "frequency": "8/8h",
+            "duration_days": 7,
+            "instructions": "tomar por 7 dias, mesmo se melhorar"
+          },
+          {
+            "name": "Paracetamol",
+            "dosage": "750mg",
+            "route": "oral",
+            "frequency": "SOS",
+            "duration_days": 7,
+            "instructions": "se febre acima de 38°C, máximo 4x ao dia"
+          }
+        ]
+      },
+      "render_notes": "CANVA — estilo infectologista, layout com bordas discretas. Cabeçalho com endereço do consultório."
+    },
+    {
+      "prescription_id": "P005",
+      "production_method": "canva_manual",
+      "num_medications": 2,
+      "complexity": "complex",
+      "adversarial_notes": "Duas abreviações diferentes (6/6h e SOS) + instrução condicional de dor.",
+      "ground_truth": {
+        "patient_name": "Carlos Almeida",
+        "prescription_date": "2026-03-05",
+        "doctor_name": "Dr. Thiago Ferreira",
+        "doctor_crm": "CRM/PR 78901",
+        "doctor_specialty": "Ortopedia",
+        "medications": [
+          {
+            "name": "Dipirona Sódica",
+            "dosage": "500mg",
+            "route": "oral",
+            "frequency": "6/6h SOS",
+            "duration_days": 5,
+            "instructions": "em caso de dor, intervalo mínimo 6h"
+          },
+          {
+            "name": "Cefalexina",
+            "dosage": "500mg",
+            "route": "oral",
+            "frequency": "6/6h",
+            "duration_days": 7,
+            "instructions": "antibiótico, completar todo o tratamento"
+          }
+        ]
+      },
+      "render_notes": "CANVA — estilo ortopedista, receita em papel off-white (creme). Carimbo fictício na parte inferior."
+    },
+    {
+      "prescription_id": "P006",
+      "production_method": "canva_manual",
+      "num_medications": 2,
+      "complexity": "simple",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Fernanda Souza",
+        "prescription_date": "2025-01-25",
+        "doctor_name": "Dr. Ricardo Almeida",
+        "doctor_crm": "CRM/RS 12345",
+        "doctor_specialty": "Clínica Médica",
+        "medications": [
+          {
+            "name": "Omeprazol",
+            "dosage": "20mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": 30,
+            "instructions": "tomar em jejum, 30min antes do café"
+          },
+          {
+            "name": "Dipirona",
+            "dosage": "1g",
+            "route": "oral",
+            "frequency": "8/8h SOS",
+            "duration_days": null,
+            "instructions": "se dor, uso contínuo conforme necessidade"
+          }
+        ]
+      },
+      "render_notes": "CANVA — mesmo médico da P001 (Dr. Ricardo), mas variar levemente o layout (cabeçalho um pouco diferente) para simular receitas do mesmo médico em datas diferentes."
+    },
+    {
+      "prescription_id": "P007",
+      "production_method": "canva_manual",
+      "num_medications": 3,
+      "complexity": "complex",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Roberto Lima",
+        "prescription_date": "2024-02-15",
+        "doctor_name": "Dra. Juliana Costa",
+        "doctor_crm": "CRM/SP 23456",
+        "doctor_specialty": "Cardiologia",
+        "medications": [
+          {
+            "name": "Enalapril",
+            "dosage": "10mg",
+            "route": "oral",
+            "frequency": "12/12h",
+            "duration_days": null,
+            "instructions": "uso contínuo para hipertensão"
+          },
+          {
+            "name": "Hidroclorotiazida",
+            "dosage": "25mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "tomar pela manhã"
+          },
+          {
+            "name": "Ácido Acetilsalicílico",
+            "dosage": "100mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "tomar após o almoço"
+          }
+        ]
+      },
+      "render_notes": "CANVA — estilo cardiologista, receituário com linhas numeradas (1), 2), 3)), layout formal. Pode incluir ícone de coração discreto no cabeçalho."
+    },
+    {
+      "prescription_id": "P008",
+      "production_method": "canva_manual",
+      "num_medications": 3,
+      "complexity": "complex",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Juliana Ferreira",
+        "prescription_date": "2024-03-01",
+        "doctor_name": "Dr. Fernando Oliveira",
+        "doctor_crm": "CRM/MG 34567",
+        "doctor_specialty": "Endocrinologia",
+        "medications": [
+          {
+            "name": "Metformina",
+            "dosage": "850mg",
+            "route": "oral",
+            "frequency": "12/12h",
+            "duration_days": null,
+            "instructions": "tomar após as refeições principais"
+          },
+          {
+            "name": "Glibenclamida",
+            "dosage": "5mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "tomar pela manhã antes do café"
+          },
+          {
+            "name": "Atorvastatina",
+            "dosage": "20mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "tomar à noite"
+          }
+        ]
+      },
+      "render_notes": "CANVA — mesmo médico da P003 (Dr. Fernando), manter identidade visual mas variar layout do corpo."
+    },
+    {
+      "prescription_id": "P009",
+      "production_method": "canva_manual",
+      "num_medications": 3,
+      "complexity": "complex",
+      "adversarial_notes": "Abreviação SL (sublingual) + 12/12h + SOS crise. Múltiplas siglas em uma receita.",
+      "ground_truth": {
+        "patient_name": "Marcos Pereira",
+        "prescription_date": "2025-02-28",
+        "doctor_name": "Dra. Sofia Nogueira",
+        "doctor_crm": "CRM/RS 01234",
+        "doctor_specialty": "Neurologia",
+        "medications": [
+          {
+            "name": "Captopril",
+            "dosage": "25mg",
+            "route": "sublingual",
+            "frequency": "SOS",
+            "duration_days": null,
+            "instructions": "SL em caso de crise hipertensiva, PA > 180/120"
+          },
+          {
+            "name": "Enalapril",
+            "dosage": "20mg",
+            "route": "oral",
+            "frequency": "12/12h",
+            "duration_days": null,
+            "instructions": "uso contínuo"
+          },
+          {
+            "name": "Furosemida",
+            "dosage": "40mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "tomar pela manhã, evitar à noite"
+          }
+        ]
+      },
+      "render_notes": "CANVA — paciente pós-AVC acompanhado pela neuro. Estilo mais sóbrio, fonte serif, observações manuscritas sobrepostas ao texto impresso (sua criatividade)."
+    },
+    {
+      "prescription_id": "P010",
+      "production_method": "canva_manual",
+      "num_medications": 4,
+      "complexity": "complex",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Cláudia Rodrigues",
+        "prescription_date": "2024-01-08",
+        "doctor_name": "Dra. Juliana Costa",
+        "doctor_crm": "CRM/SP 23456",
+        "doctor_specialty": "Cardiologia",
+        "medications": [
+          {
+            "name": "Losartana Potássica",
+            "dosage": "50mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "tomar pela manhã"
+          },
+          {
+            "name": "Anlodipino",
+            "dosage": "5mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "tomar pela manhã junto com Losartana"
+          },
+          {
+            "name": "Sinvastatina",
+            "dosage": "20mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "tomar à noite"
+          },
+          {
+            "name": "Ácido Acetilsalicílico",
+            "dosage": "100mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "tomar após almoço"
+          }
+        ]
+      },
+      "render_notes": "CANVA — mesma médica da P007 (Dra. Juliana), mas em receituário de 2ª via/carbono simulado, pode ter cor levemente amarelada."
+    },
+    {
+      "prescription_id": "P011",
+      "production_method": "script",
+      "num_medications": 4,
+      "complexity": "simple",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Antônio Ferreira",
+        "prescription_date": "2025-03-10",
+        "doctor_name": "Dr. Ricardo Almeida",
+        "doctor_crm": "CRM/RS 12345",
+        "doctor_specialty": "Clínica Médica",
+        "medications": [
+          {
+            "name": "Metformina",
+            "dosage": "500mg",
+            "route": "oral",
+            "frequency": "12/12h",
+            "duration_days": null,
+            "instructions": "após refeições"
+          },
+          {
+            "name": "Sitagliptina",
+            "dosage": "50mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          },
+          {
+            "name": "Empagliflozina",
+            "dosage": "10mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          },
+          {
+            "name": "Losartana Potássica",
+            "dosage": "50mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Clínico Tradicional' (Dr. Ricardo Almeida). Arial 11pt. Tratamento triplo diabetes + HAS."
+    },
+    {
+      "prescription_id": "P012",
+      "production_method": "script",
+      "num_medications": 5,
+      "complexity": "complex",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Helena Oliveira",
+        "prescription_date": "2024-02-20",
+        "doctor_name": "Dr. Marcos Lima",
+        "doctor_crm": "CRM/RS 56789",
+        "doctor_specialty": "Geriatria",
+        "medications": [
+          {
+            "name": "Atenolol",
+            "dosage": "50mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          },
+          {
+            "name": "Hidroclorotiazida",
+            "dosage": "25mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          },
+          {
+            "name": "Enalapril",
+            "dosage": "20mg",
+            "route": "oral",
+            "frequency": "12/12h",
+            "duration_days": null,
+            "instructions": "manhã e noite"
+          },
+          {
+            "name": "Ácido Acetilsalicílico",
+            "dosage": "100mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "após almoço"
+          },
+          {
+            "name": "Sinvastatina",
+            "dosage": "20mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "à noite"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Geriatria' (Dr. Marcos Lima). Fonte serif maior (13pt) para paciente idoso. Idosa polifarmácia."
+    },
+    {
+      "prescription_id": "P013",
+      "production_method": "script",
+      "num_medications": 2,
+      "complexity": "simple",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Bruno Santos",
+        "prescription_date": "2026-01-30",
+        "doctor_name": "Dra. Camila Ribeiro",
+        "doctor_crm": "CRM/SC 89012",
+        "doctor_specialty": "Infectologia",
+        "medications": [
+          {
+            "name": "Azitromicina",
+            "dosage": "500mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": 5,
+            "instructions": "tomar por 5 dias consecutivos"
+          },
+          {
+            "name": "Ibuprofeno",
+            "dosage": "400mg",
+            "route": "oral",
+            "frequency": "8/8h SOS",
+            "duration_days": 5,
+            "instructions": "após as refeições, se dor"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Infectologia' (Dra. Camila). Layout com bordas discretas."
+    },
+    {
+      "prescription_id": "P014",
+      "production_method": "script",
+      "num_medications": 3,
+      "complexity": "simple",
+      "adversarial_notes": "Nome parcialmente abreviado: 'Losartana Potáss.' — testa se Gemini expande pra 'Losartana Potássica'.",
+      "ground_truth": {
+        "patient_name": "Letícia Alves",
+        "prescription_date": "2025-03-15",
+        "doctor_name": "Dra. Patrícia Souza",
+        "doctor_crm": "CRM/RS 45678",
+        "doctor_specialty": "Clínica Médica",
+        "medications": [
+          {
+            "name": "Losartana Potássica",
+            "dosage": "50mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          },
+          {
+            "name": "Hidroclorotiazida",
+            "dosage": "25mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã junto com Losartana"
+          },
+          {
+            "name": "Ácido Acetilsalicílico",
+            "dosage": "100mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "após almoço"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Clínica Moderna' (Dra. Patrícia). ESCREVER NO SCRIPT 'Losartana Potáss.' (abreviado) em vez do nome completo."
+    },
+    {
+      "prescription_id": "P015",
+      "production_method": "script",
+      "num_medications": 1,
+      "complexity": "complex",
+      "adversarial_notes": "Antibiótico menos comum (Clindamicina) + frequência de 6/6h. Nome pode ser confundido.",
+      "ground_truth": {
+        "patient_name": "Ricardo Souza",
+        "prescription_date": "2026-02-18",
+        "doctor_name": "Dr. Leonardo Santos",
+        "doctor_crm": "CRM/RS 90123",
+        "doctor_specialty": "Pneumologia",
+        "medications": [
+          {
+            "name": "Clindamicina",
+            "dosage": "300mg",
+            "route": "oral",
+            "frequency": "6/6h",
+            "duration_days": 10,
+            "instructions": "VO, completar os 10 dias mesmo se melhorar"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Pneumologia' (Dr. Leonardo). Pneumonia tratada com clindamicina."
+    },
+    {
+      "prescription_id": "P016",
+      "production_method": "script",
+      "num_medications": 1,
+      "complexity": "simple",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Isabela Costa",
+        "prescription_date": "2026-01-12",
+        "doctor_name": "Dr. Leonardo Santos",
+        "doctor_crm": "CRM/RS 90123",
+        "doctor_specialty": "Pneumologia",
+        "medications": [
+          {
+            "name": "Salbutamol",
+            "dosage": "100mcg/dose",
+            "route": "inalatória",
+            "frequency": "SOS",
+            "duration_days": null,
+            "instructions": "2 jatos em caso de crise de asma"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Pneumologia' com fonte Caveat (handwriting) no corpo. Asma."
+    },
+    {
+      "prescription_id": "P017",
+      "production_method": "script",
+      "num_medications": 2,
+      "complexity": "simple",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Tiago Martins",
+        "prescription_date": "2025-02-08",
+        "doctor_name": "Dra. Beatriz Mendes",
+        "doctor_crm": "CRM/RJ 67890",
+        "doctor_specialty": "Ginecologia",
+        "medications": [
+          {
+            "name": "Paracetamol",
+            "dosage": "500mg",
+            "route": "oral",
+            "frequency": "6/6h SOS",
+            "duration_days": 5,
+            "instructions": "se febre"
+          },
+          {
+            "name": "Dipirona",
+            "dosage": "500mg",
+            "route": "oral",
+            "frequency": "6/6h SOS",
+            "duration_days": 5,
+            "instructions": "se dor, alternar com paracetamol"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Ginecologia' (Dra. Beatriz). Fonte Kalam (handwriting) no corpo. Paciente com cólica/dor pélvica."
+    },
+    {
+      "prescription_id": "P018",
+      "production_method": "script",
+      "num_medications": 2,
+      "complexity": "complex",
+      "adversarial_notes": "Posologia decrescente (20mg por 5 dias depois 10mg por 3 dias) — testa interpretação de desmame escrito em fonte handwriting.",
+      "ground_truth": {
+        "patient_name": "Mariana Lopes",
+        "prescription_date": "2026-03-20",
+        "doctor_name": "Dr. Leonardo Santos",
+        "doctor_crm": "CRM/RS 90123",
+        "doctor_specialty": "Pneumologia",
+        "medications": [
+          {
+            "name": "Prednisona",
+            "dosage": "20mg por 5 dias, depois 10mg por 3 dias",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": 8,
+            "instructions": "VO pela manhã, dose decrescente"
+          },
+          {
+            "name": "Loratadina",
+            "dosage": "10mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": 10,
+            "instructions": "pela manhã"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Pneumologia' com fonte Caveat. Corticoide com desmame — caso realista desafiador."
+    },
+    {
+      "prescription_id": "P019",
+      "production_method": "script",
+      "num_medications": 1,
+      "complexity": "simple",
+      "adversarial_notes": "Dose única — testa se Gemini captura 'dose única' como duration_days=1 ou como instrução especial.",
+      "ground_truth": {
+        "patient_name": "Gabriel Pereira",
+        "prescription_date": "2026-01-18",
+        "doctor_name": "Dra. Beatriz Mendes",
+        "doctor_crm": "CRM/RJ 67890",
+        "doctor_specialty": "Ginecologia",
+        "medications": [
+          {
+            "name": "Fluconazol",
+            "dosage": "150mg",
+            "route": "oral",
+            "frequency": "dose única",
+            "duration_days": 1,
+            "instructions": "VO, dose única"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Ginecologia' com fonte Kalam. Candidíase tratada com dose única."
+    },
+    {
+      "prescription_id": "P020",
+      "production_method": "script",
+      "num_medications": 3,
+      "complexity": "complex",
+      "adversarial_notes": "Metformina pode ser confundida com Metoprolol (antihipertensivo) — teste de nome similar em fonte handwriting.",
+      "ground_truth": {
+        "patient_name": "Beatriz Carvalho",
+        "prescription_date": "2025-02-25",
+        "doctor_name": "Dr. Fernando Oliveira",
+        "doctor_crm": "CRM/MG 34567",
+        "doctor_specialty": "Endocrinologia",
+        "medications": [
+          {
+            "name": "Metformina",
+            "dosage": "850mg",
+            "route": "oral",
+            "frequency": "12/12h",
+            "duration_days": null,
+            "instructions": "após refeições principais"
+          },
+          {
+            "name": "Empagliflozina",
+            "dosage": "25mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          },
+          {
+            "name": "Glibenclamida",
+            "dosage": "5mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã antes do café"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Endocrinologia' (Dr. Fernando) com fonte Caveat. Tratamento triplo diabetes tipo 2."
+    },
+    {
+      "prescription_id": "P021",
+      "production_method": "script",
+      "num_medications": 1,
+      "complexity": "complex",
+      "adversarial_notes": "Anticoagulante com instrução de controle laboratorial — instrução longa.",
+      "ground_truth": {
+        "patient_name": "Eduardo Ribeiro",
+        "prescription_date": "2024-03-08",
+        "doctor_name": "Dra. Sofia Nogueira",
+        "doctor_crm": "CRM/RS 01234",
+        "doctor_specialty": "Neurologia",
+        "medications": [
+          {
+            "name": "Varfarina Sódica",
+            "dosage": "5mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "VO à noite, uso contínuo, controle INR entre 2 e 3"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Neurologia' (Dra. Sofia). Paciente pós-AVC em anticoagulação."
+    },
+    {
+      "prescription_id": "P022",
+      "production_method": "script",
+      "num_medications": 4,
+      "complexity": "complex",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Regina Dias",
+        "prescription_date": "2024-02-12",
+        "doctor_name": "Dra. Juliana Costa",
+        "doctor_crm": "CRM/SP 23456",
+        "doctor_specialty": "Cardiologia",
+        "medications": [
+          {
+            "name": "Carvedilol",
+            "dosage": "12.5mg",
+            "route": "oral",
+            "frequency": "12/12h",
+            "duration_days": null,
+            "instructions": "manhã e noite, após refeições"
+          },
+          {
+            "name": "Furosemida",
+            "dosage": "40mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          },
+          {
+            "name": "Espironolactona",
+            "dosage": "25mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          },
+          {
+            "name": "Digoxina",
+            "dosage": "0.25mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Cardiologia' (Dra. Juliana). Insuficiência cardíaca clássica. Atenção pra dosagem decimal (0.25mg)."
+    },
+    {
+      "prescription_id": "P023",
+      "production_method": "script",
+      "num_medications": 2,
+      "complexity": "simple",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Rafael Gomes",
+        "prescription_date": "2026-01-28",
+        "doctor_name": "Dra. Camila Ribeiro",
+        "doctor_crm": "CRM/SC 89012",
+        "doctor_specialty": "Infectologia",
+        "medications": [
+          {
+            "name": "Ciprofloxacino",
+            "dosage": "500mg",
+            "route": "oral",
+            "frequency": "12/12h",
+            "duration_days": 7,
+            "instructions": "de 12 em 12 horas por 7 dias"
+          },
+          {
+            "name": "Omeprazol",
+            "dosage": "20mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": 7,
+            "instructions": "em jejum pela manhã"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Infectologia' (Dra. Camila). Infecção urinária (cistite)."
+    },
+    {
+      "prescription_id": "P024",
+      "production_method": "script",
+      "num_medications": 4,
+      "complexity": "simple",
+      "adversarial_notes": "Múltiplas vias de administração (SL, VO) em uma mesma receita. Testa diferenciação.",
+      "ground_truth": {
+        "patient_name": "Camila Batista",
+        "prescription_date": "2025-03-22",
+        "doctor_name": "Dra. Patrícia Souza",
+        "doctor_crm": "CRM/RS 45678",
+        "doctor_specialty": "Clínica Médica",
+        "medications": [
+          {
+            "name": "Isossorbida",
+            "dosage": "5mg",
+            "route": "sublingual",
+            "frequency": "SOS",
+            "duration_days": null,
+            "instructions": "SL em caso de dor precordial"
+          },
+          {
+            "name": "Ácido Acetilsalicílico",
+            "dosage": "100mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "VO após almoço"
+          },
+          {
+            "name": "Clopidogrel",
+            "dosage": "75mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "VO pela manhã"
+          },
+          {
+            "name": "Atorvastatina",
+            "dosage": "40mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "VO à noite"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Clínica Moderna' (Dra. Patrícia). Pós-IAM acompanhado pela CM. Mistura de vias SL e VO."
+    },
+    {
+      "prescription_id": "P025",
+      "production_method": "script",
+      "num_medications": 5,
+      "complexity": "complex",
+      "adversarial_notes": null,
+      "ground_truth": {
+        "patient_name": "Augusto Campos",
+        "prescription_date": "2024-02-05",
+        "doctor_name": "Dr. Marcos Lima",
+        "doctor_crm": "CRM/RS 56789",
+        "doctor_specialty": "Geriatria",
+        "medications": [
+          {
+            "name": "Metformina",
+            "dosage": "1g",
+            "route": "oral",
+            "frequency": "12/12h",
+            "duration_days": null,
+            "instructions": "após almoço e jantar"
+          },
+          {
+            "name": "Losartana Potássica",
+            "dosage": "100mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          },
+          {
+            "name": "Sinvastatina",
+            "dosage": "40mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "à noite"
+          },
+          {
+            "name": "Ácido Acetilsalicílico",
+            "dosage": "100mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "após almoço"
+          },
+          {
+            "name": "Omeprazol",
+            "dosage": "20mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "em jejum"
+          }
+        ]
+      },
+      "render_notes": "SCRIPT — template 'Geriatria' (Dr. Marcos) com fonte serif 13pt. Polifarmácia 5 medicamentos em idoso."
+    },
+    {
+      "prescription_id": "P026",
+      "production_method": "manuscrita_real",
+      "num_medications": 1,
+      "complexity": "simple",
+      "adversarial_notes": "Escrita à mão real — teste base de legibilidade do modelo.",
+      "ground_truth": {
+        "patient_name": "Larissa Nunes",
+        "prescription_date": "2025-01-22",
+        "doctor_name": "Dr. Thiago Ferreira",
+        "doctor_crm": "CRM/PR 78901",
+        "doctor_specialty": "Ortopedia",
+        "medications": [
+          {
+            "name": "Nimesulida",
+            "dosage": "100mg",
+            "route": "oral",
+            "frequency": "12/12h",
+            "duration_days": 5,
+            "instructions": "após refeições"
+          }
+        ]
+      },
+      "render_notes": "MANUSCRITA — imprimir só o cabeçalho do ortopedista, escrever à mão o corpo. 1 medicamento simples. Anti-inflamatório comum pós-entorse."
+    },
+    {
+      "prescription_id": "P027",
+      "production_method": "manuscrita_real",
+      "num_medications": 2,
+      "complexity": "complex",
+      "adversarial_notes": "Tramadol (opioide leve) — testa se Gemini captura medicamento controlado. Duas frequências diferentes.",
+      "ground_truth": {
+        "patient_name": "Renato Tavares",
+        "prescription_date": "2026-02-14",
+        "doctor_name": "Dr. Thiago Ferreira",
+        "doctor_crm": "CRM/PR 78901",
+        "doctor_specialty": "Ortopedia",
+        "medications": [
+          {
+            "name": "Tramadol",
+            "dosage": "50mg",
+            "route": "oral",
+            "frequency": "8/8h SOS",
+            "duration_days": 7,
+            "instructions": "VO se dor intensa, máximo 400mg/dia"
+          },
+          {
+            "name": "Dipirona",
+            "dosage": "1g",
+            "route": "oral",
+            "frequency": "6/6h",
+            "duration_days": 7,
+            "instructions": "VO de horário"
+          }
+        ]
+      },
+      "render_notes": "MANUSCRITA — mesmo médico da P026 (Dr. Thiago), letra um pouco mais rápida. Paciente com dor pós-cirurgia ortopédica."
+    },
+    {
+      "prescription_id": "P028",
+      "production_method": "manuscrita_real",
+      "num_medications": 3,
+      "complexity": "simple",
+      "adversarial_notes": "Nome composto (Amoxicilina+Clavulanato) escrito à mão — testa capacidade de leitura.",
+      "ground_truth": {
+        "patient_name": "Vanessa Melo",
+        "prescription_date": "2025-03-12",
+        "doctor_name": "Dra. Sofia Nogueira",
+        "doctor_crm": "CRM/RS 01234",
+        "doctor_specialty": "Neurologia",
+        "medications": [
+          {
+            "name": "Amoxicilina + Clavulanato",
+            "dosage": "875mg",
+            "route": "oral",
+            "frequency": "12/12h",
+            "duration_days": 10,
+            "instructions": "VO por 10 dias, mesmo se melhorar"
+          },
+          {
+            "name": "Ibuprofeno",
+            "dosage": "600mg",
+            "route": "oral",
+            "frequency": "8/8h SOS",
+            "duration_days": 5,
+            "instructions": "após refeições"
+          },
+          {
+            "name": "Paracetamol",
+            "dosage": "750mg",
+            "route": "oral",
+            "frequency": "6/6h SOS",
+            "duration_days": 5,
+            "instructions": "se febre"
+          }
+        ]
+      },
+      "render_notes": "MANUSCRITA — neuro tratando infecção associada a cefaleia. Pode escrever 'Amox+Clav 875mg' se quiser testar abreviação."
+    },
+    {
+      "prescription_id": "P029",
+      "production_method": "manuscrita_real",
+      "num_medications": 3,
+      "complexity": "complex",
+      "adversarial_notes": "Escrita à mão + abreviação 12/12h + 3 medicamentos com diferentes rotinas.",
+      "ground_truth": {
+        "patient_name": "Diego Barbosa",
+        "prescription_date": "2024-02-22",
+        "doctor_name": "Dra. Beatriz Mendes",
+        "doctor_crm": "CRM/RJ 67890",
+        "doctor_specialty": "Ginecologia",
+        "medications": [
+          {
+            "name": "Enalapril",
+            "dosage": "10mg",
+            "route": "oral",
+            "frequency": "12/12h",
+            "duration_days": null,
+            "instructions": "manhã e noite"
+          },
+          {
+            "name": "Anlodipino",
+            "dosage": "5mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          },
+          {
+            "name": "Hidroclorotiazida",
+            "dosage": "25mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          }
+        ]
+      },
+      "render_notes": "MANUSCRITA — gineco manejando HAS em paciente gestante/pós-parto (comum). Letra mais cursiva."
+    },
+    {
+      "prescription_id": "P030",
+      "production_method": "manuscrita_real",
+      "num_medications": 6,
+      "complexity": "complex",
+      "adversarial_notes": "Polifarmácia extrema (6 medicamentos) + Sinvastatina/Sitagliptina nomes similares que podem confundir na letra cursiva. Teste mais difícil do dataset.",
+      "ground_truth": {
+        "patient_name": "Terezinha Moura",
+        "prescription_date": "2024-01-10",
+        "doctor_name": "Dr. Marcos Lima",
+        "doctor_crm": "CRM/RS 56789",
+        "doctor_specialty": "Geriatria",
+        "medications": [
+          {
+            "name": "Losartana Potássica",
+            "dosage": "100mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          },
+          {
+            "name": "Hidroclorotiazida",
+            "dosage": "25mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          },
+          {
+            "name": "Metformina",
+            "dosage": "850mg",
+            "route": "oral",
+            "frequency": "12/12h",
+            "duration_days": null,
+            "instructions": "após refeições"
+          },
+          {
+            "name": "Sitagliptina",
+            "dosage": "50mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "pela manhã"
+          },
+          {
+            "name": "Sinvastatina",
+            "dosage": "40mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "à noite"
+          },
+          {
+            "name": "Ácido Acetilsalicílico",
+            "dosage": "100mg",
+            "route": "oral",
+            "frequency": "1x ao dia",
+            "duration_days": null,
+            "instructions": "após almoço"
+          }
+        ]
+      },
+      "render_notes": "MANUSCRITA — geriatra com idosa polifarmácia. TESTE MAIS DIFÍCIL DO DATASET. Escrever todos os 6 medicamentos à mão, atenção pra Sinvastatina vs Sitagliptina."
+    }
+  ]
+}
