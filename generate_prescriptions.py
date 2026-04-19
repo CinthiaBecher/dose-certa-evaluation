@@ -8,8 +8,6 @@ renderizar HTML → PNG.
 
 Produz:
 - 15 receitas completas (production_method == "script")
-- 5 cabeçalhos isolados para as receitas manuscritas (production_method == "manuscrita_real"),
-  para você imprimir e escrever o corpo à mão.
 
 Dataset: Dose Certa — TCC 2 — Cinthia Virtuoso Becher
 Versão: 1.0
@@ -21,7 +19,6 @@ USO:
 
 SAÍDAS:
     images/               — 15 receitas completas (P011-P025)
-    headers/              — 5 cabeçalhos pra manuscritas (P026-P030)
 """
 
 import asyncio
@@ -623,85 +620,6 @@ def _build_css(style: dict, use_handwriting: bool) -> str:
     """
 
 
-def build_header_only_html(prescription: dict, style: dict) -> str:
-    """
-    Constrói HTML apenas com o cabeçalho e espaço em branco para o corpo,
-    para imprimir e escrever à mão (receitas manuscritas).
-    """
-    gt = prescription["ground_truth"]
-    date_parts = gt["prescription_date"].split("-")
-    date_formatted = f"{date_parts[2]}/{date_parts[1]}/{date_parts[0]}"
-
-    header_html = _build_header(gt, style)
-    css = _build_css(style, use_handwriting=False)
-
-    # CSS adicional para o modo "cabeçalho only"
-    extra_css = """
-    .handwrite-area {
-        flex-grow: 1;
-        border-top: 1px dashed #bbb;
-        margin-top: 10px;
-        padding-top: 15px;
-        min-height: 500px;
-        display: flex;
-        gap: 12px;
-    }
-    .handwrite-rx {
-        font-size: 28pt;
-        color: #888;
-        font-weight: bold;
-    }
-    .handwrite-space {
-        flex-grow: 1;
-        position: relative;
-    }
-    .handwrite-hint {
-        font-size: 8pt;
-        color: #aaa;
-        font-style: italic;
-    }
-    """
-
-    html = f"""<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        {css}
-        {extra_css}
-    </style>
-</head>
-<body>
-    <div class="prescription-container">
-        {header_html}
-        <div class="patient-info">
-            <div class="patient-name">
-                <span class="label">Paciente:</span>
-                <span class="value">{gt['patient_name']}</span>
-            </div>
-            <div class="date">
-                <span class="label">Data:</span>
-                <span class="value">{date_formatted}</span>
-            </div>
-        </div>
-        <div class="handwrite-area">
-            <div class="handwrite-rx">℞</div>
-            <div class="handwrite-space">
-                <div class="handwrite-hint">↓ escrever à mão os medicamentos aqui ↓</div>
-            </div>
-        </div>
-        <div class="signature-section">
-            <div class="signature-line"></div>
-            <div class="signature-name">{gt['doctor_name']}</div>
-            <div class="signature-crm">{gt['doctor_crm']}</div>
-        </div>
-    </div>
-</body>
-</html>"""
-    return html
-
-
 # ==============================================================================
 # RENDERIZAÇÃO COM PLAYWRIGHT
 # ==============================================================================
@@ -723,10 +641,8 @@ async def main():
     script_dir = Path(__file__).parent
     dataset_path = script_dir / "ground_truth_dataset.json"
     images_dir = script_dir / "images"
-    headers_dir = script_dir / "headers"
 
     images_dir.mkdir(exist_ok=True)
-    headers_dir.mkdir(exist_ok=True)
 
     # Carrega o dataset
     if not dataset_path.exists():
@@ -739,11 +655,9 @@ async def main():
 
     all_prescriptions = data["prescriptions"]
     script_prescriptions = [p for p in all_prescriptions if p["production_method"] == "script"]
-    manuscrita_prescriptions = [p for p in all_prescriptions if p["production_method"] == "manuscrita_real"]
 
     print(f"📋 Dataset carregado: {len(all_prescriptions)} receitas")
     print(f"   • {len(script_prescriptions)} via script (vou gerar)")
-    print(f"   • {len(manuscrita_prescriptions)} manuscritas (vou gerar só o cabeçalho)")
     print()
 
     async with async_playwright() as playwright:
@@ -771,37 +685,12 @@ async def main():
             await render_html_to_png(page, html, output_path)
             print(f"   ✓ {prescription['prescription_id']}.png ({style['style_name']})")
 
-        # ============================================
-        # 2. Gerar os 5 cabeçalhos pra manuscritas
-        # ============================================
-        print()
-        print("📝 Gerando cabeçalhos para as manuscritas (você imprime e escreve à mão)...")
-        for prescription in manuscrita_prescriptions:
-            doctor_name = prescription["ground_truth"]["doctor_name"]
-            style = DOCTOR_STYLES.get(doctor_name)
-
-            if not style:
-                print(f"   ⚠️  {prescription['prescription_id']}: médico '{doctor_name}' sem estilo definido — pulando")
-                continue
-
-            html = build_header_only_html(prescription, style)
-            output_path = headers_dir / f"{prescription['prescription_id']}_header.png"
-            await render_html_to_png(page, html, output_path)
-            print(f"   ✓ {prescription['prescription_id']}_header.png")
-
         await context.close()
         await browser.close()
 
     print()
     print("✅ Concluído!")
     print(f"   Receitas completas: {images_dir.absolute()}")
-    print(f"   Cabeçalhos para manuscritas: {headers_dir.absolute()}")
-    print()
-    print("📌 Próximos passos:")
-    print("   1. Confira as 15 PNGs em images/ — se algo parecer estranho, ajuste o DOCTOR_STYLES no topo e rode de novo")
-    print("   2. Imprima os 5 cabeçalhos em headers/ em papel A5")
-    print("   3. Escreva o corpo das receitas à mão conforme o ground_truth")
-    print("   4. Fotografe as manuscritas e salve em images/ com os nomes P026.png a P030.png")
 
 
 if __name__ == "__main__":

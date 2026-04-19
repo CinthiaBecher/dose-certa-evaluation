@@ -40,7 +40,6 @@ python3 generate_prescriptions.py
 O script lê o `ground_truth_dataset.json` e produz:
 
 - `images/` — 15 receitas completas (P011-P025)
-- `headers/` — 5 cabeçalhos isolados para as receitas manuscritas (P026-P030)
 
 As demais 15 imagens (P001-P010 produzidas no Canva + P026-P030 manuscritas/cursivas) devem ser colocadas manualmente em `images/`.
 
