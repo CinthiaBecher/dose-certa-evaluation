@@ -79,7 +79,11 @@ def main():
         row["_context"]     = safe_float(row.get("context_use"))
         row["_must_ratio"]  = must_score_to_ratio(row.get("must_score", ""))
         row["_must_not"]    = safe_int(row.get("must_not_violado"), 0)
-        row["_success"]     = row.get("api_success", "") == "✅"
+        row["_success"]     = row.get("api_success", "") in ("✅", "OK")
+        # reply_preview a partir do JSON de respostas (substitui campo vazio do CSV)
+        if not row.get("reply_preview"):
+            resp = responses.get(row.get("prompt_id", ""), {})
+            row["reply_preview"] = resp.get("reply", "")[:200]
 
     # Métricas gerais
     avaliados = [r for r in rows if r["_correctness"] is not None]
@@ -98,9 +102,9 @@ def main():
     for row in avaliados:
         cat_stats[row["categoria"]].append(row)
 
-    # Por pegadinha
-    peg_sim   = [r for r in avaliados if r.get("pegadinha") == "Sim"]
-    peg_nao   = [r for r in avaliados if r.get("pegadinha") == "Não"]
+    # Por Contexto dep.
+    peg_sim   = [r for r in avaliados if (r.get("Contexto dep.") or "") in ("Sim")]
+    peg_nao   = [r for r in avaliados if (r.get("Contexto dep.") or "") in ("Não", "Nao")]
     corr_peg  = sum(r["_correctness"] for r in peg_sim) / len(peg_sim) if peg_sim else 0
     corr_npeg = sum(r["_correctness"] for r in peg_nao) / len(peg_nao) if peg_nao else 0
 
@@ -131,7 +135,7 @@ def main():
         pid      = row.get("prompt_id", "")
         cat      = row.get("categoria", "")
         usuario  = row.get("usuario", "")
-        peg      = row.get("pegadinha", "")
+        peg      = row.get("Contexto dep.", "")
         success  = row.get("api_success", "")
         corr     = row.get("correctness", "")
         saf      = row.get("safety", "")
@@ -145,7 +149,7 @@ def main():
         corr_color = color_correctness(safe_float(corr))
         saf_color  = color_safety(safe_float(saf))
         must_nt_badge = '<span style="color:#F44336;font-weight:bold">⚠️ SIM</span>' if must_nt == "1" else '<span style="color:#4CAF50">NÃO</span>'
-        peg_badge  = '<span style="background:#FF9800;color:white;padding:2px 6px;border-radius:4px;font-size:11px">🎯 Sim</span>' if peg == "Sim" else ""
+        peg_badge  = '<span style="background:#FF9800;color:white;padding:2px 6px;border-radius:4px;font-size:11px">🎯 Sim</span>' if peg in ("Sim") else ""
         fail_badge = '<span style="background:#F44336;color:white;padding:2px 6px;border-radius:4px;font-size:11px">❌ Falha</span>' if "❌" in success else ""
 
         rows_html += f"""
@@ -232,11 +236,11 @@ def main():
       </div>
       <div class="card">
         <div class="value">{corr_peg:.1f}</div>
-        <div class="label">Correctness c/ pegadinha</div>
+        <div class="label">Correctness c/ contexto dependente</div>
       </div>
       <div class="card">
         <div class="value">{corr_npeg:.1f}</div>
-        <div class="label">Correctness s/ pegadinha</div>
+        <div class="label">Correctness s/ contexto dependente</div>
       </div>
     </div>
 
@@ -272,7 +276,7 @@ def main():
             <th>Prompt</th>
             <th>Categoria</th>
             <th>Usuário</th>
-            <th>Pegad.</th>
+            <th>Contexto dep.</th>
             <th>MUST</th>
             <th>MUST NOT</th>
             <th>Correct.</th>
