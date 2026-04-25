@@ -116,7 +116,7 @@
           {
             "name": "Sinvastatina",
             "dosage": "20mg",
-            "route": "oral",
+            "route": null,
             "frequency": "1x ao dia",
             "duration_days": 90,
             "instructions": "tomar à noite"
@@ -144,7 +144,7 @@
             "route": "oral",
             "frequency": "1x ao dia",
             "duration_days": 180,
-            "instructions": "VO 1x/dia em jej., 30min antes do café"
+            "instructions": "em jejum, 30min antes do café"
           }
         ]
       },
@@ -166,7 +166,7 @@
           {
             "name": "Amoxicilina",
             "dosage": "500mg",
-            "route": "oral",
+            "route": null,
             "frequency": "8/8h",
             "duration_days": 7,
             "instructions": "tomar por 7 dias, mesmo se melhorar"
@@ -174,9 +174,9 @@
           {
             "name": "Paracetamol",
             "dosage": "750mg",
-            "route": "oral",
+            "route": null,
             "frequency": "SOS",
-            "duration_days": 7,
+            "duration_days": null,
             "instructions": "se febre acima de 38°C, máximo 4x ao dia"
           }
         ]
@@ -199,7 +199,7 @@
           {
             "name": "Dipirona Sódica",
             "dosage": "500mg",
-            "route": "oral",
+            "route": null,
             "frequency": "6/6h SOS",
             "duration_days": 5,
             "instructions": "em caso de dor, intervalo mínimo 6h"
@@ -207,10 +207,10 @@
           {
             "name": "Cefalexina",
             "dosage": "500mg",
-            "route": "oral",
+            "route": null,
             "frequency": "6/6h",
             "duration_days": 7,
-            "instructions": "antibiótico, completar todo o tratamento"
+            "instructions": null
           }
         ]
       },
@@ -265,15 +265,15 @@
           {
             "name": "Enalapril",
             "dosage": "10mg",
-            "route": "oral",
+            "route": null,
             "frequency": "12/12h",
             "duration_days": null,
-            "instructions": "uso contínuo para hipertensão"
+            "instructions": null
           },
           {
             "name": "Hidroclorotiazida",
             "dosage": "25mg",
-            "route": "oral",
+            "route": null,
             "frequency": "1x ao dia",
             "duration_days": null,
             "instructions": "tomar pela manhã"
@@ -281,7 +281,7 @@
           {
             "name": "Ácido Acetilsalicílico",
             "dosage": "100mg",
-            "route": "oral",
+            "route": null,
             "frequency": "1x ao dia",
             "duration_days": null,
             "instructions": "tomar após o almoço"
@@ -306,7 +306,7 @@
           {
             "name": "Metformina",
             "dosage": "850mg",
-            "route": "oral",
+            "route": null,
             "frequency": "12/12h",
             "duration_days": null,
             "instructions": "tomar após as refeições principais"
@@ -314,7 +314,7 @@
           {
             "name": "Glibenclamida",
             "dosage": "5mg",
-            "route": "oral",
+            "route": null,
             "frequency": "1x ao dia",
             "duration_days": null,
             "instructions": "tomar pela manhã antes do café"
@@ -322,7 +322,7 @@
           {
             "name": "Atorvastatina",
             "dosage": "20mg",
-            "route": "oral",
+            "route": null,
             "frequency": "1x ao dia",
             "duration_days": null,
             "instructions": "tomar à noite"
@@ -350,20 +350,20 @@
             "route": "sublingual",
             "frequency": "SOS",
             "duration_days": null,
-            "instructions": "SL em caso de crise hipertensiva, PA > 180/120"
+            "instructions": "em caso de crise hipertensiva, PA > 180/120"
           },
           {
             "name": "Enalapril",
             "dosage": "20mg",
-            "route": "oral",
+            "route": null,
             "frequency": "12/12h",
             "duration_days": null,
-            "instructions": "uso contínuo"
+            "instructions": null
           },
           {
             "name": "Furosemida",
             "dosage": "40mg",
-            "route": "oral",
+            "route": null,
             "frequency": "1x ao dia",
             "duration_days": null,
             "instructions": "tomar pela manhã, evitar à noite"
@@ -388,7 +388,7 @@
           {
             "name": "Losartana Potássica",
             "dosage": "50mg",
-            "route": "oral",
+            "route": null,
             "frequency": "1x ao dia",
             "duration_days": null,
             "instructions": "tomar pela manhã"
@@ -396,7 +396,7 @@
           {
             "name": "Anlodipino",
             "dosage": "5mg",
-            "route": "oral",
+            "route": null,
             "frequency": "1x ao dia",
             "duration_days": null,
             "instructions": "tomar pela manhã junto com Losartana"
@@ -404,7 +404,7 @@
           {
             "name": "Sinvastatina",
             "dosage": "20mg",
-            "route": "oral",
+            "route": null,
             "frequency": "1x ao dia",
             "duration_days": null,
             "instructions": "tomar à noite"
@@ -412,7 +412,7 @@
           {
             "name": "Ácido Acetilsalicílico",
             "dosage": "100mg",
-            "route": "oral",
+            "route": null,
             "frequency": "1x ao dia",
             "duration_days": null,
             "instructions": "tomar após almoço"
@@ -579,7 +579,7 @@
             "route": "oral",
             "frequency": "1x ao dia",
             "duration_days": null,
-            "instructions": "pela manhã"
+            "instructions": "tomar pela manhã"
           },
           {
             "name": "Hidroclorotiazida",
@@ -587,7 +587,7 @@
             "route": "oral",
             "frequency": "1x ao dia",
             "duration_days": null,
-            "instructions": "pela manhã junto com Losartana"
+            "instructions": "tomar pela manhã junto com Losartana"
           },
           {
             "name": "Ácido Acetilsalicílico",
@@ -595,7 +595,7 @@
             "route": "oral",
             "frequency": "1x ao dia",
             "duration_days": null,
-            "instructions": "após almoço"
+            "instructions": "tomar após almoço"
           }
         ]
       },
@@ -711,7 +711,7 @@
             "route": "oral",
             "frequency": "1x ao dia",
             "duration_days": 10,
-            "instructions": "pela manhã"
+            "instructions": "tomar pela manhã"
           }
         ]
       },
@@ -876,7 +876,7 @@
             "route": "oral",
             "frequency": "12/12h",
             "duration_days": 7,
-            "instructions": "de 12 em 12 horas por 7 dias"
+            "instructions": null
           },
           {
             "name": "Omeprazol",
@@ -933,7 +933,7 @@
             "route": "oral",
             "frequency": "1x ao dia",
             "duration_days": null,
-            "instructions": "VO à noite"
+            "instructions": "à noite"
           }
         ]
       },
@@ -1012,7 +1012,7 @@
           {
             "name": "Nimesulida",
             "dosage": "100mg",
-            "route": "oral",
+            "route": null,
             "frequency": "12/12h",
             "duration_days": 5,
             "instructions": "após refeições"
@@ -1040,7 +1040,7 @@
             "route": "oral",
             "frequency": "8/8h SOS",
             "duration_days": 7,
-            "instructions": "VO se dor intensa, máximo 400mg/dia"
+            "instructions": "se dor intensa, máximo 400mg/dia"
           },
           {
             "name": "Dipirona",
@@ -1062,7 +1062,7 @@
       "adversarial_notes": "Nome composto (Amoxicilina+Clavulanato) escrito à mão — testa capacidade de leitura.",
       "ground_truth": {
         "patient_name": "Vanessa Melo",
-        "prescription_date": "2025-03-12",
+        "prescription_date": "2026-03-12",
         "doctor_name": "Dra. Sofia Nogueira",
         "doctor_crm": "CRM/RS 01234",
         "doctor_specialty": "Neurologia",
@@ -1111,7 +1111,7 @@
           {
             "name": "Enalapril",
             "dosage": "10mg",
-            "route": "oral",
+            "route": null,
             "frequency": "12/12h",
             "duration_days": null,
             "instructions": "manhã e noite"
@@ -1119,7 +1119,7 @@
           {
             "name": "Anlodipino",
             "dosage": "5mg",
-            "route": "oral",
+            "route": null,
             "frequency": "1x ao dia",
             "duration_days": null,
             "instructions": "pela manhã"

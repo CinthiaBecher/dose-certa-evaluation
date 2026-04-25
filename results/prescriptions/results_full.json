@@ -1,0 +1,2718 @@
+[
+  {
+    "prescription_id": "P001",
+    "production_method": "canva_manual",
+    "num_medications": 1,
+    "complexity": "simple",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "João Silva",
+        "got": "João Silva",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2024-01-15",
+        "got": "2024-01-15",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Ricardo Almeida",
+        "got": "Dr. Ricardo Almeida",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 12345",
+        "got": "CRM/RS 12345",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 1,
+      "n_pred": 1,
+      "n_matched": 1,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P002",
+    "production_method": "canva_manual",
+    "num_medications": 1,
+    "complexity": "simple",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Maria Santos",
+        "got": "Maria Santos",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2025-02-03",
+        "got": "2025-02-03",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Patrícia Souza",
+        "got": "Dra. Patrícia Souza",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 45678",
+        "got": "CRM/RS 45678",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 0.0,
+        "dosage": 1.0,
+        "route": null,
+        "name": 1.0
+      },
+      "n_gt": 1,
+      "n_pred": 1,
+      "n_matched": 1,
+      "errors": [
+        {
+          "med_name": "Sinvastatina",
+          "field": "instructions",
+          "expected": "tomar à noite",
+          "got": "tomar 1 comprimido à noite",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Sinvastatina",
+        "field": "instructions",
+        "expected": "tomar à noite",
+        "got": "tomar 1 comprimido à noite",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P003",
+    "production_method": "canva_manual",
+    "num_medications": 1,
+    "complexity": "simple",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Pedro Oliveira",
+        "got": "Pedro Oliveira",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2024-02-10",
+        "got": "2024-02-10",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Fernando Oliveira",
+        "got": "Fernando Oliveira",
+        "matched": true,
+        "similarity": 0.895,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/MG 34567",
+        "got": "CRM/MG 34567",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 1,
+      "n_pred": 1,
+      "n_matched": 1,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P004",
+    "production_method": "canva_manual",
+    "num_medications": 2,
+    "complexity": "simple",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Ana Costa",
+        "got": "Ana Costa",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2026-01-20",
+        "got": "2026-01-20",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Camila Ribeiro",
+        "got": "Camila Ribeiro",
+        "matched": false,
+        "similarity": 0.848,
+        "critical": false,
+        "error_type": "wrong_extraction",
+        "severity": "minor"
+      },
+      "doctor_crm": {
+        "expected": "CRM/SC 89012",
+        "got": "CRM/SC 89012",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 0.5,
+        "duration_days": 1.0,
+        "instructions": 0.5,
+        "dosage": 1.0,
+        "route": null,
+        "name": 1.0
+      },
+      "n_gt": 2,
+      "n_pred": 2,
+      "n_matched": 2,
+      "errors": [
+        {
+          "med_name": "Paracetamol",
+          "field": "frequency",
+          "expected": "SOS",
+          "got": "máximo 4x ao dia",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Paracetamol",
+          "field": "instructions",
+          "expected": "se febre acima de 38°C, máximo 4x ao dia",
+          "got": "se febre acima de 38°C",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Paracetamol",
+        "field": "frequency",
+        "expected": "SOS",
+        "got": "máximo 4x ao dia",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Paracetamol",
+        "field": "instructions",
+        "expected": "se febre acima de 38°C, máximo 4x ao dia",
+        "got": "se febre acima de 38°C",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": null,
+        "field": "doctor_name",
+        "expected": "Dra. Camila Ribeiro",
+        "got": "Camila Ribeiro",
+        "error_type": "wrong_extraction",
+        "severity": "minor"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P005",
+    "production_method": "canva_manual",
+    "num_medications": 2,
+    "complexity": "complex",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Carlos Almeida",
+        "got": "Carlos Almeida",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2026-03-05",
+        "got": "2026-03-05",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Thiago Ferreira",
+        "got": "Dr. Thiago Ferreira",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/PR 78901",
+        "got": "CRM/PR 78901",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 0.5,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": null,
+        "name": 1.0
+      },
+      "n_gt": 2,
+      "n_pred": 2,
+      "n_matched": 2,
+      "errors": [
+        {
+          "med_name": "Dipirona Sódica",
+          "field": "frequency",
+          "expected": "6/6h SOS",
+          "got": "SOS",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Dipirona Sódica",
+        "field": "frequency",
+        "expected": "6/6h SOS",
+        "got": "SOS",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P006",
+    "production_method": "canva_manual",
+    "num_medications": 2,
+    "complexity": "simple",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Fernanda Souza",
+        "got": "Fernanda Souza",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2025-01-25",
+        "got": "2025-01-25",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Ricardo Almeida",
+        "got": "Dr. Ricardo Almeida",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 12345",
+        "got": "CRM/RS 12345",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 0.5,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 2,
+      "n_pred": 2,
+      "n_matched": 2,
+      "errors": [
+        {
+          "med_name": "Dipirona",
+          "field": "frequency",
+          "expected": "8/8h SOS",
+          "got": "8/8h",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Dipirona",
+        "field": "frequency",
+        "expected": "8/8h SOS",
+        "got": "8/8h",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P007",
+    "production_method": "canva_manual",
+    "num_medications": 3,
+    "complexity": "complex",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Roberto Lima",
+        "got": "Roberto Lima",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2024-02-15",
+        "got": "2024-02-15",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Juliana Costa",
+        "got": "Dra. Juliana Costa",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/SP 23456",
+        "got": "CRM/SP 23456",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": null,
+        "name": 1.0
+      },
+      "n_gt": 3,
+      "n_pred": 3,
+      "n_matched": 3,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P008",
+    "production_method": "canva_manual",
+    "num_medications": 3,
+    "complexity": "complex",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Juliana Ferreira",
+        "got": "Juliana Ferreira",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2024-03-01",
+        "got": "2024-03-01",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Fernando Oliveira",
+        "got": "Dr. Fernando Oliveira",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/MG 34567",
+        "got": "CRM/MG 34567",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 0.0,
+        "name": 1.0
+      },
+      "n_gt": 3,
+      "n_pred": 3,
+      "n_matched": 3,
+      "errors": [
+        {
+          "med_name": "Metformina",
+          "field": "route",
+          "expected": "oral",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        },
+        {
+          "med_name": "Glibenclamida",
+          "field": "route",
+          "expected": "oral",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        },
+        {
+          "med_name": "Atorvastatina",
+          "field": "route",
+          "expected": "oral",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Metformina",
+        "field": "route",
+        "expected": "oral",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      },
+      {
+        "med_name": "Glibenclamida",
+        "field": "route",
+        "expected": "oral",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      },
+      {
+        "med_name": "Atorvastatina",
+        "field": "route",
+        "expected": "oral",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P009",
+    "production_method": "canva_manual",
+    "num_medications": 3,
+    "complexity": "complex",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Marcos Pereira",
+        "got": "Marcos Pereira",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2025-02-28",
+        "got": "2025-02-28",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Sofia Nogueira",
+        "got": "Dra. Sofia Nogueira",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 01234",
+        "got": "CRM/RS 01234",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 3,
+      "n_pred": 3,
+      "n_matched": 3,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P010",
+    "production_method": "canva_manual",
+    "num_medications": 4,
+    "complexity": "complex",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Cláudia Rodrigues",
+        "got": "Cláudia Rodrigues",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2024-01-08",
+        "got": "2024-01-08",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Juliana Costa",
+        "got": "Dra. Juliana Costa",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/SP 23456",
+        "got": "CRM/SP 23456",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": null,
+        "name": 1.0
+      },
+      "n_gt": 4,
+      "n_pred": 4,
+      "n_matched": 4,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P011",
+    "production_method": "script",
+    "num_medications": 4,
+    "complexity": "simple",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Antônio Ferreira",
+        "got": "Antônio Ferreira",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2025-03-10",
+        "got": "2025-03-10",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Ricardo Almeida",
+        "got": "Dr. Ricardo Almeida",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 12345",
+        "got": "CRM/RS 12345",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 4,
+      "n_pred": 4,
+      "n_matched": 4,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P012",
+    "production_method": "script",
+    "num_medications": 5,
+    "complexity": "complex",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Helena Oliveira",
+        "got": "Helena Oliveira",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2024-02-20",
+        "got": "2024-02-20",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Marcos Lima",
+        "got": "Dr. Marcos Lima",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 56789",
+        "got": "CRM/RS 56789",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 5,
+      "n_pred": 5,
+      "n_matched": 5,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P013",
+    "production_method": "script",
+    "num_medications": 2,
+    "complexity": "simple",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Bruno Santos",
+        "got": "Bruno Santos",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2026-01-30",
+        "got": "2026-01-30",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Camila Ribeiro",
+        "got": "Dra. Camila Ribeiro",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/SC 89012",
+        "got": "CRM/SC 89012",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 0.5,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 2,
+      "n_pred": 2,
+      "n_matched": 2,
+      "errors": [
+        {
+          "med_name": "Azitromicina",
+          "field": "instructions",
+          "expected": "tomar por 5 dias consecutivos",
+          "got": "tomar de forma consecutiva",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Azitromicina",
+        "field": "instructions",
+        "expected": "tomar por 5 dias consecutivos",
+        "got": "tomar de forma consecutiva",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P014",
+    "production_method": "script",
+    "num_medications": 3,
+    "complexity": "simple",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Letícia Alves",
+        "got": "Letícia Alves",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2025-03-15",
+        "got": "2025-03-15",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Patrícia Souza",
+        "got": "Dra. Patrícia Souza",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 45678",
+        "got": "CRM/RS 45678",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 0.333,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 3,
+      "n_pred": 3,
+      "n_matched": 3,
+      "errors": [
+        {
+          "med_name": "Losartana Potássica",
+          "field": "instructions",
+          "expected": "pela manhã",
+          "got": "tomar pela manhã",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Ácido Acetilsalicílico",
+          "field": "instructions",
+          "expected": "após almoço",
+          "got": "tomar após almoço",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Losartana Potássica",
+        "field": "instructions",
+        "expected": "pela manhã",
+        "got": "tomar pela manhã",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Ácido Acetilsalicílico",
+        "field": "instructions",
+        "expected": "após almoço",
+        "got": "tomar após almoço",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P015",
+    "production_method": "script",
+    "num_medications": 1,
+    "complexity": "complex",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Ricardo Souza",
+        "got": "Ricardo Souza",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2026-02-18",
+        "got": "2026-02-18",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Leonardo Santos",
+        "got": "Dr. Leonardo Santos",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 90123",
+        "got": "CRM/RS 90123",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 1,
+      "n_pred": 1,
+      "n_matched": 1,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P016",
+    "production_method": "script",
+    "num_medications": 1,
+    "complexity": "simple",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Isabela Costa",
+        "got": "Isabela Costa",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2026-01-12",
+        "got": "2026-01-12",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Leonardo Santos",
+        "got": "Dr. Leonardo Santos",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 90123",
+        "got": "CRM/RS 90123",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 1,
+      "n_pred": 1,
+      "n_matched": 1,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P017",
+    "production_method": "script",
+    "num_medications": 2,
+    "complexity": "simple",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Tiago Martins",
+        "got": "Tiago Martins",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2025-02-08",
+        "got": "2025-02-08",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Beatriz Mendes",
+        "got": "Dra. Beatriz Mendes",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RJ 67890",
+        "got": "CRM/RJ 67890",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 0.5,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 2,
+      "n_pred": 2,
+      "n_matched": 2,
+      "errors": [
+        {
+          "med_name": "Dipirona",
+          "field": "dosage",
+          "expected": "500mg",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Dipirona",
+        "field": "dosage",
+        "expected": "500mg",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P018",
+    "production_method": "script",
+    "num_medications": 2,
+    "complexity": "complex",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Mariana Lopes",
+        "got": "Mariana Lopes",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2026-03-20",
+        "got": "2026-03-20",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Leonardo Santos",
+        "got": "Dr. Leonardo Santos",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 90123",
+        "got": "CRM/RS 90123",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 0.0,
+        "dosage": 0.5,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 2,
+      "n_pred": 2,
+      "n_matched": 2,
+      "errors": [
+        {
+          "med_name": "Prednisona",
+          "field": "instructions",
+          "expected": "VO pela manhã, dose decrescente",
+          "got": "Tomar pela manhã. Dose decrescente: 20mg por 5 dias, depois 10mg por 3 dias.",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Prednisona",
+          "field": "dosage",
+          "expected": "20mg por 5 dias, depois 10mg por 3 dias",
+          "got": "20mg",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Loratadina",
+          "field": "instructions",
+          "expected": "pela manhã",
+          "got": "Tomar pela manhã.",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Prednisona",
+        "field": "instructions",
+        "expected": "VO pela manhã, dose decrescente",
+        "got": "Tomar pela manhã. Dose decrescente: 20mg por 5 dias, depois 10mg por 3 dias.",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Prednisona",
+        "field": "dosage",
+        "expected": "20mg por 5 dias, depois 10mg por 3 dias",
+        "got": "20mg",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Loratadina",
+        "field": "instructions",
+        "expected": "pela manhã",
+        "got": "Tomar pela manhã.",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P019",
+    "production_method": "script",
+    "num_medications": 1,
+    "complexity": "simple",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Gabriel Pereira",
+        "got": "Gabriel Pereira",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2026-01-18",
+        "got": "2026-01-18",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Beatriz Mendes",
+        "got": "Dra. Beatriz Mendes",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RJ 67890",
+        "got": "CRM/RJ 67890",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 0.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 1,
+      "n_pred": 1,
+      "n_matched": 1,
+      "errors": [
+        {
+          "med_name": "Fluconazol",
+          "field": "instructions",
+          "expected": "VO, dose única",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Fluconazol",
+        "field": "instructions",
+        "expected": "VO, dose única",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P020",
+    "production_method": "script",
+    "num_medications": 3,
+    "complexity": "complex",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Beatriz Carvalho",
+        "got": "Beatriz Carvalho",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2025-02-25",
+        "got": "2025-02-25",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Fernando Oliveira",
+        "got": "Dr. Fernando Oliveira",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/MG 34567",
+        "got": "CRM/MG 34567",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 3,
+      "n_pred": 3,
+      "n_matched": 3,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P021",
+    "production_method": "script",
+    "num_medications": 1,
+    "complexity": "complex",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Eduardo Ribeiro",
+        "got": "Eduardo Ribeiro",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2024-03-08",
+        "got": "2024-03-08",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Sofia Nogueira",
+        "got": "Dra. Sofia Nogueira",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 01234",
+        "got": "CRM/RS 01234",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 1,
+      "n_pred": 1,
+      "n_matched": 1,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P022",
+    "production_method": "script",
+    "num_medications": 4,
+    "complexity": "complex",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Regina Dias",
+        "got": "Regina Dias",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2024-02-12",
+        "got": "2024-02-12",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Juliana Costa",
+        "got": "Dra. Juliana Costa",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/SP 23456",
+        "got": "CRM/SP 23456",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 0.75,
+      "precision": 1.0,
+      "f1": 0.857,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 4,
+      "n_pred": 3,
+      "n_matched": 3,
+      "errors": [
+        {
+          "med_name": "Carvedilol",
+          "field": "name",
+          "expected": "Carvedilol",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": false,
+    "errors": [
+      {
+        "med_name": "Carvedilol",
+        "field": "name",
+        "expected": "Carvedilol",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P023",
+    "production_method": "script",
+    "num_medications": 2,
+    "complexity": "simple",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Rafael Gomes",
+        "got": "Rafael Gomes",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2026-01-28",
+        "got": "2026-01-28",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Camila Ribeiro",
+        "got": "Dra. Camila Ribeiro",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/SC 89012",
+        "got": "CRM/SC 89012",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 2,
+      "n_pred": 2,
+      "n_matched": 2,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P024",
+    "production_method": "script",
+    "num_medications": 4,
+    "complexity": "simple",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Camila Batista",
+        "got": "Camila Batista",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2025-03-22",
+        "got": "2025-03-22",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Patrícia Souza",
+        "got": "Dra. Patrícia Souza",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 45678",
+        "got": "CRM/RS 45678",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 4,
+      "n_pred": 4,
+      "n_matched": 4,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P025",
+    "production_method": "script",
+    "num_medications": 5,
+    "complexity": "complex",
+    "adversarial": false,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Augusto Campos",
+        "got": "Augusto Campos",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2024-02-05",
+        "got": "2024-02-05",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Marcos Lima",
+        "got": "Dr. Marcos Lima",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 56789",
+        "got": "CRM/RS 56789",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 1.0,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 5,
+      "n_pred": 5,
+      "n_matched": 5,
+      "errors": []
+    },
+    "all_critical_ok": true,
+    "errors": []
+  },
+  {
+    "prescription_id": "P026",
+    "production_method": "manuscrita_real",
+    "num_medications": 1,
+    "complexity": "simple",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Larissa Nunes",
+        "got": "Larissa Nunes",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2025-01-22",
+        "got": "2025-01-22",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Thiago Ferreira",
+        "got": "Dr. Thiago Ferreira",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/PR 78901",
+        "got": "CRM/PR 78901",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 0.0,
+        "dosage": 0.0,
+        "route": 0.0,
+        "name": 1.0
+      },
+      "n_gt": 1,
+      "n_pred": 1,
+      "n_matched": 1,
+      "errors": [
+        {
+          "med_name": "Nimesulida",
+          "field": "instructions",
+          "expected": "após refeições",
+          "got": "após refeição",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Nimesulida",
+          "field": "dosage",
+          "expected": "100mg",
+          "got": "500mg",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Nimesulida",
+          "field": "route",
+          "expected": "oral",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Nimesulida",
+        "field": "instructions",
+        "expected": "após refeições",
+        "got": "após refeição",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Nimesulida",
+        "field": "dosage",
+        "expected": "100mg",
+        "got": "500mg",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Nimesulida",
+        "field": "route",
+        "expected": "oral",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P027",
+    "production_method": "manuscrita_real",
+    "num_medications": 2,
+    "complexity": "complex",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Renato Tavares",
+        "got": "Renato Tavares",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2026-02-14",
+        "got": "2026-02-14",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Thiago Ferreira",
+        "got": "Thiago Ferreira",
+        "matched": true,
+        "similarity": 0.882,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/PR 78901",
+        "got": "CRM/PR 78901",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 0.5,
+        "duration_days": 0.5,
+        "instructions": 0.0,
+        "dosage": 1.0,
+        "route": 0.5,
+        "name": 1.0
+      },
+      "n_gt": 2,
+      "n_pred": 2,
+      "n_matched": 2,
+      "errors": [
+        {
+          "med_name": "Tramadol",
+          "field": "frequency",
+          "expected": "8/8h SOS",
+          "got": "SOS",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Tramadol",
+          "field": "duration_days",
+          "expected": 7,
+          "got": 5,
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Tramadol",
+          "field": "instructions",
+          "expected": "se dor intensa, máximo 400mg/dia",
+          "got": "se dor intensa - 400 mg/dia máximo",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Dipirona",
+          "field": "instructions",
+          "expected": "VO de horário",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        },
+        {
+          "med_name": "Dipirona",
+          "field": "route",
+          "expected": "oral",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Tramadol",
+        "field": "frequency",
+        "expected": "8/8h SOS",
+        "got": "SOS",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Tramadol",
+        "field": "duration_days",
+        "expected": 7,
+        "got": 5,
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Tramadol",
+        "field": "instructions",
+        "expected": "se dor intensa, máximo 400mg/dia",
+        "got": "se dor intensa - 400 mg/dia máximo",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Dipirona",
+        "field": "instructions",
+        "expected": "VO de horário",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      },
+      {
+        "med_name": "Dipirona",
+        "field": "route",
+        "expected": "oral",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P028",
+    "production_method": "manuscrita_real",
+    "num_medications": 3,
+    "complexity": "simple",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Vanessa Melo",
+        "got": "Vanessa Melo",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2026-03-12",
+        "got": "2026-03-12",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Sofia Nogueira",
+        "got": "Sofia Nogueira",
+        "matched": false,
+        "similarity": 0.848,
+        "critical": false,
+        "error_type": "wrong_extraction",
+        "severity": "minor"
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 01234",
+        "got": "CRM/RS 01234",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 0.667,
+      "precision": 1.0,
+      "f1": 0.8,
+      "field_recall": {
+        "frequency": 0.0,
+        "duration_days": 0.5,
+        "instructions": 0.0,
+        "dosage": 1.0,
+        "route": 0.0,
+        "name": 1.0
+      },
+      "n_gt": 3,
+      "n_pred": 2,
+      "n_matched": 2,
+      "errors": [
+        {
+          "med_name": "Paracetamol",
+          "field": "name",
+          "expected": "Paracetamol",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        },
+        {
+          "med_name": "Amoxicilina + Clavulanato",
+          "field": "frequency",
+          "expected": "12/12h",
+          "got": "12/12hs",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Amoxicilina + Clavulanato",
+          "field": "duration_days",
+          "expected": 10,
+          "got": 5,
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Amoxicilina + Clavulanato",
+          "field": "instructions",
+          "expected": "VO por 10 dias, mesmo se melhorar",
+          "got": "mesmo se melhorar",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Amoxicilina + Clavulanato",
+          "field": "route",
+          "expected": "oral",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        },
+        {
+          "med_name": "Ibuprofeno",
+          "field": "frequency",
+          "expected": "8/8h SOS",
+          "got": "8/8hs",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Ibuprofeno",
+          "field": "instructions",
+          "expected": "após refeições",
+          "got": "após refeição",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Ibuprofeno",
+          "field": "route",
+          "expected": "oral",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": false,
+    "errors": [
+      {
+        "med_name": "Paracetamol",
+        "field": "name",
+        "expected": "Paracetamol",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      },
+      {
+        "med_name": "Amoxicilina + Clavulanato",
+        "field": "frequency",
+        "expected": "12/12h",
+        "got": "12/12hs",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Amoxicilina + Clavulanato",
+        "field": "duration_days",
+        "expected": 10,
+        "got": 5,
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Amoxicilina + Clavulanato",
+        "field": "instructions",
+        "expected": "VO por 10 dias, mesmo se melhorar",
+        "got": "mesmo se melhorar",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Amoxicilina + Clavulanato",
+        "field": "route",
+        "expected": "oral",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      },
+      {
+        "med_name": "Ibuprofeno",
+        "field": "frequency",
+        "expected": "8/8h SOS",
+        "got": "8/8hs",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Ibuprofeno",
+        "field": "instructions",
+        "expected": "após refeições",
+        "got": "após refeição",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Ibuprofeno",
+        "field": "route",
+        "expected": "oral",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      },
+      {
+        "med_name": null,
+        "field": "doctor_name",
+        "expected": "Dra. Sofia Nogueira",
+        "got": "Sofia Nogueira",
+        "error_type": "wrong_extraction",
+        "severity": "minor"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P029",
+    "production_method": "manuscrita_real",
+    "num_medications": 3,
+    "complexity": "complex",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Diego Barbosa",
+        "got": "Diego Barbosa",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2024-02-22",
+        "got": "2024-02-22",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dra. Beatriz Mendes",
+        "got": "Dra. Beatriz Mendes",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RJ 67890",
+        "got": "CRM/RJ 67890",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 0.667,
+        "duration_days": 1.0,
+        "instructions": 0.0,
+        "dosage": 1.0,
+        "route": 0.0,
+        "name": 1.0
+      },
+      "n_gt": 3,
+      "n_pred": 3,
+      "n_matched": 3,
+      "errors": [
+        {
+          "med_name": "Enalapril",
+          "field": "frequency",
+          "expected": "12/12h",
+          "got": "2x ao dia",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Enalapril",
+          "field": "instructions",
+          "expected": "manhã e noite",
+          "got": "tomar pela manhã e à noite",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Anlodipino",
+          "field": "instructions",
+          "expected": "pela manhã",
+          "got": "tomar pela manhã",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Anlodipino",
+          "field": "route",
+          "expected": "oral",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        },
+        {
+          "med_name": "Hidroclorotiazida",
+          "field": "instructions",
+          "expected": "pela manhã",
+          "got": "tomar pela manhã",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Hidroclorotiazida",
+          "field": "route",
+          "expected": "oral",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Enalapril",
+        "field": "frequency",
+        "expected": "12/12h",
+        "got": "2x ao dia",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Enalapril",
+        "field": "instructions",
+        "expected": "manhã e noite",
+        "got": "tomar pela manhã e à noite",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Anlodipino",
+        "field": "instructions",
+        "expected": "pela manhã",
+        "got": "tomar pela manhã",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Anlodipino",
+        "field": "route",
+        "expected": "oral",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      },
+      {
+        "med_name": "Hidroclorotiazida",
+        "field": "instructions",
+        "expected": "pela manhã",
+        "got": "tomar pela manhã",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Hidroclorotiazida",
+        "field": "route",
+        "expected": "oral",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      }
+    ]
+  },
+  {
+    "prescription_id": "P030",
+    "production_method": "manuscrita_real",
+    "num_medications": 6,
+    "complexity": "complex",
+    "adversarial": true,
+    "api_success": true,
+    "api_error": null,
+    "scalar_fields": {
+      "patient_name": {
+        "expected": "Terezinha Moura",
+        "got": "Terezinha Moura",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "prescription_date": {
+        "expected": "2024-01-10",
+        "got": "2024-01-10",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_name": {
+        "expected": "Dr. Marcos Lima",
+        "got": "Dr. Marcos Lima",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": false,
+        "error_type": null,
+        "severity": null
+      },
+      "doctor_crm": {
+        "expected": "CRM/RS 56789",
+        "got": "CRM/RS 56789",
+        "matched": true,
+        "similarity": 1.0,
+        "critical": true,
+        "error_type": null,
+        "severity": null
+      }
+    },
+    "medications": {
+      "recall": 1.0,
+      "precision": 1.0,
+      "f1": 1.0,
+      "field_recall": {
+        "frequency": 1.0,
+        "duration_days": 1.0,
+        "instructions": 0.333,
+        "dosage": 1.0,
+        "route": 1.0,
+        "name": 1.0
+      },
+      "n_gt": 6,
+      "n_pred": 6,
+      "n_matched": 6,
+      "errors": [
+        {
+          "med_name": "Losartana Potássica",
+          "field": "instructions",
+          "expected": "pela manhã",
+          "got": "tomar pela manhã",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Hidroclorotiazida",
+          "field": "instructions",
+          "expected": "pela manhã",
+          "got": "tomar pela manhã",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Sitagliptina",
+          "field": "instructions",
+          "expected": "pela manhã",
+          "got": "tomar pela manhã",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        },
+        {
+          "med_name": "Sinvastatina",
+          "field": "instructions",
+          "expected": "à noite",
+          "got": "tomar à noite",
+          "error_type": "wrong_extraction",
+          "severity": "major"
+        }
+      ]
+    },
+    "all_critical_ok": true,
+    "errors": [
+      {
+        "med_name": "Losartana Potássica",
+        "field": "instructions",
+        "expected": "pela manhã",
+        "got": "tomar pela manhã",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Hidroclorotiazida",
+        "field": "instructions",
+        "expected": "pela manhã",
+        "got": "tomar pela manhã",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Sitagliptina",
+        "field": "instructions",
+        "expected": "pela manhã",
+        "got": "tomar pela manhã",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      },
+      {
+        "med_name": "Sinvastatina",
+        "field": "instructions",
+        "expected": "à noite",
+        "got": "tomar à noite",
+        "error_type": "wrong_extraction",
+        "severity": "major"
+      }
+    ]
+  }
+]

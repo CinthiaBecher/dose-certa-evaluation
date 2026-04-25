@@ -8,13 +8,13 @@ análise de erros e comparação por método de produção.
 
 USO:
     python3 generate_report.py
-    # Abre results/report.html no seu navegador
+    # Abre results/prescriptions/report.html no seu navegador
 """
 
 import json
 from pathlib import Path
 
-RESULTS_DIR  = Path("results")
+RESULTS_DIR  = Path("results/prescriptions")
 FULL_JSON    = RESULTS_DIR / "results_full.json"
 SUMMARY_JSON = RESULTS_DIR / "metrics_summary.json"
 REPORT_PATH  = RESULTS_DIR / "report.html"

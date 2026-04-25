@@ -47,23 +47,22 @@ BACKEND_URL  = "http://localhost:8000"
 ENDPOINT     = f"{BACKEND_URL}/api/prescriptions/interpret"
 DATASET_PATH = Path("ground_truth_dataset.json")
 IMAGES_DIR   = Path("images")
-RESULTS_DIR  = Path("results")
+RESULTS_DIR  = Path("results/prescriptions")
 
 # Campos críticos — erro aqui é sempre MAJOR (impacta conduta clínica)
 CRITICAL_FIELDS = {"patient_name", "prescription_date", "doctor_crm"}
 
 # Campos de medicamento críticos
-CRITICAL_MED_FIELDS = {"name", "dosage", "route", "frequency"}
+CRITICAL_MED_FIELDS = {"name", "dosage", "route", "frequency", "instructions", "duration_days"}
 
 # Limiar de similaridade para Fuzzy Match
 FUZZY_THRESHOLD = 0.85
 
-# Delay entre requisições (segundos) — evita rate limiting do Gemini
-REQUEST_DELAY = 13.0  # 5 RPM = 1 req a cada 12s -> 13s pra ter margem
+# Delay entre requisições (segundos)
+REQUEST_DELAY = 1.0  # billing ativo, 1000 RPM
 
-# Retry em caso de 500 (Gemini rate limit temporário)
-MAX_RETRIES = 3
-RETRY_DELAY = 30.0  # Aguarda mais antes de retry em quota diária
+# Retry em caso de 500 — exponential backoff: 1s, 2s, 4s, 8s, ...
+MAX_RETRIES = 10
 
 
 # ==============================================================================
@@ -224,11 +223,21 @@ def match_medications(gt_meds: list, pred_meds: list) -> dict:
         for field in CRITICAL_MED_FIELDS:
             expected = gt_med.get(field)
             got      = pred_med.get(field)
-            if expected is None:
-                continue
-            field_totals[field] += 1
-            use_fuzzy = field in ("name", "instructions")
-            matched   = is_match(expected, got, use_fuzzy=use_fuzzy)
+            if field == "duration_days":
+                # None==None é match; assimetria é mismatch
+                field_totals[field] += 1
+                if expected is None and got is None:
+                    matched = True
+                elif expected is None or got is None:
+                    matched = False
+                else:
+                    matched = is_match(str(expected), str(got))
+            else:
+                if expected is None:
+                    continue
+                field_totals[field] += 1
+                use_fuzzy = field in ("name", "instructions")
+                matched   = is_match(expected, got, use_fuzzy=use_fuzzy)
             if matched:
                 field_hits[field] += 1
             else:
@@ -274,7 +283,7 @@ def match_medications(gt_meds: list, pred_meds: list) -> dict:
 
 def call_backend(image_path: Path, pid: str) -> tuple:
     """
-    Chama o endpoint do backend com retry em caso de 500.
+    Chama o endpoint do backend com retry e exponential backoff em caso de 500.
     Retorna (pred_dict, error_str).
     """
     for attempt in range(1, MAX_RETRIES + 1):
@@ -291,11 +300,11 @@ def call_backend(image_path: Path, pid: str) -> tuple:
 
             elif response.status_code == 500:
                 if attempt < MAX_RETRIES:
-                    print(f"\n    ⏳ 500 — aguardando {RETRY_DELAY}s (tentativa {attempt}/{MAX_RETRIES})", end="")
-                    time.sleep(RETRY_DELAY)
+                    wait = 2 ** (attempt - 1)  # 1s, 2s, 4s, 8s, ...
+                    print(f"\n    ⏳ 500 — backoff {wait}s (tentativa {attempt}/{MAX_RETRIES})", end="")
+                    time.sleep(wait)
                     continue
                 else:
-                    # Tenta extrair detalhes do erro
                     try:
                         detail = response.json().get("detail", response.text[:200])
                     except Exception:
@@ -394,6 +403,7 @@ def save_results(all_results: list):
         "patient_name_ok", "prescription_date_ok", "doctor_name_ok", "doctor_crm_ok",
         "med_recall", "med_precision", "med_f1",
         "name_recall", "dosage_recall", "route_recall", "frequency_recall",
+        "instructions_recall", "duration_days_recall",
         "all_critical_ok",
     ]
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
@@ -418,10 +428,12 @@ def save_results(all_results: list):
                 "med_recall":           med.get("recall",    ""),
                 "med_precision":        med.get("precision", ""),
                 "med_f1":               med.get("f1",        ""),
-                "name_recall":          fr.get("name",       ""),
-                "dosage_recall":        fr.get("dosage",     ""),
-                "route_recall":         fr.get("route",      ""),
-                "frequency_recall":     fr.get("frequency",  ""),
+                "name_recall":          fr.get("name",          ""),
+                "dosage_recall":        fr.get("dosage",        ""),
+                "route_recall":         fr.get("route",         ""),
+                "frequency_recall":     fr.get("frequency",     ""),
+                "instructions_recall":  fr.get("instructions",  ""),
+                "duration_days_recall": fr.get("duration_days", ""),
                 "all_critical_ok":      r["all_critical_ok"],
             })
 
@@ -464,8 +476,10 @@ def save_results(all_results: list):
             "doctor_crm_accuracy_pct":    pct([r["scalar_fields"].get("doctor_crm",         {}).get("matched") for r in successful]),
             "name_recall":      avg([r["medications"].get("field_recall", {}).get("name")      for r in successful]),
             "dosage_recall":    avg([r["medications"].get("field_recall", {}).get("dosage")    for r in successful]),
-            "route_recall":     avg([r["medications"].get("field_recall", {}).get("route")     for r in successful]),
-            "frequency_recall": avg([r["medications"].get("field_recall", {}).get("frequency") for r in successful]),
+            "route_recall":          avg([r["medications"].get("field_recall", {}).get("route")          for r in successful]),
+            "frequency_recall":      avg([r["medications"].get("field_recall", {}).get("frequency")      for r in successful]),
+            "instructions_recall":   avg([r["medications"].get("field_recall", {}).get("instructions")   for r in successful]),
+            "duration_days_recall":  avg([r["medications"].get("field_recall", {}).get("duration_days")  for r in successful]),
         },
         "by_production_method": methods,
     }
@@ -537,7 +551,7 @@ def print_summary(all_results: list):
         print(f"    {field:<22} {hits}/{n} ({hits/n*100:.1f}%)")
 
     print("\n  Por campo de medicamento (recall médio):")
-    for field in ["name", "dosage", "route", "frequency"]:
+    for field in ["name", "dosage", "route", "frequency", "instructions", "duration_days"]:
         vals = [
             r["medications"].get("field_recall", {}).get(field)
             for r in successful
@@ -581,7 +595,7 @@ def main():
     print("🔬 Dose Certa — Avaliação de Prescrições")
     print(f"   Endpoint: {ENDPOINT}")
     print(f"   Delay entre requisições: {REQUEST_DELAY}s (~{60/REQUEST_DELAY:.0f} RPM)")
-    print(f"   Retry em caso de erro: {MAX_RETRIES}x (aguarda {RETRY_DELAY}s)")
+    print(f"   Retry em caso de erro: {MAX_RETRIES}x (exponential backoff: 1s, 2s, 4s, ...)")
     if args.start or args.end:
         print(f"   Lote: {args.start or 'início'} → {args.end or 'fim'}")
     print()
