@@ -18,6 +18,7 @@ SAÍDA:
 """
 
 import csv
+import html as html_mod
 import json
 from pathlib import Path
 from collections import defaultdict
@@ -74,12 +75,13 @@ def main():
 
     # Enriquecer rows
     for row in rows:
-        row["_correctness"] = safe_float(row.get("correctness"))
-        row["_safety"]      = safe_float(row.get("safety"))
-        row["_context"]     = safe_float(row.get("context_use"))
-        row["_must_ratio"]  = must_score_to_ratio(row.get("must_score", ""))
-        row["_must_not"]    = safe_int(row.get("must_not_violado"), 0)
-        row["_success"]     = row.get("api_success", "") in ("✅", "OK")
+        row["_correctness"]  = safe_float(row.get("correctness"))
+        row["_safety"]       = safe_float(row.get("safety"))
+        row["_context"]      = safe_float(row.get("context_use"))
+        row["_must_ratio"]   = must_score_to_ratio(row.get("must_score", ""))
+        row["_should_ratio"] = must_score_to_ratio(row.get("should_score", ""))
+        row["_must_not"]     = safe_int(row.get("must_not_violado"), 0)
+        row["_success"]      = row.get("api_success", "") in ("✅", "OK")
         # reply_preview a partir do JSON de respostas (substitui campo vazio do CSV)
         if not row.get("reply_preview"):
             resp = responses.get(row.get("prompt_id", ""), {})
@@ -94,17 +96,18 @@ def main():
     correctness_med = sum(r["_correctness"] for r in avaliados) / n_aval if avaliados else 0
     safety_med      = sum(r["_safety"] for r in avaliados if r["_safety"] is not None) / n_aval if avaliados else 0
     context_med     = sum(r["_context"] for r in avaliados if r["_context"] is not None) / n_aval if avaliados else 0
-    must_not_total  = sum(r["_must_not"] for r in avaliados)
-    must_ratio_med  = sum(r["_must_ratio"] for r in avaliados if r["_must_ratio"] is not None) / n_aval if avaliados else 0
+    must_not_total   = sum(r["_must_not"] for r in avaliados)
+    must_ratio_med   = sum(r["_must_ratio"] for r in avaliados if r["_must_ratio"] is not None) / n_aval if avaliados else 0
+    should_ratio_med = sum(r["_should_ratio"] for r in avaliados if r["_should_ratio"] is not None) / n_aval if avaliados else 0
 
     # Por categoria
     cat_stats = defaultdict(list)
     for row in avaliados:
         cat_stats[row["categoria"]].append(row)
 
-    # Por Contexto dep.
-    peg_sim   = [r for r in avaliados if (r.get("Contexto dep.") or "") in ("Sim")]
-    peg_nao   = [r for r in avaliados if (r.get("Contexto dep.") or "") in ("Não", "Nao")]
+    # Por contexto_dependente
+    peg_sim   = [r for r in avaliados if (r.get("contexto_dependente") or "") in ("Sim")]
+    peg_nao   = [r for r in avaliados if (r.get("contexto_dependente") or "") in ("Não", "Nao")]
     corr_peg  = sum(r["_correctness"] for r in peg_sim) / len(peg_sim) if peg_sim else 0
     corr_npeg = sum(r["_correctness"] for r in peg_nao) / len(peg_nao) if peg_nao else 0
 
@@ -115,7 +118,8 @@ def main():
     cat_labels  = [c for c in CATEGORIAS_ORDER if c in cat_stats]
     cat_corr    = [round(sum(r["_correctness"] for r in cat_stats[c]) / len(cat_stats[c]), 2) for c in cat_labels]
     cat_context = [round(sum(r["_context"] for r in cat_stats[c] if r["_context"] is not None) / len(cat_stats[c]), 2) for c in cat_labels]
-    cat_must    = [round(sum(r["_must_ratio"] for r in cat_stats[c] if r["_must_ratio"] is not None) / len(cat_stats[c]) * 100, 1) for c in cat_labels]
+    cat_must    = [round(sum(r["_must_ratio"]   for r in cat_stats[c] if r["_must_ratio"]   is not None) / len(cat_stats[c]) * 100, 1) for c in cat_labels]
+    cat_should  = [round(sum(r["_should_ratio"] for r in cat_stats[c] if r["_should_ratio"] is not None) / len(cat_stats[c]) * 100, 1) for c in cat_labels]
 
     def color_correctness(v):
         if v is None: return "#cccccc"
@@ -129,42 +133,72 @@ def main():
         if v == 1: return "#FFC107"
         return "#F44336"
 
+    def color_context(v):
+        if v is None: return "#cccccc"
+        if v >= 1: return "#4CAF50"
+        if v >= 0.5: return "#FFC107"
+        return "#F44336"
+
     # Tabela de prompts
     rows_html = ""
     for row in rows:
         pid      = row.get("prompt_id", "")
         cat      = row.get("categoria", "")
         usuario  = row.get("usuario", "")
-        peg      = row.get("Contexto dep.", "")
+        peg      = row.get("contexto_dependente", "")
         success  = row.get("api_success", "")
         corr     = row.get("correctness", "")
         saf      = row.get("safety", "")
         ctx      = row.get("context_use", "")
-        must_sc  = row.get("must_score", "")
-        must_nt  = row.get("must_not_violado", "")
+        must_sc       = row.get("must_score", "")
+        should_sc     = row.get("should_score", "")
+        must_nt       = row.get("must_not_violado", "")
+        must_nt_qual  = row.get("must_not_qual", "")
+        crit_must     = html_mod.escape(row.get("criterios_must", ""), quote=True)
+        crit_should   = html_mod.escape(row.get("criterios_should", ""), quote=True)
+        crit_must_not = html_mod.escape(row.get("criterios_must_not", ""), quote=True)
+        crit_must_nt_qual = html_mod.escape(must_nt_qual, quote=True)
         bula     = row.get("bula_citada", "")
         obs      = row.get("observacoes", "")
-        reply    = row.get("reply_preview", "")[:200]
+        full_reply    = responses.get(pid, {}).get("reply", row.get("reply_preview", ""))
+        reply_preview = (full_reply[:80] + "…") if len(full_reply) > 80 else full_reply
+        mensagem      = row.get("mensagem", "")
+        full_reply_e  = html_mod.escape(full_reply, quote=True)
+        preview_e     = html_mod.escape(reply_preview, quote=True)
+        mensagem_e    = html_mod.escape(mensagem, quote=True)
 
-        corr_color = color_correctness(safe_float(corr))
-        saf_color  = color_safety(safe_float(saf))
+        corr_color   = color_correctness(safe_float(corr))
+        saf_color    = color_safety(safe_float(saf))
+        ctx_color    = color_context(safe_float(ctx))
+        must_ratio_row = must_score_to_ratio(must_sc)
+        must_color = ("#4CAF50" if must_ratio_row is not None and must_ratio_row >= 1.0
+                      else "#FFC107" if must_ratio_row is not None and must_ratio_row >= 0.5
+                      else "#F44336" if must_ratio_row is not None
+                      else "#cccccc")
+        should_ratio = must_score_to_ratio(should_sc)
+        should_color = ("#4CAF50" if should_ratio is not None and should_ratio >= 1.0
+                        else "#FFC107" if should_ratio is not None and should_ratio >= 0.5
+                        else "#F44336" if should_ratio is not None
+                        else "#cccccc")
         must_nt_badge = '<span style="color:#F44336;font-weight:bold">⚠️ SIM</span>' if must_nt == "1" else '<span style="color:#4CAF50">NÃO</span>'
-        peg_badge  = '<span style="background:#FF9800;color:white;padding:2px 6px;border-radius:4px;font-size:11px">🎯 Sim</span>' if peg in ("Sim") else ""
+        peg_badge  = '<span style="background:#FF9800;color:white;padding:2px 6px;border-radius:4px;font-size:11px">🎯 Sim</span>' if peg == "Sim" else ""
         fail_badge = '<span style="background:#F44336;color:white;padding:2px 6px;border-radius:4px;font-size:11px">❌ Falha</span>' if "❌" in success else ""
 
         rows_html += f"""
         <tr>
           <td><b>{pid}</b> {fail_badge}</td>
+          <td class="expandable" onclick="toggleExpand(this)" data-full="{mensagem_e}" data-preview="{mensagem_e}" style="font-size:11px;color:#444;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{mensagem_e}</td>
           <td style="font-size:12px">{cat}</td>
           <td style="font-size:12px">{usuario.replace("EVAL_","")}</td>
           <td>{peg_badge}</td>
-          <td style="font-size:11px;color:#555">{must_sc}</td>
-          <td>{must_nt_badge}</td>
+          <td class="crit-cell" onclick="openModal('MUST','{crit_must}','{must_sc}','')" title="Clique para ver critérios" style="cursor:pointer"><span style="background:{must_color};color:white;padding:2px 6px;border-radius:4px;font-size:11px">{must_sc if must_sc else "—"}</span></td>
+          <td class="crit-cell" onclick="openModal('SHOULD','{crit_should}','{should_sc}','')" title="Clique para ver critérios" style="cursor:pointer"><span style="background:{should_color};color:white;padding:2px 6px;border-radius:4px;font-size:11px">{should_sc if should_sc else "—"}</span></td>
+          <td class="crit-cell" onclick="openModal('MUST NOT','{crit_must_not}','{must_nt}','{crit_must_nt_qual}')" title="Clique para ver critérios" style="cursor:pointer">{must_nt_badge}</td>
           <td><span style="background:{corr_color};color:white;padding:2px 8px;border-radius:4px">{corr if corr else "—"}</span></td>
           <td><span style="background:{saf_color};color:white;padding:2px 8px;border-radius:4px">{saf if saf else "—"}</span></td>
-          <td style="text-align:center">{ctx if ctx else "—"}</td>
+          <td><span style="background:{ctx_color};color:white;padding:2px 8px;border-radius:4px">{ctx if ctx else "—"}</span></td>
           <td style="text-align:center">{bula if bula else "—"}</td>
-          <td style="font-size:11px;color:#666;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{reply}">{reply[:80]}...</td>
+          <td class="expandable" onclick="toggleExpand(this)" data-full="{full_reply_e}" data-preview="{preview_e}" style="font-size:11px;color:#666;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{preview_e}</td>
           <td style="font-size:11px;color:#555">{obs}</td>
         </tr>"""
 
@@ -199,7 +233,88 @@ def main():
     .critico {{ background: #fff3f3; }}
     .footer {{ text-align: center; padding: 24px; color: #888; font-size: 12px; }}
     @media (max-width: 768px) {{ .charts {{ grid-template-columns: 1fr; }} }}
+    .expandable {{ cursor: pointer; }}
+    .expandable:hover {{ background: #f0f8f6; }}
+    .expandable.expanded {{ white-space: pre-wrap !important; overflow: visible !important;
+      text-overflow: clip !important; max-width: 500px !important; color: #222 !important; }}
+    .crit-cell:hover {{ background: #f0f8f6; }}
+    /* Modal */
+    #criteriaModal {{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45);
+      z-index:1000; align-items:center; justify-content:center; }}
+    #criteriaModal.open {{ display:flex; }}
+    #modalBox {{ background:white; border-radius:12px; padding:28px 32px; max-width:560px;
+      width:90%; box-shadow:0 8px 32px rgba(0,0,0,0.18); position:relative; }}
+    #modalTitle {{ font-size:15px; font-weight:bold; color:#006B5E; margin-bottom:16px; }}
+    #modalScore {{ display:inline-block; background:#006B5E; color:white; padding:2px 10px;
+      border-radius:4px; font-size:13px; margin-left:8px; vertical-align:middle; }}
+    #modalList {{ list-style:none; padding:0; margin:0; }}
+    #modalList li {{ padding:8px 12px; border-radius:6px; margin-bottom:6px;
+      background:#f5f5f5; font-size:13px; line-height:1.5; }}
+    #modalList li.violated {{ background:#fff0f0; border-left:3px solid #F44336; color:#c62828; font-weight:500; }}
+    #modalList li.ok {{ background:#f0fff4; border-left:3px solid #4CAF50; }}
+    #modalClose {{ position:absolute; top:14px; right:16px; cursor:pointer;
+      font-size:20px; color:#888; line-height:1; border:none; background:none; }}
+    #modalClose:hover {{ color:#333; }}
   </style>
+  <!-- Modal de critérios -->
+  <div id="criteriaModal" onclick="if(event.target===this)closeModal()">
+    <div id="modalBox">
+      <button id="modalClose" onclick="closeModal()">✕</button>
+      <div id="modalTitle"></div>
+      <ul id="modalList"></ul>
+    </div>
+  </div>
+
+  <script>
+    function openModal(type, criteriaStr, score, violated) {{
+      const modal = document.getElementById('criteriaModal');
+      const title = document.getElementById('modalTitle');
+      const list  = document.getElementById('modalList');
+
+      const typeColors = {{ 'MUST': '#006B5E', 'SHOULD': '#8BC34A', 'MUST NOT': '#F44336' }};
+      const color = typeColors[type] || '#333';
+      const scoreHtml = score ? `<span id="modalScore" style="background:${{color}}">${{score}}</span>` : '';
+      title.innerHTML = `Critérios <b style="color:${{color}}">${{type}}</b> ${{scoreHtml}}`;
+
+      list.innerHTML = '';
+      if (!criteriaStr) {{
+        list.innerHTML = '<li style="color:#888">Sem critérios registrados.</li>';
+      }} else {{
+        const items = criteriaStr.split('|').map(s => s.trim()).filter(Boolean);
+        items.forEach(item => {{
+          const li = document.createElement('li');
+          li.textContent = item;
+          if (type === 'MUST NOT') {{
+            if (violated && violated.toLowerCase().includes(item.toLowerCase().substring(0,15))) {{
+              li.classList.add('violated');
+              li.textContent = '⚠️ ' + item + ' (violado)';
+            }}
+          }} else {{
+            li.classList.add('ok');
+          }}
+          list.appendChild(li);
+        }});
+      }}
+
+      modal.classList.add('open');
+    }}
+
+    function closeModal() {{
+      document.getElementById('criteriaModal').classList.remove('open');
+    }}
+
+    document.addEventListener('keydown', e => {{ if (e.key === 'Escape') closeModal(); }});
+
+    function toggleExpand(el) {{
+      if (el.classList.contains('expanded')) {{
+        el.classList.remove('expanded');
+        el.textContent = el.dataset.preview;
+      }} else {{
+        el.classList.add('expanded');
+        el.textContent = el.dataset.full;
+      }}
+    }}
+  </script>
 </head>
 <body>
   <div class="header">
@@ -227,6 +342,10 @@ def main():
         <div class="label">MUST atendidos</div>
       </div>
       <div class="card">
+        <div class="value">{should_ratio_med*100:.0f}%</div>
+        <div class="label">SHOULD atendidos</div>
+      </div>
+      <div class="card">
         <div class="value" style="color:{'#F44336' if must_not_total > 0 else '#4CAF50'}">{must_not_total}</div>
         <div class="label">MUST NOT violados</div>
       </div>
@@ -251,7 +370,7 @@ def main():
         <canvas id="chartCorr"></canvas>
       </div>
       <div class="chart-box">
-        <h3>MUST atendidos por categoria (%)</h3>
+        <h3>MUST e SHOULD atendidos por categoria (%)</h3>
         <canvas id="chartMust"></canvas>
       </div>
     </div>
@@ -274,10 +393,12 @@ def main():
         <table>
           <tr>
             <th>Prompt</th>
+            <th>Pergunta</th>
             <th>Categoria</th>
             <th>Usuário</th>
             <th>Contexto dep.</th>
             <th>MUST</th>
+            <th>SHOULD</th>
             <th>MUST NOT</th>
             <th>Correct.</th>
             <th>Safety</th>
@@ -300,6 +421,7 @@ def main():
     const labels = {json.dumps(cat_labels)};
     const corr   = {json.dumps(cat_corr)};
     const must   = {json.dumps(cat_must)};
+    const should = {json.dumps(cat_should)};
 
     new Chart(document.getElementById('chartCorr'), {{
       type: 'bar',
@@ -325,19 +447,27 @@ def main():
       type: 'bar',
       data: {{
         labels,
-        datasets: [{{
-          label: 'MUST atendidos (%)',
-          data: must,
-          backgroundColor: '#B5CC18',
-          borderRadius: 6,
-        }}]
+        datasets: [
+          {{
+            label: 'MUST (%)',
+            data: must,
+            backgroundColor: '#006B5E',
+            borderRadius: 4,
+          }},
+          {{
+            label: 'SHOULD (%)',
+            data: should,
+            backgroundColor: '#B5CC18',
+            borderRadius: 4,
+          }}
+        ]
       }},
       options: {{
         responsive: true,
         scales: {{
           y: {{ min: 0, max: 100, ticks: {{ callback: v => v + '%' }} }}
         }},
-        plugins: {{ legend: {{ display: false }} }}
+        plugins: {{ legend: {{ display: true, position: 'top' }} }}
       }}
     }});
   </script>
