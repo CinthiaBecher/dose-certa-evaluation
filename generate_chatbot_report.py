@@ -58,6 +58,19 @@ def must_score_to_ratio(score_str):
     except Exception:
         return None
 
+def wilson_ci(k, n, z=1.96):
+    """Intervalo de confiança Wilson Score 95% para proporção k/n.
+    Retorna (lower, upper) arredondados a 3 casas decimais.
+    Retorna (None, None) se n == 0.
+    """
+    if n == 0:
+        return None, None
+    p = k / n
+    denom = 1 + z**2 / n
+    centre = (p + z**2 / (2 * n)) / denom
+    margin = (z * (p * (1 - p) / n + z**2 / (4 * n**2)) ** 0.5) / denom
+    return round(centre - margin, 3), round(centre + margin, 3)
+
 def main():
     if not FILLED_CSV_PATH.exists():
         print(f"❌ {FILLED_CSV_PATH} não encontrado.")
@@ -99,6 +112,26 @@ def main():
     must_not_total   = sum(r["_must_not"] for r in avaliados)
     must_ratio_med   = sum(r["_must_ratio"] for r in avaliados if r["_must_ratio"] is not None) / n_aval if avaliados else 0
     should_ratio_med = sum(r["_should_ratio"] for r in avaliados if r["_should_ratio"] is not None) / n_aval if avaliados else 0
+
+    # Totais para Wilson CI (soma de hits e denominadores individuais)
+    def _parse_score_parts(score_str):
+        try:
+            parts = score_str.strip().split("/")
+            return int(parts[0]), int(parts[1])
+        except Exception:
+            return 0, 0
+
+    total_must_hits,   total_must_total   = 0, 0
+    total_should_hits, total_should_total = 0, 0
+    for r in avaliados:
+        h, t = _parse_score_parts(r.get("must_score", ""))
+        total_must_hits   += h; total_must_total   += t
+        h, t = _parse_score_parts(r.get("should_score", ""))
+        total_should_hits += h; total_should_total += t
+
+    must_ci   = wilson_ci(total_must_hits,   total_must_total)
+    should_ci = wilson_ci(total_should_hits, total_should_total)
+    must_not_ci = wilson_ci(must_not_total, n_aval)
 
     # Por categoria
     cat_stats = defaultdict(list)
@@ -340,14 +373,17 @@ def main():
       <div class="card">
         <div class="value">{must_ratio_med*100:.0f}%</div>
         <div class="label">MUST atendidos</div>
+        {'<div style="font-size:12px;color:#888;margin-top:4px">[IC 95%: ' + f'{must_ci[0]*100:.0f}% – {must_ci[1]*100:.0f}%' + ']</div>' if must_ci[0] is not None else ''}
       </div>
       <div class="card">
         <div class="value">{should_ratio_med*100:.0f}%</div>
         <div class="label">SHOULD atendidos</div>
+        {'<div style="font-size:12px;color:#888;margin-top:4px">[IC 95%: ' + f'{should_ci[0]*100:.0f}% – {should_ci[1]*100:.0f}%' + ']</div>' if should_ci[0] is not None else ''}
       </div>
       <div class="card">
         <div class="value" style="color:{'#F44336' if must_not_total > 0 else '#4CAF50'}">{must_not_total}</div>
         <div class="label">MUST NOT violados</div>
+        {'<div style="font-size:12px;color:#888;margin-top:4px">[IC 95%: ' + f'{must_not_ci[0]*100:.0f}% – {must_not_ci[1]*100:.0f}%' + ']</div>' if must_not_ci[0] is not None else ''}
       </div>
       <div class="card">
         <div class="value">{context_med:.1f}<span style="font-size:18px">/2</span></div>
