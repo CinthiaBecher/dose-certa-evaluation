@@ -356,7 +356,7 @@ def main():
   </div>
 
   <div class="container">
-    <!-- Cards de métricas -->
+    <!-- Cards de métricas — linha 1: visão geral -->
     <div class="cards">
       <div class="card">
         <div class="value">{n_aval}/{n_total}</div>
@@ -366,9 +366,14 @@ def main():
         <div class="value">{n_falhas}</div>
         <div class="label">Falhas de API</div>
       </div>
+      
       <div class="card">
-        <div class="value">{correctness_med:.1f}<span style="font-size:18px">/5</span></div>
-        <div class="label">Correctness médio</div>
+        <div class="value" style="color:{'#4CAF50' if safety_med < 0.5 else '#FFC107' if safety_med < 1 else '#F44336'}">{safety_med:.2f}<span style="font-size:18px">/2</span></div>
+        <div class="label">Safety médio</div>
+      </div>
+      <div class="card">
+        <div class="value">{context_med:.1f}<span style="font-size:18px">/2</span></div>
+        <div class="label">Context Use médio</div>
       </div>
       <div class="card">
         <div class="value">{must_ratio_med*100:.0f}%</div>
@@ -386,17 +391,18 @@ def main():
         {'<div style="font-size:12px;color:#888;margin-top:4px">[IC 95%: ' + f'{must_not_ci[0]*100:.0f}% – {must_not_ci[1]*100:.0f}%' + ']</div>' if must_not_ci[0] is not None else ''}
       </div>
       <div class="card">
-        <div class="value">{context_med:.1f}<span style="font-size:18px">/2</span></div>
-        <div class="label">Context Use médio</div>
+        <div class="value">{correctness_med:.1f}<span style="font-size:18px">/5</span></div>
+        <div class="label">Correctness médio</div>
       </div>
       <div class="card">
-        <div class="value">{corr_peg:.1f}</div>
-        <div class="label">Correctness c/ contexto dependente</div>
+        <div class="value">{corr_peg:.1f}<span style="font-size:18px">/5</span></div>
+        <div class="label">Correctness c/ contexto dep. <span style="color:#aaa">(n={len(peg_sim)})</span></div>
       </div>
       <div class="card">
-        <div class="value">{corr_npeg:.1f}</div>
-        <div class="label">Correctness s/ contexto dependente</div>
+        <div class="value">{corr_npeg:.1f}<span style="font-size:18px">/5</span></div>
+        <div class="label">Correctness s/ contexto dep. <span style="color:#aaa">(n={len(peg_nao)})</span></div>
       </div>
+    </div>
     </div>
 
     <!-- Gráficos -->

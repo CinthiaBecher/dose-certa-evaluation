@@ -70,8 +70,8 @@ def build_report(all_results, summary):
     method_f1     = [round((methods_data[m].get("med_f1") or 0) * 100, 1) for m in methods_data]
 
     # 2. Recall por campo de medicamento
-    field_names  = ["name", "dosage", "route", "frequency"]
-    field_labels = ["Nome", "Dosagem", "Via", "Frequência"]
+    field_names  = ["name", "dosage", "route", "frequency", "instructions", "duration_days"]
+    field_labels = ["Nome", "Dosagem", "Via", "Frequência", "Instruções", "Duração (dias)"]
     field_values = [round((overall.get(f"{f}_recall") or 0) * 100, 1) for f in field_names]
 
     # 3. Distribuição de erros
@@ -327,7 +327,7 @@ def build_report(all_results, summary):
         datasets: [{{
           label: 'Recall (%)',
           data: {json.dumps(field_values)},
-          backgroundColor: [green + 'cc', accent + 'cc', orange + 'cc', '#8b5cf6cc'],
+          backgroundColor: [green + 'cc', accent + 'cc', orange + 'cc', '#8b5cf6cc', '#ec4899cc', '#06b6d4cc'],
           borderRadius: 4,
         }}]
       }},
