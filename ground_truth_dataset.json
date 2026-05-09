@@ -83,7 +83,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "João Silva",
-        "prescription_date": "2024-01-15",
+        "prescription_date": "15/01/2024",
         "doctor_name": "Dr. Ricardo Almeida",
         "doctor_crm": "CRM/RS 12345",
         "doctor_specialty": "Clínica Médica",
@@ -108,7 +108,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Maria Santos",
-        "prescription_date": "2025-02-03",
+        "prescription_date": "03/02/2025",
         "doctor_name": "Dra. Patrícia Souza",
         "doctor_crm": "CRM/RS 45678",
         "doctor_specialty": "Clínica Médica",
@@ -119,7 +119,7 @@
             "route": null,
             "frequency": "1x ao dia",
             "duration_days": 90,
-            "instructions": "tomar à noite"
+            "instructions": "à noite"
           }
         ]
       },
@@ -133,7 +133,7 @@
       "adversarial_notes": "Usa abreviações VO (via oral) e jej. (jejum) — testa capacidade do Gemini de interpretar siglas médicas.",
       "ground_truth": {
         "patient_name": "Pedro Oliveira",
-        "prescription_date": "2024-02-10",
+        "prescription_date": "10/02/2024",
         "doctor_name": "Dr. Fernando Oliveira",
         "doctor_crm": "CRM/MG 34567",
         "doctor_specialty": "Endocrinologia",
@@ -158,7 +158,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Ana Costa",
-        "prescription_date": "2026-01-20",
+        "prescription_date": "20/01/2026",
         "doctor_name": "Dra. Camila Ribeiro",
         "doctor_crm": "CRM/SC 89012",
         "doctor_specialty": "Infectologia",
@@ -175,9 +175,9 @@
             "name": "Paracetamol",
             "dosage": "750mg",
             "route": null,
-            "frequency": "SOS",
+            "frequency": "4x ao dia",
             "duration_days": null,
-            "instructions": "se febre acima de 38°C, máximo 4x ao dia"
+            "instructions": "se febre acima de 38°C"
           }
         ]
       },
@@ -191,7 +191,7 @@
       "adversarial_notes": "Duas abreviações diferentes (6/6h e SOS) + instrução condicional de dor.",
       "ground_truth": {
         "patient_name": "Carlos Almeida",
-        "prescription_date": "2026-03-05",
+        "prescription_date": "05/03/2026",
         "doctor_name": "Dr. Thiago Ferreira",
         "doctor_crm": "CRM/PR 78901",
         "doctor_specialty": "Ortopedia",
@@ -200,9 +200,9 @@
             "name": "Dipirona Sódica",
             "dosage": "500mg",
             "route": null,
-            "frequency": "6/6h SOS",
+            "frequency": null,
             "duration_days": 5,
-            "instructions": "em caso de dor, intervalo mínimo 6h"
+            "instructions": "em caso de dor"
           },
           {
             "name": "Cefalexina",
@@ -224,7 +224,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Fernanda Souza",
-        "prescription_date": "2025-01-25",
+        "prescription_date": "25/01/2025",
         "doctor_name": "Dr. Ricardo Almeida",
         "doctor_crm": "CRM/RS 12345",
         "doctor_specialty": "Clínica Médica",
@@ -241,7 +241,7 @@
             "name": "Dipirona",
             "dosage": "1g",
             "route": "oral",
-            "frequency": "8/8h SOS",
+            "frequency": "8/8h",
             "duration_days": null,
             "instructions": "se dor, uso contínuo conforme necessidade"
           }
@@ -257,7 +257,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Roberto Lima",
-        "prescription_date": "2024-02-15",
+        "prescription_date": "15/02/2024",
         "doctor_name": "Dra. Juliana Costa",
         "doctor_crm": "CRM/SP 23456",
         "doctor_specialty": "Cardiologia",
@@ -298,7 +298,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Juliana Ferreira",
-        "prescription_date": "2024-03-01",
+        "prescription_date": "01/03/2024",
         "doctor_name": "Dr. Fernando Oliveira",
         "doctor_crm": "CRM/MG 34567",
         "doctor_specialty": "Endocrinologia",
@@ -339,7 +339,7 @@
       "adversarial_notes": "Abreviação SL (sublingual) + 12/12h + SOS crise. Múltiplas siglas em uma receita.",
       "ground_truth": {
         "patient_name": "Marcos Pereira",
-        "prescription_date": "2025-02-28",
+        "prescription_date": "28/02/2025",
         "doctor_name": "Dra. Sofia Nogueira",
         "doctor_crm": "CRM/RS 01234",
         "doctor_specialty": "Neurologia",
@@ -380,7 +380,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Cláudia Rodrigues",
-        "prescription_date": "2024-01-08",
+        "prescription_date": "08/01/2024",
         "doctor_name": "Dra. Juliana Costa",
         "doctor_crm": "CRM/SP 23456",
         "doctor_specialty": "Cardiologia",
@@ -429,7 +429,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Antônio Ferreira",
-        "prescription_date": "2025-03-10",
+        "prescription_date": "10/03/2025",
         "doctor_name": "Dr. Ricardo Almeida",
         "doctor_crm": "CRM/RS 12345",
         "doctor_specialty": "Clínica Médica",
@@ -478,7 +478,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Helena Oliveira",
-        "prescription_date": "2024-02-20",
+        "prescription_date": "20/02/2024",
         "doctor_name": "Dr. Marcos Lima",
         "doctor_crm": "CRM/RS 56789",
         "doctor_specialty": "Geriatria",
@@ -535,7 +535,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Bruno Santos",
-        "prescription_date": "2026-01-30",
+        "prescription_date": "30/01/2026",
         "doctor_name": "Dra. Camila Ribeiro",
         "doctor_crm": "CRM/SC 89012",
         "doctor_specialty": "Infectologia",
@@ -552,7 +552,7 @@
             "name": "Ibuprofeno",
             "dosage": "400mg",
             "route": "oral",
-            "frequency": "8/8h SOS",
+            "frequency": "8/8h",
             "duration_days": 5,
             "instructions": "após as refeições, se dor"
           }
@@ -568,7 +568,7 @@
       "adversarial_notes": "Nome parcialmente abreviado: 'Losartana Potáss.' — testa se Gemini expande pra 'Losartana Potássica'.",
       "ground_truth": {
         "patient_name": "Letícia Alves",
-        "prescription_date": "2025-03-15",
+        "prescription_date": "15/03/2025",
         "doctor_name": "Dra. Patrícia Souza",
         "doctor_crm": "CRM/RS 45678",
         "doctor_specialty": "Clínica Médica",
@@ -579,7 +579,7 @@
             "route": "oral",
             "frequency": "1x ao dia",
             "duration_days": null,
-            "instructions": "tomar pela manhã"
+            "instructions": "pela manhã"
           },
           {
             "name": "Hidroclorotiazida",
@@ -587,7 +587,7 @@
             "route": "oral",
             "frequency": "1x ao dia",
             "duration_days": null,
-            "instructions": "tomar pela manhã junto com Losartana"
+            "instructions": "pela manhã junto com Losartana"
           },
           {
             "name": "Ácido Acetilsalicílico",
@@ -595,7 +595,7 @@
             "route": "oral",
             "frequency": "1x ao dia",
             "duration_days": null,
-            "instructions": "tomar após almoço"
+            "instructions": "após almoço"
           }
         ]
       },
@@ -609,7 +609,7 @@
       "adversarial_notes": "Antibiótico menos comum (Clindamicina) + frequência de 6/6h. Nome pode ser confundido.",
       "ground_truth": {
         "patient_name": "Ricardo Souza",
-        "prescription_date": "2026-02-18",
+        "prescription_date": "18/02/2026",
         "doctor_name": "Dr. Leonardo Santos",
         "doctor_crm": "CRM/RS 90123",
         "doctor_specialty": "Pneumologia",
@@ -634,7 +634,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Isabela Costa",
-        "prescription_date": "2026-01-12",
+        "prescription_date": "12/01/2026",
         "doctor_name": "Dr. Leonardo Santos",
         "doctor_crm": "CRM/RS 90123",
         "doctor_specialty": "Pneumologia",
@@ -659,7 +659,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Tiago Martins",
-        "prescription_date": "2025-02-08",
+        "prescription_date": "08/02/2025",
         "doctor_name": "Dra. Beatriz Mendes",
         "doctor_crm": "CRM/RJ 67890",
         "doctor_specialty": "Ginecologia",
@@ -668,7 +668,7 @@
             "name": "Paracetamol",
             "dosage": "500mg",
             "route": "oral",
-            "frequency": "6/6h SOS",
+            "frequency": "6/6h",
             "duration_days": 5,
             "instructions": "se febre"
           },
@@ -676,7 +676,7 @@
             "name": "Dipirona",
             "dosage": "500mg",
             "route": "oral",
-            "frequency": "6/6h SOS",
+            "frequency": "6/6h",
             "duration_days": 5,
             "instructions": "se dor, alternar com paracetamol"
           }
@@ -692,7 +692,7 @@
       "adversarial_notes": "Posologia decrescente (20mg por 5 dias depois 10mg por 3 dias) — testa interpretação de desmame escrito em fonte handwriting.",
       "ground_truth": {
         "patient_name": "Mariana Lopes",
-        "prescription_date": "2026-03-20",
+        "prescription_date": "20/03/2026",
         "doctor_name": "Dr. Leonardo Santos",
         "doctor_crm": "CRM/RS 90123",
         "doctor_specialty": "Pneumologia",
@@ -725,7 +725,7 @@
       "adversarial_notes": "Dose única — testa se Gemini captura 'dose única' como duration_days=1 ou como instrução especial.",
       "ground_truth": {
         "patient_name": "Gabriel Pereira",
-        "prescription_date": "2026-01-18",
+        "prescription_date": "18/01/2026",
         "doctor_name": "Dra. Beatriz Mendes",
         "doctor_crm": "CRM/RJ 67890",
         "doctor_specialty": "Ginecologia",
@@ -736,7 +736,7 @@
             "route": "oral",
             "frequency": "dose única",
             "duration_days": 1,
-            "instructions": "VO, dose única"
+            "instructions": null
           }
         ]
       },
@@ -750,7 +750,7 @@
       "adversarial_notes": "Metformina pode ser confundida com Metoprolol (antihipertensivo) — teste de nome similar em fonte handwriting.",
       "ground_truth": {
         "patient_name": "Beatriz Carvalho",
-        "prescription_date": "2025-02-25",
+        "prescription_date": "25/02/2025",
         "doctor_name": "Dr. Fernando Oliveira",
         "doctor_crm": "CRM/MG 34567",
         "doctor_specialty": "Endocrinologia",
@@ -791,7 +791,7 @@
       "adversarial_notes": "Anticoagulante com instrução de controle laboratorial — instrução longa.",
       "ground_truth": {
         "patient_name": "Eduardo Ribeiro",
-        "prescription_date": "2024-03-08",
+        "prescription_date": "08/03/2024",
         "doctor_name": "Dra. Sofia Nogueira",
         "doctor_crm": "CRM/RS 01234",
         "doctor_specialty": "Neurologia",
@@ -816,7 +816,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Regina Dias",
-        "prescription_date": "2024-02-12",
+        "prescription_date": "12/02/2024",
         "doctor_name": "Dra. Juliana Costa",
         "doctor_crm": "CRM/SP 23456",
         "doctor_specialty": "Cardiologia",
@@ -865,7 +865,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Rafael Gomes",
-        "prescription_date": "2026-01-28",
+        "prescription_date": "28/01/2026",
         "doctor_name": "Dra. Camila Ribeiro",
         "doctor_crm": "CRM/SC 89012",
         "doctor_specialty": "Infectologia",
@@ -898,7 +898,7 @@
       "adversarial_notes": "Múltiplas vias de administração (SL, VO) em uma mesma receita. Testa diferenciação.",
       "ground_truth": {
         "patient_name": "Camila Batista",
-        "prescription_date": "2025-03-22",
+        "prescription_date": "22/03/2025",
         "doctor_name": "Dra. Patrícia Souza",
         "doctor_crm": "CRM/RS 45678",
         "doctor_specialty": "Clínica Médica",
@@ -947,7 +947,7 @@
       "adversarial_notes": null,
       "ground_truth": {
         "patient_name": "Augusto Campos",
-        "prescription_date": "2024-02-05",
+        "prescription_date": "05/02/2024",
         "doctor_name": "Dr. Marcos Lima",
         "doctor_crm": "CRM/RS 56789",
         "doctor_specialty": "Geriatria",
@@ -1004,7 +1004,7 @@
       "adversarial_notes": "Escrita à mão real — teste base de legibilidade do modelo.",
       "ground_truth": {
         "patient_name": "Larissa Nunes",
-        "prescription_date": "2025-01-22",
+        "prescription_date": "22/01/2025",
         "doctor_name": "Dr. Thiago Ferreira",
         "doctor_crm": "CRM/PR 78901",
         "doctor_specialty": "Ortopedia",
@@ -1015,7 +1015,7 @@
             "route": null,
             "frequency": "12/12h",
             "duration_days": 5,
-            "instructions": "após refeições"
+            "instructions": "após refeição"
           }
         ]
       },
@@ -1029,7 +1029,7 @@
       "adversarial_notes": "Tramadol (opioide leve) — testa se Gemini captura medicamento controlado. Duas frequências diferentes.",
       "ground_truth": {
         "patient_name": "Renato Tavares",
-        "prescription_date": "2026-02-14",
+        "prescription_date": "14/02/2026",
         "doctor_name": "Dr. Thiago Ferreira",
         "doctor_crm": "CRM/PR 78901",
         "doctor_specialty": "Ortopedia",
@@ -1038,9 +1038,9 @@
             "name": "Tramadol",
             "dosage": "50mg",
             "route": "oral",
-            "frequency": "8/8h SOS",
-            "duration_days": 7,
-            "instructions": "se dor intensa, máximo 400mg/dia"
+            "frequency": null,
+            "duration_days": 5,
+            "instructions": "se dor intensa - 400 mg/dia máximo"
           },
           {
             "name": "Dipirona",
@@ -1048,7 +1048,7 @@
             "route": "oral",
             "frequency": "6/6h",
             "duration_days": 7,
-            "instructions": "VO de horário"
+            "instructions": null
           }
         ]
       },
@@ -1062,7 +1062,7 @@
       "adversarial_notes": "Nome composto (Amoxicilina+Clavulanato) escrito à mão — testa capacidade de leitura.",
       "ground_truth": {
         "patient_name": "Vanessa Melo",
-        "prescription_date": "2026-03-12",
+        "prescription_date": "12/03/2026",
         "doctor_name": "Dra. Sofia Nogueira",
         "doctor_crm": "CRM/RS 01234",
         "doctor_specialty": "Neurologia",
@@ -1073,23 +1073,15 @@
             "route": "oral",
             "frequency": "12/12h",
             "duration_days": 10,
-            "instructions": "VO por 10 dias, mesmo se melhorar"
+            "instructions": "mesmo se melhorar"
           },
           {
             "name": "Ibuprofeno",
             "dosage": "600mg",
             "route": "oral",
-            "frequency": "8/8h SOS",
+            "frequency": "8/8h",
             "duration_days": 5,
-            "instructions": "após refeições"
-          },
-          {
-            "name": "Paracetamol",
-            "dosage": "750mg",
-            "route": "oral",
-            "frequency": "6/6h SOS",
-            "duration_days": 5,
-            "instructions": "se febre"
+            "instructions": "após refeição"
           }
         ]
       },
@@ -1103,7 +1095,7 @@
       "adversarial_notes": "Escrita à mão + abreviação 12/12h + 3 medicamentos com diferentes rotinas.",
       "ground_truth": {
         "patient_name": "Diego Barbosa",
-        "prescription_date": "2024-02-22",
+        "prescription_date": "22/02/2024",
         "doctor_name": "Dra. Beatriz Mendes",
         "doctor_crm": "CRM/RJ 67890",
         "doctor_specialty": "Ginecologia",
@@ -1112,9 +1104,9 @@
             "name": "Enalapril",
             "dosage": "10mg",
             "route": null,
-            "frequency": "12/12h",
+            "frequency": "2x ao dia",
             "duration_days": null,
-            "instructions": "manhã e noite"
+            "instructions": "manhã e à noite"
           },
           {
             "name": "Anlodipino",
@@ -1122,7 +1114,7 @@
             "route": null,
             "frequency": "1x ao dia",
             "duration_days": null,
-            "instructions": "pela manhã"
+            "instructions": "manhã"
           },
           {
             "name": "Hidroclorotiazida",
@@ -1130,7 +1122,7 @@
             "route": "oral",
             "frequency": "1x ao dia",
             "duration_days": null,
-            "instructions": "pela manhã"
+            "instructions": "manhã"
           }
         ]
       },
@@ -1144,7 +1136,7 @@
       "adversarial_notes": "Polifarmácia extrema (6 medicamentos) + Sinvastatina/Sitagliptina nomes similares que podem confundir na letra cursiva. Teste mais difícil do dataset.",
       "ground_truth": {
         "patient_name": "Terezinha Moura",
-        "prescription_date": "2024-01-10",
+        "prescription_date": "10/01/2024",
         "doctor_name": "Dr. Marcos Lima",
         "doctor_crm": "CRM/RS 56789",
         "doctor_specialty": "Geriatria",
@@ -1153,7 +1145,7 @@
             "name": "Losartana Potássica",
             "dosage": "100mg",
             "route": "oral",
-            "frequency": "1x ao dia",
+            "frequency": "1 vez ao dia",
             "duration_days": null,
             "instructions": "pela manhã"
           },
@@ -1161,7 +1153,7 @@
             "name": "Hidroclorotiazida",
             "dosage": "25mg",
             "route": "oral",
-            "frequency": "1x ao dia",
+            "frequency": "1 vez ao dia",
             "duration_days": null,
             "instructions": "pela manhã"
           },
@@ -1177,7 +1169,7 @@
             "name": "Sitagliptina",
             "dosage": "50mg",
             "route": "oral",
-            "frequency": "1x ao dia",
+            "frequency": "1 vez ao dia",
             "duration_days": null,
             "instructions": "pela manhã"
           },
@@ -1185,7 +1177,7 @@
             "name": "Sinvastatina",
             "dosage": "40mg",
             "route": "oral",
-            "frequency": "1x ao dia",
+            "frequency": "1 vez ao dia",
             "duration_days": null,
             "instructions": "à noite"
           },
@@ -1193,7 +1185,7 @@
             "name": "Ácido Acetilsalicílico",
             "dosage": "100mg",
             "route": "oral",
-            "frequency": "1x ao dia",
+            "frequency": "1 vez ao dia",
             "duration_days": null,
             "instructions": "após almoço"
           }

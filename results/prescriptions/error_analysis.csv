@@ -1,46 +1,18 @@
 prescription_id,production_method,complexity,adversarial,med_name,field,expected,got,error_type,severity
-P002,canva_manual,simple,False,Sinvastatina,instructions,tomar à noite,tomar 1 comprimido à noite,wrong_extraction,major
-P004,canva_manual,simple,False,Paracetamol,frequency,SOS,máximo 4x ao dia,wrong_extraction,major
-P004,canva_manual,simple,False,Paracetamol,instructions,"se febre acima de 38°C, máximo 4x ao dia",se febre acima de 38°C,wrong_extraction,major
-P004,canva_manual,simple,False,,doctor_name,Dra. Camila Ribeiro,Camila Ribeiro,wrong_extraction,minor
-P005,canva_manual,complex,True,Dipirona Sódica,frequency,6/6h SOS,SOS,wrong_extraction,major
-P006,canva_manual,simple,False,Dipirona,frequency,8/8h SOS,8/8h,wrong_extraction,major
-P008,canva_manual,complex,False,Metformina,route,oral,,omission,major
-P008,canva_manual,complex,False,Glibenclamida,route,oral,,omission,major
-P008,canva_manual,complex,False,Atorvastatina,route,oral,,omission,major
-P013,script,simple,False,Azitromicina,instructions,tomar por 5 dias consecutivos,tomar de forma consecutiva,wrong_extraction,major
-P014,script,simple,True,Losartana Potássica,instructions,pela manhã,tomar pela manhã,wrong_extraction,major
-P014,script,simple,True,Ácido Acetilsalicílico,instructions,após almoço,tomar após almoço,wrong_extraction,major
-P017,script,simple,False,Dipirona,dosage,500mg,,omission,major
-P018,script,complex,True,Prednisona,instructions,"VO pela manhã, dose decrescente","Tomar pela manhã. Dose decrescente: 20mg por 5 dias, depois 10mg por 3 dias.",wrong_extraction,major
-P018,script,complex,True,Prednisona,dosage,"20mg por 5 dias, depois 10mg por 3 dias",20mg,wrong_extraction,major
-P018,script,complex,True,Loratadina,instructions,pela manhã,Tomar pela manhã.,wrong_extraction,major
-P019,script,simple,True,Fluconazol,instructions,"VO, dose única",,omission,major
-P022,script,complex,False,Carvedilol,name,Carvedilol,,omission,major
-P026,manuscrita_real,simple,True,Nimesulida,instructions,após refeições,após refeição,wrong_extraction,major
+P004,canva_manual,simple,False,Paracetamol,frequency,4x ao dia,máximo 4x ao dia,wrong_extraction,major
+P013,script,simple,False,Azitromicina,instructions,tomar por 5 dias consecutivos,,omission,minor
+P018,script,complex,True,Prednisona,instructions,"VO pela manhã, dose decrescente","VO pela manhã, dose decrescente: 20mg por 5 dias, depois 10mg por 3 dias",wrong_extraction,minor
+P018,script,complex,True,Prednisona,dosage,"20mg por 5 dias, depois 10mg por 3 dias",,omission,major
+P026,manuscrita_real,simple,True,Nimesulida,duration_days,5,,omission,major
 P026,manuscrita_real,simple,True,Nimesulida,dosage,100mg,500mg,wrong_extraction,major
-P026,manuscrita_real,simple,True,Nimesulida,route,oral,,omission,major
-P027,manuscrita_real,complex,True,Tramadol,frequency,8/8h SOS,SOS,wrong_extraction,major
-P027,manuscrita_real,complex,True,Tramadol,duration_days,7,5,wrong_extraction,major
-P027,manuscrita_real,complex,True,Tramadol,instructions,"se dor intensa, máximo 400mg/dia",se dor intensa - 400 mg/dia máximo,wrong_extraction,major
-P027,manuscrita_real,complex,True,Dipirona,instructions,VO de horário,,omission,major
-P027,manuscrita_real,complex,True,Dipirona,route,oral,,omission,major
-P028,manuscrita_real,simple,True,Paracetamol,name,Paracetamol,,omission,major
-P028,manuscrita_real,simple,True,Amoxicilina + Clavulanato,frequency,12/12h,12/12hs,wrong_extraction,major
+P027,manuscrita_real,complex,True,Tramadol,dosage,50mg,50 mg,wrong_extraction,major
+P027,manuscrita_real,complex,True,Dipirona,route,oral,,omission,minor
+P027,manuscrita_real,complex,True,Dipirona,dosage,1g,1 g,wrong_extraction,major
 P028,manuscrita_real,simple,True,Amoxicilina + Clavulanato,duration_days,10,5,wrong_extraction,major
-P028,manuscrita_real,simple,True,Amoxicilina + Clavulanato,instructions,"VO por 10 dias, mesmo se melhorar",mesmo se melhorar,wrong_extraction,major
-P028,manuscrita_real,simple,True,Amoxicilina + Clavulanato,route,oral,,omission,major
-P028,manuscrita_real,simple,True,Ibuprofeno,frequency,8/8h SOS,8/8hs,wrong_extraction,major
-P028,manuscrita_real,simple,True,Ibuprofeno,instructions,após refeições,após refeição,wrong_extraction,major
-P028,manuscrita_real,simple,True,Ibuprofeno,route,oral,,omission,major
+P028,manuscrita_real,simple,True,Amoxicilina + Clavulanato,route,oral,,omission,minor
+P028,manuscrita_real,simple,True,Ibuprofeno,route,oral,,omission,minor
 P028,manuscrita_real,simple,True,,doctor_name,Dra. Sofia Nogueira,Sofia Nogueira,wrong_extraction,minor
-P029,manuscrita_real,complex,True,Enalapril,frequency,12/12h,2x ao dia,wrong_extraction,major
-P029,manuscrita_real,complex,True,Enalapril,instructions,manhã e noite,tomar pela manhã e à noite,wrong_extraction,major
-P029,manuscrita_real,complex,True,Anlodipino,instructions,pela manhã,tomar pela manhã,wrong_extraction,major
-P029,manuscrita_real,complex,True,Anlodipino,route,oral,,omission,major
-P029,manuscrita_real,complex,True,Hidroclorotiazida,instructions,pela manhã,tomar pela manhã,wrong_extraction,major
-P029,manuscrita_real,complex,True,Hidroclorotiazida,route,oral,,omission,major
-P030,manuscrita_real,complex,True,Losartana Potássica,instructions,pela manhã,tomar pela manhã,wrong_extraction,major
-P030,manuscrita_real,complex,True,Hidroclorotiazida,instructions,pela manhã,tomar pela manhã,wrong_extraction,major
-P030,manuscrita_real,complex,True,Sitagliptina,instructions,pela manhã,tomar pela manhã,wrong_extraction,major
-P030,manuscrita_real,complex,True,Sinvastatina,instructions,à noite,tomar à noite,wrong_extraction,major
+P029,manuscrita_real,complex,True,Enalapril,instructions,manhã e à noite,tomar de manhã e à noite,wrong_extraction,minor
+P029,manuscrita_real,complex,True,Anlodipino,instructions,manhã,tomar de manhã,wrong_extraction,minor
+P029,manuscrita_real,complex,True,Hidroclorotiazida,instructions,manhã,tomar de manhã,wrong_extraction,minor
+P030,manuscrita_real,complex,True,Metformina,frequency,12/12h,a cada 12 horas,wrong_extraction,major

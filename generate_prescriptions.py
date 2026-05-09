@@ -209,9 +209,8 @@ def build_html(prescription: dict, style: dict) -> str:
     use_handwriting = prescription_id in HANDWRITING_PRESCRIPTIONS
     name_overrides = NAME_OVERRIDES.get(prescription_id, {})
 
-    # Formata a data
-    date_parts = gt["prescription_date"].split("-")
-    date_formatted = f"{date_parts[2]}/{date_parts[1]}/{date_parts[0]}"
+    # Data já está em DD/MM/YYYY no ground_truth_dataset.json
+    date_formatted = gt["prescription_date"]
 
     # Monta a lista de medicamentos
     meds_html = ""

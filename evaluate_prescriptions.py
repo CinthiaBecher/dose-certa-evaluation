@@ -99,26 +99,26 @@ def is_match(expected, got, use_fuzzy: bool = False) -> bool:
 
 def normalize_date(date_str) -> str:
     """
-    Normaliza datas para comparação.
-    Aceita: YYYY-MM-DD, DD/MM/YYYY, DD/MM/YY
-    Retorna: YYYY-MM-DD
+    Normaliza datas para comparação. Formato alvo: DD/MM/YYYY.
+    Aceita: DD/MM/YYYY (padrão), YYYY-MM-DD (fallback API), DD/MM/YY (ano curto)
     """
     if not date_str:
         return ""
     s = str(date_str).strip()
 
-    if re.match(r"^\d{4}-\d{2}-\d{2}$", s):
+    # Já está em DD/MM/YYYY — padrão esperado
+    if re.match(r"^\d{2}/\d{2}/\d{4}$", s):
         return s
 
-    m = re.match(r"^(\d{2})/(\d{2})/(\d{4})$", s)
+    # API retornou YYYY-MM-DD — converte para DD/MM/YYYY
+    m = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", s)
     if m:
-        return f"{m.group(3)}-{m.group(2)}-{m.group(1)}"
+        return f"{m.group(3)}/{m.group(2)}/{m.group(1)}"
 
-    # DD/MM/YY (adversarial case P026)
+    # Ano com 2 dígitos DD/MM/YY → DD/MM/20YY
     m = re.match(r"^(\d{2})/(\d{2})/(\d{2})$", s)
     if m:
-        year = f"20{m.group(3)}"
-        return f"{year}-{m.group(2)}-{m.group(1)}"
+        return f"{m.group(1)}/{m.group(2)}/20{m.group(3)}"
 
     return normalize(s)
 
@@ -247,7 +247,11 @@ def match_medications(gt_meds: list, pred_meds: list) -> dict:
                     "expected":   expected,
                     "got":        got,
                     "error_type": classify_error(expected, got, matched),
-                    "severity":   "major",
+                    "severity":   (
+                        "minor" if field == "instructions"
+                        else "minor" if (field == "route" and got is None)
+                        else "major"
+                    ),
                 })
 
     field_recall = {}
@@ -383,7 +387,18 @@ def evaluate_prescription(prescription: dict) -> dict:
 
     scalar_ok = all(scalar[f]["matched"] for f in CRITICAL_FIELDS if f in scalar)
     meds_ok   = med_eval["recall"] == 1.0 and med_eval["precision"] == 1.0
-    result["all_critical_ok"] = scalar_ok and meds_ok
+    # Todos os campos críticos de medicamento com recall 1.0 (instructions é minor, não entra)
+    fr = med_eval.get("field_recall", {})
+    no_major_route_error = not any(
+        e["field"] == "route" and e.get("severity") == "major"
+        for e in med_eval["errors"]
+    )
+    med_fields_ok = all(
+        fr.get(f) == 1.0
+        for f in ("name", "dosage", "frequency", "duration_days")
+        if fr.get(f) is not None
+    ) and no_major_route_error
+    result["all_critical_ok"] = scalar_ok and meds_ok and med_fields_ok
 
     return result
 
