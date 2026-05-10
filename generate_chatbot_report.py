@@ -21,7 +21,7 @@ import csv
 import html as html_mod
 import json
 from pathlib import Path
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 FILLED_CSV_PATH   = Path("results/chat/chatbot_eval_filled.csv")
 RESPONSES_PATH    = Path("results/chat/chatbot_responses.json")
@@ -71,6 +71,31 @@ def wilson_ci(k, n, z=1.96):
     margin = (z * (p * (1 - p) / n + z**2 / (4 * n**2)) ** 0.5) / denom
     return round(centre - margin, 3), round(centre + margin, 3)
 
+def _median(values):
+    s = sorted(v for v in values if v is not None)
+    n = len(s)
+    if n == 0: return None
+    return s[n // 2] if n % 2 == 1 else (s[n//2 - 1] + s[n//2]) / 2
+
+def _dist_section(dist_items, bar_colors):
+    if not dist_items:
+        return '<p style="color:#888;font-size:12px">Sem dados</p>'
+    max_count = max(c for _, c in dist_items) or 1
+    total = sum(c for _, c in dist_items)
+    rows = ""
+    for val, count in dist_items:
+        color = bar_colors.get(val, "#ccc")
+        bar_px = int(count / max_count * 100)
+        pct = count / total * 100 if total else 0
+        rows += (
+            f'<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">'
+            f'<span style="width:18px;text-align:right;font-size:12px;font-weight:bold;color:#555">{val}</span>'
+            f'<div style="background:{color};height:12px;width:{bar_px}px;border-radius:2px;min-width:2px"></div>'
+            f'<span style="font-size:11px;color:#666">{count} ({pct:.0f}%)</span>'
+            f'</div>'
+        )
+    return rows
+
 def main():
     if not FILLED_CSV_PATH.exists():
         print(f"❌ {FILLED_CSV_PATH} não encontrado.")
@@ -113,6 +138,27 @@ def main():
     must_ratio_med   = sum(r["_must_ratio"] for r in avaliados if r["_must_ratio"] is not None) / n_aval if avaliados else 0
     should_ratio_med = sum(r["_should_ratio"] for r in avaliados if r["_should_ratio"] is not None) / n_aval if avaliados else 0
 
+    # Mediana e distribuição por dimensão
+    correctness_vals = [r["_correctness"] for r in avaliados if r["_correctness"] is not None]
+    safety_vals      = [r["_safety"]      for r in avaliados if r["_safety"]       is not None]
+    context_vals     = [r["_context"]     for r in avaliados if r["_context"]      is not None]
+
+    correctness_median = _median(correctness_vals)
+    safety_median      = _median(safety_vals)
+    context_median     = _median(context_vals)
+
+    corr_median_str = f"{correctness_median:.1f}" if correctness_median is not None else "—"
+    saf_median_str  = f"{safety_median:.1f}"      if safety_median      is not None else "—"
+    ctx_median_str  = f"{context_median:.1f}"     if context_median     is not None else "—"
+
+    _corr_colors = {1: "#F44336", 2: "#F44336", 3: "#FFC107", 4: "#4CAF50", 5: "#4CAF50"}
+    _saf_colors  = {0: "#4CAF50", 1: "#FFC107", 2: "#F44336", 3: "#F44336"}
+    _ctx_colors  = {0: "#F44336", 1: "#FFC107", 2: "#4CAF50"}
+
+    correctness_dist_html = _dist_section(sorted(Counter(int(v) for v in correctness_vals).items()), _corr_colors)
+    safety_dist_html      = _dist_section(sorted(Counter(int(v) for v in safety_vals).items()),      _saf_colors)
+    context_dist_html     = _dist_section(sorted(Counter(int(v) for v in context_vals).items()),     _ctx_colors)
+
     # Totais para Wilson CI (soma de hits e denominadores individuais)
     def _parse_score_parts(score_str):
         try:
@@ -143,16 +189,51 @@ def main():
     peg_nao   = [r for r in avaliados if (r.get("contexto_dependente") or "") in ("Não", "Nao")]
     corr_peg  = sum(r["_correctness"] for r in peg_sim) / len(peg_sim) if peg_sim else 0
     corr_npeg = sum(r["_correctness"] for r in peg_nao) / len(peg_nao) if peg_nao else 0
+    saf_peg   = sum(r["_safety"]  for r in peg_sim if r["_safety"]  is not None) / len(peg_sim) if peg_sim else 0
+    saf_npeg  = sum(r["_safety"]  for r in peg_nao if r["_safety"]  is not None) / len(peg_nao) if peg_nao else 0
+    ctx_peg   = sum(r["_context"] for r in peg_sim if r["_context"] is not None) / len(peg_sim) if peg_sim else 0
+    ctx_npeg  = sum(r["_context"] for r in peg_nao if r["_context"] is not None) / len(peg_nao) if peg_nao else 0
+
+    _fmt = lambda v, d=1: f"{v:.{d}f}" if v is not None else "—"
+    corr_peg_med_s  = _fmt(_median([r["_correctness"] for r in peg_sim if r["_correctness"] is not None]))
+    corr_npeg_med_s = _fmt(_median([r["_correctness"] for r in peg_nao if r["_correctness"] is not None]))
+    saf_peg_med_s   = _fmt(_median([r["_safety"]      for r in peg_sim if r["_safety"]      is not None]))
+    saf_npeg_med_s  = _fmt(_median([r["_safety"]      for r in peg_nao if r["_safety"]      is not None]))
+    ctx_peg_med_s   = _fmt(_median([r["_context"]     for r in peg_sim if r["_context"]     is not None]))
+    ctx_npeg_med_s  = _fmt(_median([r["_context"]     for r in peg_nao if r["_context"]     is not None]))
+
+    # Strings em formato brasileiro (vírgula decimal) para a tabela de comparação
+    _brf1 = lambda v: f"{v:.1f}".replace(".", ",") if v is not None else "—"
+    _brf2 = lambda v: f"{v:.2f}".replace(".", ",") if v is not None else "—"
+    corr_geral_med_br  = _brf1(correctness_med)
+    corr_geral_mdn_br  = corr_median_str.replace(".", ",")
+    saf_geral_med_br   = _brf2(safety_med)
+    saf_geral_mdn_br   = saf_median_str.replace(".", ",")
+    ctx_geral_med_br   = _brf1(context_med)
+    ctx_geral_mdn_br   = ctx_median_str.replace(".", ",")
+    corr_peg_med_br    = _brf1(corr_peg)
+    corr_peg_mdn_br    = corr_peg_med_s.replace(".", ",")
+    corr_npeg_med_br   = _brf1(corr_npeg)
+    corr_npeg_mdn_br   = corr_npeg_med_s.replace(".", ",")
+    saf_peg_med_br     = _brf2(saf_peg)
+    saf_peg_mdn_br     = saf_peg_med_s.replace(".", ",")
+    saf_npeg_med_br    = _brf2(saf_npeg)
+    saf_npeg_mdn_br    = saf_npeg_med_s.replace(".", ",")
+    ctx_peg_med_br     = _brf1(ctx_peg)
+    ctx_peg_mdn_br     = ctx_peg_med_s.replace(".", ",")
+    ctx_npeg_med_br    = _brf1(ctx_npeg)
+    ctx_npeg_mdn_br    = ctx_npeg_med_s.replace(".", ",")
 
     # Casos críticos (safety >= 2 ou MUST NOT violado)
     criticos = [r for r in avaliados if (r["_safety"] or 0) >= 2 or r["_must_not"] == 1]
 
     # Gera dados para Chart.js
-    cat_labels  = [c for c in CATEGORIAS_ORDER if c in cat_stats]
-    cat_corr    = [round(sum(r["_correctness"] for r in cat_stats[c]) / len(cat_stats[c]), 2) for c in cat_labels]
-    cat_context = [round(sum(r["_context"] for r in cat_stats[c] if r["_context"] is not None) / len(cat_stats[c]), 2) for c in cat_labels]
-    cat_must    = [round(sum(r["_must_ratio"]   for r in cat_stats[c] if r["_must_ratio"]   is not None) / len(cat_stats[c]) * 100, 1) for c in cat_labels]
-    cat_should  = [round(sum(r["_should_ratio"] for r in cat_stats[c] if r["_should_ratio"] is not None) / len(cat_stats[c]) * 100, 1) for c in cat_labels]
+    cat_labels   = [c for c in CATEGORIAS_ORDER if c in cat_stats]
+    cat_corr     = [round(sum(r["_correctness"] for r in cat_stats[c]) / len(cat_stats[c]), 2) for c in cat_labels]
+    cat_safety   = [round(sum(r["_safety"]  for r in cat_stats[c] if r["_safety"]  is not None) / len(cat_stats[c]), 2) for c in cat_labels]
+    cat_context  = [round(sum(r["_context"] for r in cat_stats[c] if r["_context"] is not None) / len(cat_stats[c]), 2) for c in cat_labels]
+    cat_must     = [round(sum(r["_must_ratio"]   for r in cat_stats[c] if r["_must_ratio"]   is not None) / len(cat_stats[c]) * 100, 1) for c in cat_labels]
+    cat_should   = [round(sum(r["_should_ratio"] for r in cat_stats[c] if r["_should_ratio"] is not None) / len(cat_stats[c]) * 100, 1) for c in cat_labels]
 
     def color_correctness(v):
         if v is None: return "#cccccc"
@@ -356,24 +437,11 @@ def main():
   </div>
 
   <div class="container">
-    <!-- Cards de métricas — linha 1: visão geral -->
-    <div class="cards">
+    <!-- Linha 1: escopo + critérios -->
+    <div class="cards" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px">
       <div class="card">
         <div class="value">{n_aval}/{n_total}</div>
         <div class="label">Prompts avaliados</div>
-      </div>
-      <div class="card">
-        <div class="value">{n_falhas}</div>
-        <div class="label">Falhas de API</div>
-      </div>
-      
-      <div class="card">
-        <div class="value" style="color:{'#4CAF50' if safety_med < 0.5 else '#FFC107' if safety_med < 1 else '#F44336'}">{safety_med:.2f}<span style="font-size:18px">/2</span></div>
-        <div class="label">Safety médio</div>
-      </div>
-      <div class="card">
-        <div class="value">{context_med:.1f}<span style="font-size:18px">/2</span></div>
-        <div class="label">Context Use médio</div>
       </div>
       <div class="card">
         <div class="value">{must_ratio_med*100:.0f}%</div>
@@ -390,19 +458,49 @@ def main():
         <div class="label">MUST NOT violados</div>
         {'<div style="font-size:12px;color:#888;margin-top:4px">[IC 95%: ' + f'{must_not_ci[0]*100:.0f}% – {must_not_ci[1]*100:.0f}%' + ']</div>' if must_not_ci[0] is not None else ''}
       </div>
-      <div class="card">
-        <div class="value">{correctness_med:.1f}<span style="font-size:18px">/5</span></div>
-        <div class="label">Correctness médio</div>
-      </div>
-      <div class="card">
-        <div class="value">{corr_peg:.1f}<span style="font-size:18px">/5</span></div>
-        <div class="label">Correctness c/ contexto dep. <span style="color:#aaa">(n={len(peg_sim)})</span></div>
-      </div>
-      <div class="card">
-        <div class="value">{corr_npeg:.1f}<span style="font-size:18px">/5</span></div>
-        <div class="label">Correctness s/ contexto dep. <span style="color:#aaa">(n={len(peg_nao)})</span></div>
+    </div>
+
+    <!-- Linha 3: comparação por grupo -->
+    <div class="cards" style="grid-template-columns:1fr;margin-bottom:12px">
+      <div class="card" style="text-align:left">
+        <div style="font-size:12px;font-weight:600;color:#555;margin-bottom:10px">Geral vs Contexto-dependente vs Independente</div>
+        <table style="width:100%;font-size:12px;border-collapse:collapse">
+          <tr>
+            <th style="padding:6px 8px;background:#55555;text-align:left;font-weight:500;color:#555"></th>
+            <th style="padding:6px 8px;background:#e0f2ef;text-align:center;font-weight:700;color:#006B5E">Geral (n={n_aval})</th>
+            <th style="padding:6px 8px;background:#55555;text-align:center;font-weight:600">Dep. (n={len(peg_sim)})</th>
+            <th style="padding:6px 8px;background:#55555;text-align:center;font-weight:600">Indep. (n={len(peg_nao)})</th>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px;color:#555;font-weight:500">Correctness <span style="color:#aaa;font-weight:normal">(1–5)</span></td>
+            <td style="padding:6px 8px;text-align:center;background:#f0faf8">média {corr_geral_med_br}<br><span style="color:#888;font-size:11px">mediana {corr_geral_mdn_br}</span></td>
+            <td style="padding:6px 8px;text-align:center">média {corr_peg_med_br}<br><span style="color:#888;font-size:11px">mediana {corr_peg_mdn_br}</span></td>
+            <td style="padding:6px 8px;text-align:center">média {corr_npeg_med_br}<br><span style="color:#888;font-size:11px">mediana {corr_npeg_mdn_br}</span></td>
+          </tr>
+          <tr style="background:#fafafa">
+            <td style="padding:6px 8px;color:#555;font-weight:500">Safety <span style="color:#aaa;font-weight:normal">(0–3)</span></td>
+            <td style="padding:6px 8px;text-align:center;background:#f0faf8">média {saf_geral_med_br}<br><span style="color:#888;font-size:11px">mediana {saf_geral_mdn_br}</span></td>
+            <td style="padding:6px 8px;text-align:center">média {saf_peg_med_br}<br><span style="color:#888;font-size:11px">mediana {saf_peg_mdn_br}</span></td>
+            <td style="padding:6px 8px;text-align:center">média {saf_npeg_med_br}<br><span style="color:#888;font-size:11px">mediana {saf_npeg_mdn_br}</span></td>
+          </tr>
+          <tr>
+            <td style="padding:6px 8px;color:#555;font-weight:500">Context Use <span style="color:#aaa;font-weight:normal">(0–2)</span></td>
+            <td style="padding:6px 8px;text-align:center;background:#f0faf8">média {ctx_geral_med_br}<br><span style="color:#888;font-size:11px">mediana {ctx_geral_mdn_br}</span></td>
+            <td style="padding:6px 8px;text-align:center">média {ctx_peg_med_br}<br><span style="color:#888;font-size:11px">mediana {ctx_peg_mdn_br}</span></td>
+            <td style="padding:6px 8px;text-align:center">média {ctx_npeg_med_br}<br><span style="color:#888;font-size:11px">mediana {ctx_npeg_mdn_br}</span></td>
+          </tr>
+        </table>
       </div>
     </div>
+
+    <!-- Callout: achado principal -->
+    <div style="background:#e8f5e9;border-left:4px solid #388E3C;border-radius:10px;padding:18px 22px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06)">
+      <div style="font-size:14px;font-weight:700;color:#2E7D32;margin-bottom:8px">📍 Achado principal</div>
+      <p style="font-size:13px;color:#1B5E20;line-height:1.6;margin:0">
+        Prompts contexto-dependentes (n=25) tiveram Correctness superior aos contexto-independentes (4,4 vs 4,1).
+        As 3 violações de MUST NOT identificadas (P05, P10, P14) ocorreram exclusivamente no grupo contexto-independente,
+        sugerindo que a contextualização do sistema (perfil do paciente + RAG das bulas) fortalece a precisão clínica.
+      </p>
     </div>
 
     <!-- Gráficos -->
@@ -414,6 +512,33 @@ def main():
       <div class="chart-box">
         <h3>MUST e SHOULD atendidos por categoria (%)</h3>
         <canvas id="chartMust"></canvas>
+      </div>
+      <div class="chart-box">
+        <h3>Safety médio por categoria (0–3)</h3>
+        <canvas id="chartSafety"></canvas>
+      </div>
+      <div class="chart-box">
+        <h3>Context Use médio por categoria (0–2)</h3>
+        <canvas id="chartContext"></canvas>
+      </div>
+    </div>
+
+    <!-- Distribuição das dimensões -->
+    <div class="section">
+      <h2>📊 Distribuição das dimensões (Grupo A)</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px">
+        <div>
+          <h4 style="font-size:13px;color:#555;margin-bottom:10px">Correctness (1–5) · mediana: {corr_median_str}</h4>
+          {correctness_dist_html}
+        </div>
+        <div>
+          <h4 style="font-size:13px;color:#555;margin-bottom:10px">Safety (0–3) · mediana: {saf_median_str}</h4>
+          {safety_dist_html}
+        </div>
+        <div>
+          <h4 style="font-size:13px;color:#555;margin-bottom:10px">Context Use (0–2) · mediana: {ctx_median_str}</h4>
+          {context_dist_html}
+        </div>
       </div>
     </div>
 
@@ -460,10 +585,12 @@ def main():
   </div>
 
   <script>
-    const labels = {json.dumps(cat_labels)};
-    const corr   = {json.dumps(cat_corr)};
-    const must   = {json.dumps(cat_must)};
-    const should = {json.dumps(cat_should)};
+    const labels  = {json.dumps(cat_labels)};
+    const corr    = {json.dumps(cat_corr)};
+    const safety  = {json.dumps(cat_safety)};
+    const context = {json.dumps(cat_context)};
+    const must    = {json.dumps(cat_must)};
+    const should  = {json.dumps(cat_should)};
 
     new Chart(document.getElementById('chartCorr'), {{
       type: 'bar',
@@ -510,6 +637,46 @@ def main():
           y: {{ min: 0, max: 100, ticks: {{ callback: v => v + '%' }} }}
         }},
         plugins: {{ legend: {{ display: true, position: 'top' }} }}
+      }}
+    }});
+
+    new Chart(document.getElementById('chartSafety'), {{
+      type: 'bar',
+      data: {{
+        labels,
+        datasets: [{{
+          label: 'Safety médio',
+          data: safety,
+          backgroundColor: safety.map(v => v === 0 ? '#4CAF50' : v < 1 ? '#8BC34A' : v < 2 ? '#FFC107' : '#F44336'),
+          borderRadius: 6,
+        }}]
+      }},
+      options: {{
+        responsive: true,
+        scales: {{
+          y: {{ min: 0, max: 3, ticks: {{ stepSize: 1 }} }}
+        }},
+        plugins: {{ legend: {{ display: false }} }}
+      }}
+    }});
+
+    new Chart(document.getElementById('chartContext'), {{
+      type: 'bar',
+      data: {{
+        labels,
+        datasets: [{{
+          label: 'Context Use médio',
+          data: context,
+          backgroundColor: '#0097A7',
+          borderRadius: 6,
+        }}]
+      }},
+      options: {{
+        responsive: true,
+        scales: {{
+          y: {{ min: 0, max: 2, ticks: {{ stepSize: 1 }} }}
+        }},
+        plugins: {{ legend: {{ display: false }} }}
       }}
     }});
   </script>

@@ -182,7 +182,7 @@ def calc_metrics(avaliadores: list[dict]) -> dict:
         pct_concordancia_clarity  = round(sum(a==b for a,b in zip(r1_clarity, r2_clarity)) / n * 100, 1)
         pct_concordancia_deferral = round(sum(a==b for a,b in zip(r1_deferral, r2_deferral)) / n * 100, 1)
 
-        kappa_help     = simple_kappa(r1_help, r2_help)
+        kappa_help     = weighted_kappa(r1_help, r2_help, 1, 3)
         kappa_clarity  = weighted_kappa(r1_clarity, r2_clarity, 1, 5)
         kappa_deferral = simple_kappa(r1_deferral, r2_deferral)
 
@@ -377,7 +377,7 @@ def gerar_html(m: dict) -> str:
         </tr>
         <tr>
           <td><b>Helpfulness</b></td>
-          <td>κ simples</td>
+          <td>κ ponderado quadrático</td>
           <td>{kappa_badge(m['kappa_help'], m['pct_help'])}</td>
           <td>{m['pct_help']}%</td>
           <td style="font-size:12px;color:#555">Concordância perfeita — ambos deram nota máxima</td>
