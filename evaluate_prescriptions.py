@@ -70,10 +70,13 @@ MAX_RETRIES = 10
 # ==============================================================================
 
 def normalize(text) -> str:
-    """Normaliza string para comparação: lowercase, sem espaços extras."""
+    """Normaliza string para comparação: lowercase, sem espaços extras,
+    e colapsa espaço entre número e unidade (ex: '50 mg' → '50mg')."""
     if text is None:
         return ""
-    return re.sub(r"\s+", " ", str(text).lower().strip())
+    s = re.sub(r"\s+", " ", str(text).lower().strip())
+    s = re.sub(r"(\d)\s+([a-zA-Zµμ])", r"\1\2", s)
+    return s
 
 
 def exact_match(expected, got) -> bool:

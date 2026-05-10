@@ -1,18 +1,20 @@
 prescription_id,production_method,complexity,adversarial,med_name,field,expected,got,error_type,severity
+P002,canva_manual,simple,False,Sinvastatina,instructions,à noite,tomar à noite,wrong_extraction,minor
+P002,canva_manual,simple,False,,doctor_name,Dra. Patrícia Souza,Patrícia Souza,wrong_extraction,minor
 P004,canva_manual,simple,False,Paracetamol,frequency,4x ao dia,máximo 4x ao dia,wrong_extraction,major
+P011,script,simple,False,Empagliflozina,frequency,1x ao dia,,omission,major
+P011,script,simple,False,Empagliflozina,route,oral,,omission,minor
+P011,script,simple,False,Empagliflozina,instructions,pela manhã,,omission,minor
 P013,script,simple,False,Azitromicina,instructions,tomar por 5 dias consecutivos,,omission,minor
-P018,script,complex,True,Prednisona,instructions,"VO pela manhã, dose decrescente","VO pela manhã, dose decrescente: 20mg por 5 dias, depois 10mg por 3 dias",wrong_extraction,minor
-P018,script,complex,True,Prednisona,dosage,"20mg por 5 dias, depois 10mg por 3 dias",,omission,major
-P026,manuscrita_real,simple,True,Nimesulida,duration_days,5,,omission,major
-P026,manuscrita_real,simple,True,Nimesulida,dosage,100mg,500mg,wrong_extraction,major
-P027,manuscrita_real,complex,True,Tramadol,dosage,50mg,50 mg,wrong_extraction,major
+P017,script,simple,False,Paracetamol,instructions,se febre,em caso de febre,wrong_extraction,minor
+P018,script,complex,True,Prednisona,dosage,"20mg por 5 dias, depois 10mg por 3 dias",20mg,wrong_extraction,major
+P018,script,complex,True,Prednisona,instructions,"VO pela manhã, dose decrescente","tomar pela manhã, com dose decrescente: 20mg por 5 dias, depois 10mg por 3 dias",wrong_extraction,minor
 P027,manuscrita_real,complex,True,Dipirona,route,oral,,omission,minor
-P027,manuscrita_real,complex,True,Dipirona,dosage,1g,1 g,wrong_extraction,major
-P028,manuscrita_real,simple,True,Amoxicilina + Clavulanato,duration_days,10,5,wrong_extraction,major
-P028,manuscrita_real,simple,True,Amoxicilina + Clavulanato,route,oral,,omission,minor
-P028,manuscrita_real,simple,True,Ibuprofeno,route,oral,,omission,minor
+P028,manuscrita_real,simple,True,Amoxicilina + Clavulanato,duration_days,10,7,wrong_extraction,major
+P028,manuscrita_real,simple,True,Amoxicilina + Clavulanato,instructions,mesmo se melhorar,completar os 7 dias mesmo se melhorar,wrong_extraction,minor
 P028,manuscrita_real,simple,True,,doctor_name,Dra. Sofia Nogueira,Sofia Nogueira,wrong_extraction,minor
 P029,manuscrita_real,complex,True,Enalapril,instructions,manhã e à noite,tomar de manhã e à noite,wrong_extraction,minor
 P029,manuscrita_real,complex,True,Anlodipino,instructions,manhã,tomar de manhã,wrong_extraction,minor
+P029,manuscrita_real,complex,True,Hidroclorotiazida,route,oral,,omission,minor
 P029,manuscrita_real,complex,True,Hidroclorotiazida,instructions,manhã,tomar de manhã,wrong_extraction,minor
 P030,manuscrita_real,complex,True,Metformina,frequency,12/12h,a cada 12 horas,wrong_extraction,major

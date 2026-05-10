@@ -51,6 +51,8 @@
     .table-wrap { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.08); overflow-x: auto; margin-bottom: 24px; }
 
     code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 11px; }
+    tr.expandable-row:hover { background: #fef9c3 !important; }
+    tr.expandable-row td:first-child { user-select: none; }
     .failed-banner {
       background: #fef2f2;
       border: 1px solid #fecaca;
@@ -72,7 +74,7 @@
   <div class="cards">
     <div class="card ">
       <div class="card-label">Prescription Success Rate</div>
-      <div class="card-value">80.0%</div>
+      <div class="card-value">83.3%</div>
       <div class="card-sub">Todos os campos críticos corretos</div>
     </div>
     <div class="card ">
@@ -87,8 +89,8 @@
     </div>
     <div class="card danger">
       <div class="card-label">Total de erros</div>
-      <div class="card-value">17</div>
-      <div class="card-sub">8 major · 9 minor</div>
+      <div class="card-value">19</div>
+      <div class="card-sub">5 major · 14 minor</div>
     </div>
     <div class="card">
       <div class="card-label">Acurácia nome paciente</div>
@@ -128,10 +130,10 @@
         <tr>
           <th>ID</th><th>Método</th><th># Meds</th><th>Adv</th>
           <th>Nome Paciente</th><th>Data</th><th>CRM</th>
-          <th>Med F1</th><th>✅ Todos OK</th>
+          <th>Med F1</th><th>PSR</th>
         </tr>
       </thead>
-      <tbody><tr style="background:#f0fdf4">
+      <tbody><tr onclick="toggleErrors('err_P001')" style="background:#f0fdf4;">
           <td><strong>P001</strong></td>
           <td>🎨 Canva</td>
           <td style="text-align:center">1</td>
@@ -140,8 +142,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P002')" style="background:#f0fdf4;">
           <td><strong>P002</strong></td>
           <td>🎨 Canva</td>
           <td style="text-align:center">1</td>
@@ -150,8 +152,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P003')" style="background:#f0fdf4;">
           <td><strong>P003</strong></td>
           <td>🎨 Canva</td>
           <td style="text-align:center">1</td>
@@ -160,9 +162,9 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#fffbeb">
-          <td><strong>P004</strong></td>
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P004')" style="background:#fffbeb;cursor:pointer">
+          <td><strong>P004</strong> <span data-ind style="font-size:10px;color:#92400e;margin-left:6px">▶ detalhes</span></td>
           <td>🎨 Canva</td>
           <td style="text-align:center">2</td>
           <td style="text-align:center"></td>
@@ -170,8 +172,29 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">❌ Erro</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">❌ PSR</span></td>
+        </tr><tr id="err_P004" style="display:none">
+              <td colspan="9" style="padding:0;background:#fffbeb;border-bottom:2px solid #fcd34d">
+                <table style="width:100%;font-size:12px;border-collapse:collapse;margin:0">
+                  <thead><tr style="background:#fef3c7">
+                    <th style="padding:6px 12px;font-size:11px;color:#92400e">Medicamento</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Campo</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Tipo</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Severidade</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Esperado</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Obtido</th>
+                  </tr></thead>
+                  <tbody><tr style="background:#fff8f0">
+                  <td style="padding:4px 12px;font-size:12px;color:#92400e"><code>Paracetamol</code></td>
+                  <td style="padding:4px 8px;font-size:12px"><code style="background:#fca5a5;padding:2px 6px;border-radius:4px">frequency</code></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#555">wrong_extraction</td>
+                  <td style="padding:4px 8px;font-size:12px">🔴 major</td>
+                  <td style="padding:4px 8px;font-size:12px;color:#065f46">esperado: <b>4x ao dia</b></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#991b1b">obtido: <b>máximo 4x ao dia</b></td>
+                </tr></tbody>
+                </table>
+              </td>
+            </tr><tr onclick="toggleErrors('err_P005')" style="background:#f0fdf4;">
           <td><strong>P005</strong></td>
           <td>🎨 Canva</td>
           <td style="text-align:center">2</td>
@@ -180,8 +203,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P006')" style="background:#f0fdf4;">
           <td><strong>P006</strong></td>
           <td>🎨 Canva</td>
           <td style="text-align:center">2</td>
@@ -190,8 +213,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P007')" style="background:#f0fdf4;">
           <td><strong>P007</strong></td>
           <td>🎨 Canva</td>
           <td style="text-align:center">3</td>
@@ -200,8 +223,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P008')" style="background:#f0fdf4;">
           <td><strong>P008</strong></td>
           <td>🎨 Canva</td>
           <td style="text-align:center">3</td>
@@ -210,8 +233,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P009')" style="background:#f0fdf4;">
           <td><strong>P009</strong></td>
           <td>🎨 Canva</td>
           <td style="text-align:center">3</td>
@@ -220,8 +243,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P010')" style="background:#f0fdf4;">
           <td><strong>P010</strong></td>
           <td>🎨 Canva</td>
           <td style="text-align:center">4</td>
@@ -230,9 +253,9 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
-          <td><strong>P011</strong></td>
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P011')" style="background:#fffbeb;cursor:pointer">
+          <td><strong>P011</strong> <span data-ind style="font-size:10px;color:#92400e;margin-left:6px">▶ detalhes</span></td>
           <td>🤖 Script</td>
           <td style="text-align:center">4</td>
           <td style="text-align:center"></td>
@@ -240,8 +263,43 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">❌ PSR</span></td>
+        </tr><tr id="err_P011" style="display:none">
+              <td colspan="9" style="padding:0;background:#fffbeb;border-bottom:2px solid #fcd34d">
+                <table style="width:100%;font-size:12px;border-collapse:collapse;margin:0">
+                  <thead><tr style="background:#fef3c7">
+                    <th style="padding:6px 12px;font-size:11px;color:#92400e">Medicamento</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Campo</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Tipo</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Severidade</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Esperado</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Obtido</th>
+                  </tr></thead>
+                  <tbody><tr style="background:#fff8f0">
+                  <td style="padding:4px 12px;font-size:12px;color:#92400e"><code>Empagliflozina</code></td>
+                  <td style="padding:4px 8px;font-size:12px"><code style="background:#fca5a5;padding:2px 6px;border-radius:4px">frequency</code></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#555">omission</td>
+                  <td style="padding:4px 8px;font-size:12px">🔴 major</td>
+                  <td style="padding:4px 8px;font-size:12px;color:#065f46">esperado: <b>1x ao dia</b></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#991b1b">obtido: <b>None</b></td>
+                </tr><tr style="background:#fff8f0">
+                  <td style="padding:4px 12px;font-size:12px;color:#92400e"><code>Empagliflozina</code></td>
+                  <td style="padding:4px 8px;font-size:12px"><code style="background:#fde68a;padding:2px 6px;border-radius:4px">route</code></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#555">omission</td>
+                  <td style="padding:4px 8px;font-size:12px">🟡 minor</td>
+                  <td style="padding:4px 8px;font-size:12px;color:#065f46">esperado: <b>oral</b></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#991b1b">obtido: <b>None</b></td>
+                </tr><tr style="background:#fff8f0">
+                  <td style="padding:4px 12px;font-size:12px;color:#92400e"><code>Empagliflozina</code></td>
+                  <td style="padding:4px 8px;font-size:12px"><code style="background:#fde68a;padding:2px 6px;border-radius:4px">instructions</code></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#555">omission</td>
+                  <td style="padding:4px 8px;font-size:12px">🟡 minor</td>
+                  <td style="padding:4px 8px;font-size:12px;color:#065f46">esperado: <b>pela manhã</b></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#991b1b">obtido: <b>None</b></td>
+                </tr></tbody>
+                </table>
+              </td>
+            </tr><tr onclick="toggleErrors('err_P012')" style="background:#f0fdf4;">
           <td><strong>P012</strong></td>
           <td>🤖 Script</td>
           <td style="text-align:center">5</td>
@@ -250,8 +308,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P013')" style="background:#f0fdf4;">
           <td><strong>P013</strong></td>
           <td>🤖 Script</td>
           <td style="text-align:center">2</td>
@@ -260,8 +318,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P014')" style="background:#f0fdf4;">
           <td><strong>P014</strong></td>
           <td>🤖 Script</td>
           <td style="text-align:center">3</td>
@@ -270,8 +328,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P015')" style="background:#f0fdf4;">
           <td><strong>P015</strong></td>
           <td>🤖 Script</td>
           <td style="text-align:center">1</td>
@@ -280,8 +338,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P016')" style="background:#f0fdf4;">
           <td><strong>P016</strong></td>
           <td>🤖 Script</td>
           <td style="text-align:center">1</td>
@@ -290,8 +348,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P017')" style="background:#f0fdf4;">
           <td><strong>P017</strong></td>
           <td>🤖 Script</td>
           <td style="text-align:center">2</td>
@@ -300,9 +358,9 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#fffbeb">
-          <td><strong>P018</strong></td>
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P018')" style="background:#fffbeb;cursor:pointer">
+          <td><strong>P018</strong> <span data-ind style="font-size:10px;color:#92400e;margin-left:6px">▶ detalhes</span></td>
           <td>🤖 Script</td>
           <td style="text-align:center">2</td>
           <td style="text-align:center">⚠️</td>
@@ -310,8 +368,36 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">❌ Erro</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">❌ PSR</span></td>
+        </tr><tr id="err_P018" style="display:none">
+              <td colspan="9" style="padding:0;background:#fffbeb;border-bottom:2px solid #fcd34d">
+                <table style="width:100%;font-size:12px;border-collapse:collapse;margin:0">
+                  <thead><tr style="background:#fef3c7">
+                    <th style="padding:6px 12px;font-size:11px;color:#92400e">Medicamento</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Campo</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Tipo</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Severidade</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Esperado</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Obtido</th>
+                  </tr></thead>
+                  <tbody><tr style="background:#fff8f0">
+                  <td style="padding:4px 12px;font-size:12px;color:#92400e"><code>Prednisona</code></td>
+                  <td style="padding:4px 8px;font-size:12px"><code style="background:#fca5a5;padding:2px 6px;border-radius:4px">dosage</code></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#555">wrong_extraction</td>
+                  <td style="padding:4px 8px;font-size:12px">🔴 major</td>
+                  <td style="padding:4px 8px;font-size:12px;color:#065f46">esperado: <b>20mg por 5 dias, depois 10mg por 3 dias</b></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#991b1b">obtido: <b>20mg</b></td>
+                </tr><tr style="background:#fff8f0">
+                  <td style="padding:4px 12px;font-size:12px;color:#92400e"><code>Prednisona</code></td>
+                  <td style="padding:4px 8px;font-size:12px"><code style="background:#fde68a;padding:2px 6px;border-radius:4px">instructions</code></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#555">wrong_extraction</td>
+                  <td style="padding:4px 8px;font-size:12px">🟡 minor</td>
+                  <td style="padding:4px 8px;font-size:12px;color:#065f46">esperado: <b>VO pela manhã, dose decrescente</b></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#991b1b">obtido: <b>tomar pela manhã, com dose decrescente: 20mg por 5 dias, depois 10mg por 3 dias</b></td>
+                </tr></tbody>
+                </table>
+              </td>
+            </tr><tr onclick="toggleErrors('err_P019')" style="background:#f0fdf4;">
           <td><strong>P019</strong></td>
           <td>🤖 Script</td>
           <td style="text-align:center">1</td>
@@ -320,8 +406,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P020')" style="background:#f0fdf4;">
           <td><strong>P020</strong></td>
           <td>🤖 Script</td>
           <td style="text-align:center">3</td>
@@ -330,8 +416,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P021')" style="background:#f0fdf4;">
           <td><strong>P021</strong></td>
           <td>🤖 Script</td>
           <td style="text-align:center">1</td>
@@ -340,8 +426,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P022')" style="background:#f0fdf4;">
           <td><strong>P022</strong></td>
           <td>🤖 Script</td>
           <td style="text-align:center">4</td>
@@ -350,8 +436,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P023')" style="background:#f0fdf4;">
           <td><strong>P023</strong></td>
           <td>🤖 Script</td>
           <td style="text-align:center">2</td>
@@ -360,8 +446,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P024')" style="background:#f0fdf4;">
           <td><strong>P024</strong></td>
           <td>🤖 Script</td>
           <td style="text-align:center">4</td>
@@ -370,8 +456,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P025')" style="background:#f0fdf4;">
           <td><strong>P025</strong></td>
           <td>🤖 Script</td>
           <td style="text-align:center">5</td>
@@ -380,8 +466,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#fffbeb">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P026')" style="background:#f0fdf4;">
           <td><strong>P026</strong></td>
           <td>✍️ Manuscrita</td>
           <td style="text-align:center">1</td>
@@ -390,8 +476,8 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">❌ Erro</span></td>
-        </tr><tr style="background:#fffbeb">
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P027')" style="background:#f0fdf4;">
           <td><strong>P027</strong></td>
           <td>✍️ Manuscrita</td>
           <td style="text-align:center">2</td>
@@ -400,9 +486,9 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">❌ Erro</span></td>
-        </tr><tr style="background:#fffbeb">
-          <td><strong>P028</strong></td>
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P028')" style="background:#fffbeb;cursor:pointer">
+          <td><strong>P028</strong> <span data-ind style="font-size:10px;color:#92400e;margin-left:6px">▶ detalhes</span></td>
           <td>✍️ Manuscrita</td>
           <td style="text-align:center">3</td>
           <td style="text-align:center">⚠️</td>
@@ -410,8 +496,43 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">❌ Erro</span></td>
-        </tr><tr style="background:#f0fdf4">
+          <td><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">❌ PSR</span></td>
+        </tr><tr id="err_P028" style="display:none">
+              <td colspan="9" style="padding:0;background:#fffbeb;border-bottom:2px solid #fcd34d">
+                <table style="width:100%;font-size:12px;border-collapse:collapse;margin:0">
+                  <thead><tr style="background:#fef3c7">
+                    <th style="padding:6px 12px;font-size:11px;color:#92400e">Medicamento</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Campo</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Tipo</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Severidade</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Esperado</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Obtido</th>
+                  </tr></thead>
+                  <tbody><tr style="background:#fff8f0">
+                  <td style="padding:4px 12px;font-size:12px;color:#92400e"><code>Amoxicilina + Clavulanato</code></td>
+                  <td style="padding:4px 8px;font-size:12px"><code style="background:#fca5a5;padding:2px 6px;border-radius:4px">duration_days</code></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#555">wrong_extraction</td>
+                  <td style="padding:4px 8px;font-size:12px">🔴 major</td>
+                  <td style="padding:4px 8px;font-size:12px;color:#065f46">esperado: <b>10</b></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#991b1b">obtido: <b>7</b></td>
+                </tr><tr style="background:#fff8f0">
+                  <td style="padding:4px 12px;font-size:12px;color:#92400e"><code>Amoxicilina + Clavulanato</code></td>
+                  <td style="padding:4px 8px;font-size:12px"><code style="background:#fde68a;padding:2px 6px;border-radius:4px">instructions</code></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#555">wrong_extraction</td>
+                  <td style="padding:4px 8px;font-size:12px">🟡 minor</td>
+                  <td style="padding:4px 8px;font-size:12px;color:#065f46">esperado: <b>mesmo se melhorar</b></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#991b1b">obtido: <b>completar os 7 dias mesmo se melhorar</b></td>
+                </tr><tr style="background:#fff8f0">
+                  <td style="padding:4px 12px;font-size:12px;color:#92400e"><code>None</code></td>
+                  <td style="padding:4px 8px;font-size:12px"><code style="background:#fde68a;padding:2px 6px;border-radius:4px">doctor_name</code></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#555">wrong_extraction</td>
+                  <td style="padding:4px 8px;font-size:12px">🟡 minor</td>
+                  <td style="padding:4px 8px;font-size:12px;color:#065f46">esperado: <b>Dra. Sofia Nogueira</b></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#991b1b">obtido: <b>Sofia Nogueira</b></td>
+                </tr></tbody>
+                </table>
+              </td>
+            </tr><tr onclick="toggleErrors('err_P029')" style="background:#f0fdf4;">
           <td><strong>P029</strong></td>
           <td>✍️ Manuscrita</td>
           <td style="text-align:center">3</td>
@@ -420,9 +541,9 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
-        </tr><tr style="background:#fffbeb">
-          <td><strong>P030</strong></td>
+          <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ PSR</span></td>
+        </tr><tr onclick="toggleErrors('err_P030')" style="background:#fffbeb;cursor:pointer">
+          <td><strong>P030</strong> <span data-ind style="font-size:10px;color:#92400e;margin-left:6px">▶ detalhes</span></td>
           <td>✍️ Manuscrita</td>
           <td style="text-align:center">6</td>
           <td style="text-align:center">⚠️</td>
@@ -430,8 +551,29 @@
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span></td>
           <td><span style="color:#065f46;font-weight:700">1.00</span></td>
-          <td><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">❌ Erro</span></td>
-        </tr></tbody>
+          <td><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">❌ PSR</span></td>
+        </tr><tr id="err_P030" style="display:none">
+              <td colspan="9" style="padding:0;background:#fffbeb;border-bottom:2px solid #fcd34d">
+                <table style="width:100%;font-size:12px;border-collapse:collapse;margin:0">
+                  <thead><tr style="background:#fef3c7">
+                    <th style="padding:6px 12px;font-size:11px;color:#92400e">Medicamento</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Campo</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Tipo</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Severidade</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Esperado</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Obtido</th>
+                  </tr></thead>
+                  <tbody><tr style="background:#fff8f0">
+                  <td style="padding:4px 12px;font-size:12px;color:#92400e"><code>Metformina</code></td>
+                  <td style="padding:4px 8px;font-size:12px"><code style="background:#fca5a5;padding:2px 6px;border-radius:4px">frequency</code></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#555">wrong_extraction</td>
+                  <td style="padding:4px 8px;font-size:12px">🔴 major</td>
+                  <td style="padding:4px 8px;font-size:12px;color:#065f46">esperado: <b>12/12h</b></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#991b1b">obtido: <b>a cada 12 horas</b></td>
+                </tr></tbody>
+                </table>
+              </td>
+            </tr></tbody>
     </table>
   </div>
 
@@ -445,7 +587,25 @@
           <th>Esperado</th><th>Obtido</th><th>Tipo</th><th>Severidade</th>
         </tr>
       </thead>
-      <tbody><tr style="background:#fee2e2">
+      <tbody><tr style="background:#fef3c7">
+              <td>P002</td>
+              <td>🎨 Canva</td>
+              <td>Sinvastatina</td>
+              <td><code>instructions</code></td>
+              <td style="color:#065f46">à noite</td>
+              <td style="color:#991b1b">tomar à noite</td>
+              <td>wrong_extraction</td>
+              <td>🟡 Minor</td>
+            </tr><tr style="background:#fef3c7">
+              <td>P002</td>
+              <td>🎨 Canva</td>
+              <td>None</td>
+              <td><code>doctor_name</code></td>
+              <td style="color:#065f46">Dra. Patrícia Souza</td>
+              <td style="color:#991b1b">Patrícia Souza</td>
+              <td>wrong_extraction</td>
+              <td>🟡 Minor</td>
+            </tr><tr style="background:#fee2e2">
               <td>P004</td>
               <td>🎨 Canva</td>
               <td>Paracetamol</td>
@@ -454,6 +614,33 @@
               <td style="color:#991b1b">máximo 4x ao dia</td>
               <td>wrong_extraction</td>
               <td>🔴 Major</td>
+            </tr><tr style="background:#fee2e2">
+              <td>P011</td>
+              <td>🤖 Script</td>
+              <td>Empagliflozina</td>
+              <td><code>frequency</code></td>
+              <td style="color:#065f46">1x ao dia</td>
+              <td style="color:#991b1b">None</td>
+              <td>omission</td>
+              <td>🔴 Major</td>
+            </tr><tr style="background:#fef3c7">
+              <td>P011</td>
+              <td>🤖 Script</td>
+              <td>Empagliflozina</td>
+              <td><code>route</code></td>
+              <td style="color:#065f46">oral</td>
+              <td style="color:#991b1b">None</td>
+              <td>omission</td>
+              <td>🟡 Minor</td>
+            </tr><tr style="background:#fef3c7">
+              <td>P011</td>
+              <td>🤖 Script</td>
+              <td>Empagliflozina</td>
+              <td><code>instructions</code></td>
+              <td style="color:#065f46">pela manhã</td>
+              <td style="color:#991b1b">None</td>
+              <td>omission</td>
+              <td>🟡 Minor</td>
             </tr><tr style="background:#fef3c7">
               <td>P013</td>
               <td>🤖 Script</td>
@@ -464,12 +651,12 @@
               <td>omission</td>
               <td>🟡 Minor</td>
             </tr><tr style="background:#fef3c7">
-              <td>P018</td>
+              <td>P017</td>
               <td>🤖 Script</td>
-              <td>Prednisona</td>
+              <td>Paracetamol</td>
               <td><code>instructions</code></td>
-              <td style="color:#065f46">VO pela manhã, dose decrescente</td>
-              <td style="color:#991b1b">VO pela manhã, dose decrescente: 20mg por 5 dias, depois 10mg por 3 dias</td>
+              <td style="color:#065f46">se febre</td>
+              <td style="color:#991b1b">em caso de febre</td>
               <td>wrong_extraction</td>
               <td>🟡 Minor</td>
             </tr><tr style="background:#fee2e2">
@@ -478,36 +665,18 @@
               <td>Prednisona</td>
               <td><code>dosage</code></td>
               <td style="color:#065f46">20mg por 5 dias, depois 10mg por 3 dias</td>
-              <td style="color:#991b1b">None</td>
-              <td>omission</td>
-              <td>🔴 Major</td>
-            </tr><tr style="background:#fee2e2">
-              <td>P026</td>
-              <td>✍️ Manuscrita</td>
-              <td>Nimesulida</td>
-              <td><code>duration_days</code></td>
-              <td style="color:#065f46">5</td>
-              <td style="color:#991b1b">None</td>
-              <td>omission</td>
-              <td>🔴 Major</td>
-            </tr><tr style="background:#fee2e2">
-              <td>P026</td>
-              <td>✍️ Manuscrita</td>
-              <td>Nimesulida</td>
-              <td><code>dosage</code></td>
-              <td style="color:#065f46">100mg</td>
-              <td style="color:#991b1b">500mg</td>
+              <td style="color:#991b1b">20mg</td>
               <td>wrong_extraction</td>
               <td>🔴 Major</td>
-            </tr><tr style="background:#fee2e2">
-              <td>P027</td>
-              <td>✍️ Manuscrita</td>
-              <td>Tramadol</td>
-              <td><code>dosage</code></td>
-              <td style="color:#065f46">50mg</td>
-              <td style="color:#991b1b">50 mg</td>
+            </tr><tr style="background:#fef3c7">
+              <td>P018</td>
+              <td>🤖 Script</td>
+              <td>Prednisona</td>
+              <td><code>instructions</code></td>
+              <td style="color:#065f46">VO pela manhã, dose decrescente</td>
+              <td style="color:#991b1b">tomar pela manhã, com dose decrescente: 20mg por 5 dias, depois 10mg por 3 dias</td>
               <td>wrong_extraction</td>
-              <td>🔴 Major</td>
+              <td>🟡 Minor</td>
             </tr><tr style="background:#fef3c7">
               <td>P027</td>
               <td>✍️ Manuscrita</td>
@@ -517,41 +686,23 @@
               <td style="color:#991b1b">None</td>
               <td>omission</td>
               <td>🟡 Minor</td>
-            </tr><tr style="background:#fee2e2">
-              <td>P027</td>
-              <td>✍️ Manuscrita</td>
-              <td>Dipirona</td>
-              <td><code>dosage</code></td>
-              <td style="color:#065f46">1g</td>
-              <td style="color:#991b1b">1 g</td>
-              <td>wrong_extraction</td>
-              <td>🔴 Major</td>
             </tr><tr style="background:#fee2e2">
               <td>P028</td>
               <td>✍️ Manuscrita</td>
               <td>Amoxicilina + Clavulanato</td>
               <td><code>duration_days</code></td>
               <td style="color:#065f46">10</td>
-              <td style="color:#991b1b">5</td>
+              <td style="color:#991b1b">7</td>
               <td>wrong_extraction</td>
               <td>🔴 Major</td>
             </tr><tr style="background:#fef3c7">
               <td>P028</td>
               <td>✍️ Manuscrita</td>
               <td>Amoxicilina + Clavulanato</td>
-              <td><code>route</code></td>
-              <td style="color:#065f46">oral</td>
-              <td style="color:#991b1b">None</td>
-              <td>omission</td>
-              <td>🟡 Minor</td>
-            </tr><tr style="background:#fef3c7">
-              <td>P028</td>
-              <td>✍️ Manuscrita</td>
-              <td>Ibuprofeno</td>
-              <td><code>route</code></td>
-              <td style="color:#065f46">oral</td>
-              <td style="color:#991b1b">None</td>
-              <td>omission</td>
+              <td><code>instructions</code></td>
+              <td style="color:#065f46">mesmo se melhorar</td>
+              <td style="color:#991b1b">completar os 7 dias mesmo se melhorar</td>
+              <td>wrong_extraction</td>
               <td>🟡 Minor</td>
             </tr><tr style="background:#fef3c7">
               <td>P028</td>
@@ -579,6 +730,15 @@
               <td style="color:#065f46">manhã</td>
               <td style="color:#991b1b">tomar de manhã</td>
               <td>wrong_extraction</td>
+              <td>🟡 Minor</td>
+            </tr><tr style="background:#fef3c7">
+              <td>P029</td>
+              <td>✍️ Manuscrita</td>
+              <td>Hidroclorotiazida</td>
+              <td><code>route</code></td>
+              <td style="color:#065f46">oral</td>
+              <td style="color:#991b1b">None</td>
+              <td>omission</td>
               <td>🟡 Minor</td>
             </tr><tr style="background:#fef3c7">
               <td>P029</td>
@@ -615,7 +775,7 @@
       data: {
         labels: ["\ud83c\udfa8 Canva", "\ud83e\udd16 Script", "\u270d\ufe0f Manuscrita"],
         datasets: [
-          { label: 'PSR (%)', data: [90.0, 93.3, 20.0], backgroundColor: green + 'cc', borderRadius: 4 },
+          { label: 'PSR (%)', data: [90.0, 86.7, 60.0], backgroundColor: green + 'cc', borderRadius: 4 },
           { label: 'Med F1 × 100', data: [100.0, 100.0, 100.0], backgroundColor: accent + 'cc', borderRadius: 4 },
         ]
       },
@@ -633,7 +793,7 @@
         labels: ["Nome", "Dosagem", "Via", "Frequ\u00eancia", "Instru\u00e7\u00f5es", "Dura\u00e7\u00e3o (dias)"],
         datasets: [{
           label: 'Recall (%)',
-          data: [100.0, 91.7, 93.5, 97.8, 93.1, 95.0],
+          data: [100.0, 98.3, 92.4, 96.9, 85.3, 98.3],
           backgroundColor: [green + 'cc', accent + 'cc', orange + 'cc', '#8b5cf6cc', '#ec4899cc', '#06b6d4cc'],
           borderRadius: 4,
         }]
@@ -652,7 +812,7 @@
       data: {
         labels: ["wrong_extraction", "omission"],
         datasets: [{
-          data: [11, 6],
+          data: [13, 6],
           backgroundColor: [red + 'cc', orange + 'cc', '#8b5cf6cc', gray + 'cc'],
         }]
       },
@@ -661,6 +821,17 @@
         plugins: { legend: { position: 'bottom' } }
       }
     });
+
+    function toggleErrors(id) {
+      const row = document.getElementById(id);
+      if (!row) return;
+      const visible = row.style.display !== 'none';
+      row.style.display = visible ? 'none' : 'table-row';
+      // Girar o indicador ▶ / ▼
+      const trigger = row.previousElementSibling;
+      const indicator = trigger ? trigger.querySelector('span[data-ind]') : null;
+      if (indicator) indicator.textContent = visible ? '▶ detalhes' : '▼ detalhes';
+    }
   </script>
 </body>
 </html>

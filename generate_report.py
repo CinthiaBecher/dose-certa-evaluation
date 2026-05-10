@@ -34,11 +34,11 @@ def pct_bar(value, color="#006B5E"):
       </div>'''
 
 
-def status_badge(ok):
+def status_badge(ok, label_true="✅ OK", label_false="❌ Erro"):
     if ok is True:
-        return '<span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">✅ OK</span>'
+        return f'<span style="background:#d1fae5;color:#065f46;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">{label_true}</span>'
     elif ok is False:
-        return '<span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">❌ Erro</span>'
+        return f'<span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:600">{label_false}</span>'
     return '<span style="background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:12px;font-size:11px">—</span>'
 
 
@@ -112,8 +112,12 @@ def build_report(all_results, summary):
         f1_color = "#065f46" if f1_val >= 0.9 else ("#92400e" if f1_val >= 0.7 else "#991b1b")
         bg = "#f0fdf4" if ok else "#fffbeb"
 
-        rows += f"""<tr style="background:{bg}">
-          <td><strong>{pid}</strong></td>
+        errors = r.get("errors", [])
+        row_id = f"err_{pid}"
+        clickable = 'onclick="toggleErrors(\'' + row_id + '\')" style="cursor:pointer"' if (not ok and errors) else f'style="background:{bg}"'
+
+        rows += f"""<tr onclick="toggleErrors('{row_id}')" style="background:{bg};{'cursor:pointer' if not ok and errors else ''}">
+          <td><strong>{pid}</strong>{' <span data-ind style="font-size:10px;color:#92400e;margin-left:6px">▶ detalhes</span>' if not ok and errors else ''}</td>
           <td>{method}</td>
           <td style="text-align:center">{n_meds}</td>
           <td style="text-align:center">{adv}</td>
@@ -121,8 +125,37 @@ def build_report(all_results, summary):
           <td>{cell('prescription_date')}</td>
           <td>{cell('doctor_crm')}</td>
           <td><span style="color:{f1_color};font-weight:700">{f1_val:.2f}</span></td>
-          <td>{status_badge(ok)}</td>
+          <td>{status_badge(ok, "✅ PSR", "❌ PSR")}</td>
         </tr>"""
+
+        if not ok and errors:
+            err_detail = ""
+            for e in errors:
+                sev_color = "#fca5a5" if e.get("severity") == "major" else "#fde68a"
+                sev_icon  = "🔴" if e.get("severity") == "major" else "🟡"
+                err_detail += f"""<tr style="background:#fff8f0">
+                  <td style="padding:4px 12px;font-size:12px;color:#92400e"><code>{e.get('med_name','—')}</code></td>
+                  <td style="padding:4px 8px;font-size:12px"><code style="background:{sev_color};padding:2px 6px;border-radius:4px">{e.get('field','')}</code></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#555">{e.get('error_type','')}</td>
+                  <td style="padding:4px 8px;font-size:12px">{sev_icon} {e.get('severity','')}</td>
+                  <td style="padding:4px 8px;font-size:12px;color:#065f46">esperado: <b>{str(e.get('expected',''))}</b></td>
+                  <td style="padding:4px 8px;font-size:12px;color:#991b1b">obtido: <b>{str(e.get('got','—'))}</b></td>
+                </tr>"""
+            rows += f"""<tr id="{row_id}" style="display:none">
+              <td colspan="9" style="padding:0;background:#fffbeb;border-bottom:2px solid #fcd34d">
+                <table style="width:100%;font-size:12px;border-collapse:collapse;margin:0">
+                  <thead><tr style="background:#fef3c7">
+                    <th style="padding:6px 12px;font-size:11px;color:#92400e">Medicamento</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Campo</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Tipo</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Severidade</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Esperado</th>
+                    <th style="padding:6px 8px;font-size:11px;color:#92400e">Obtido</th>
+                  </tr></thead>
+                  <tbody>{err_detail}</tbody>
+                </table>
+              </td>
+            </tr>"""
 
     # Tabela de erros
     error_rows = ""
@@ -197,6 +230,8 @@ def build_report(all_results, summary):
     .table-wrap {{ background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.08); overflow-x: auto; margin-bottom: 24px; }}
 
     code {{ background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 11px; }}
+    tr.expandable-row:hover {{ background: #fef9c3 !important; }}
+    tr.expandable-row td:first-child {{ user-select: none; }}
     .failed-banner {{
       background: #fef2f2;
       border: 1px solid #fecaca;
@@ -274,7 +309,7 @@ def build_report(all_results, summary):
         <tr>
           <th>ID</th><th>Método</th><th># Meds</th><th>Adv</th>
           <th>Nome Paciente</th><th>Data</th><th>CRM</th>
-          <th>Med F1</th><th>✅ Todos OK</th>
+          <th>Med F1</th><th>PSR</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
@@ -354,6 +389,17 @@ def build_report(all_results, summary):
         plugins: {{ legend: {{ position: 'bottom' }} }}
       }}
     }});
+
+    function toggleErrors(id) {{
+      const row = document.getElementById(id);
+      if (!row) return;
+      const visible = row.style.display !== 'none';
+      row.style.display = visible ? 'none' : 'table-row';
+      // Girar o indicador ▶ / ▼
+      const trigger = row.previousElementSibling;
+      const indicator = trigger ? trigger.querySelector('span[data-ind]') : null;
+      if (indicator) indicator.textContent = visible ? '▶ detalhes' : '▼ detalhes';
+    }}
   </script>
 </body>
 </html>"""

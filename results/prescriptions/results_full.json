@@ -28,7 +28,7 @@
       },
       "doctor_name": {
         "expected": "Dr. Ricardo Almeida",
-        "got": "Dr. Ricardo Almeida",
+        "got": "DR. RICARDO ALMEIDA",
         "matched": true,
         "similarity": 1.0,
         "critical": false,
@@ -50,12 +50,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 1,
       "n_pred": 1,
@@ -94,12 +94,12 @@
       },
       "doctor_name": {
         "expected": "Dra. Patrícia Souza",
-        "got": "Dra. Patrícia Souza",
-        "matched": true,
-        "similarity": 1.0,
+        "got": "Patrícia Souza",
+        "matched": false,
+        "similarity": 0.848,
         "critical": false,
-        "error_type": null,
-        "severity": null
+        "error_type": "wrong_extraction",
+        "severity": "minor"
       },
       "doctor_crm": {
         "expected": "CRM/RS 45678",
@@ -116,20 +116,46 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": null,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 0.0
       },
       "n_gt": 1,
       "n_pred": 1,
       "n_matched": 1,
-      "errors": []
+      "errors": [
+        {
+          "med_name": "Sinvastatina",
+          "field": "instructions",
+          "expected": "à noite",
+          "got": "tomar à noite",
+          "error_type": "wrong_extraction",
+          "severity": "minor"
+        }
+      ]
     },
     "all_critical_ok": true,
-    "errors": []
+    "errors": [
+      {
+        "med_name": "Sinvastatina",
+        "field": "instructions",
+        "expected": "à noite",
+        "got": "tomar à noite",
+        "error_type": "wrong_extraction",
+        "severity": "minor"
+      },
+      {
+        "med_name": null,
+        "field": "doctor_name",
+        "expected": "Dra. Patrícia Souza",
+        "got": "Patrícia Souza",
+        "error_type": "wrong_extraction",
+        "severity": "minor"
+      }
+    ]
   },
   {
     "prescription_id": "P003",
@@ -182,12 +208,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 1,
       "n_pred": 1,
@@ -248,12 +274,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 0.5,
+        "dosage": 1.0,
         "name": 1.0,
         "route": null,
-        "frequency": 0.5,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 2,
       "n_pred": 2,
@@ -332,12 +358,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": null,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 2,
       "n_pred": 2,
@@ -398,12 +424,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 2,
       "n_pred": 2,
@@ -464,12 +490,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": null,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 3,
       "n_pred": 3,
@@ -530,12 +556,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": null,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 3,
       "n_pred": 3,
@@ -596,12 +622,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 3,
       "n_pred": 3,
@@ -662,12 +688,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": null,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 4,
       "n_pred": 4,
@@ -728,20 +754,70 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 0.75,
+        "dosage": 1.0,
         "name": 1.0,
-        "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "route": 0.75,
+        "duration_days": 1.0,
+        "instructions": 0.75
       },
       "n_gt": 4,
       "n_pred": 4,
       "n_matched": 4,
-      "errors": []
+      "errors": [
+        {
+          "med_name": "Empagliflozina",
+          "field": "frequency",
+          "expected": "1x ao dia",
+          "got": null,
+          "error_type": "omission",
+          "severity": "major"
+        },
+        {
+          "med_name": "Empagliflozina",
+          "field": "route",
+          "expected": "oral",
+          "got": null,
+          "error_type": "omission",
+          "severity": "minor"
+        },
+        {
+          "med_name": "Empagliflozina",
+          "field": "instructions",
+          "expected": "pela manhã",
+          "got": null,
+          "error_type": "omission",
+          "severity": "minor"
+        }
+      ]
     },
-    "all_critical_ok": true,
-    "errors": []
+    "all_critical_ok": false,
+    "errors": [
+      {
+        "med_name": "Empagliflozina",
+        "field": "frequency",
+        "expected": "1x ao dia",
+        "got": null,
+        "error_type": "omission",
+        "severity": "major"
+      },
+      {
+        "med_name": "Empagliflozina",
+        "field": "route",
+        "expected": "oral",
+        "got": null,
+        "error_type": "omission",
+        "severity": "minor"
+      },
+      {
+        "med_name": "Empagliflozina",
+        "field": "instructions",
+        "expected": "pela manhã",
+        "got": null,
+        "error_type": "omission",
+        "severity": "minor"
+      }
+    ]
   },
   {
     "prescription_id": "P012",
@@ -794,12 +870,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 5,
       "n_pred": 5,
@@ -860,12 +936,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 0.5,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 0.5
       },
       "n_gt": 2,
       "n_pred": 2,
@@ -944,12 +1020,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 3,
       "n_pred": 3,
@@ -1010,12 +1086,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 1,
       "n_pred": 1,
@@ -1076,12 +1152,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 1,
       "n_pred": 1,
@@ -1142,20 +1218,38 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 0.5
       },
       "n_gt": 2,
       "n_pred": 2,
       "n_matched": 2,
-      "errors": []
+      "errors": [
+        {
+          "med_name": "Paracetamol",
+          "field": "instructions",
+          "expected": "se febre",
+          "got": "em caso de febre",
+          "error_type": "wrong_extraction",
+          "severity": "minor"
+        }
+      ]
     },
     "all_critical_ok": true,
-    "errors": []
+    "errors": [
+      {
+        "med_name": "Paracetamol",
+        "field": "instructions",
+        "expected": "se febre",
+        "got": "em caso de febre",
+        "error_type": "wrong_extraction",
+        "severity": "minor"
+      }
+    ]
   },
   {
     "prescription_id": "P018",
@@ -1208,12 +1302,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 0.5,
+        "frequency": 1.0,
+        "dosage": 0.5,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 0.5
+        "duration_days": 1.0,
+        "instructions": 0.5
       },
       "n_gt": 2,
       "n_pred": 2,
@@ -1221,19 +1315,19 @@
       "errors": [
         {
           "med_name": "Prednisona",
-          "field": "instructions",
-          "expected": "VO pela manhã, dose decrescente",
-          "got": "VO pela manhã, dose decrescente: 20mg por 5 dias, depois 10mg por 3 dias",
+          "field": "dosage",
+          "expected": "20mg por 5 dias, depois 10mg por 3 dias",
+          "got": "20mg",
           "error_type": "wrong_extraction",
-          "severity": "minor"
+          "severity": "major"
         },
         {
           "med_name": "Prednisona",
-          "field": "dosage",
-          "expected": "20mg por 5 dias, depois 10mg por 3 dias",
-          "got": null,
-          "error_type": "omission",
-          "severity": "major"
+          "field": "instructions",
+          "expected": "VO pela manhã, dose decrescente",
+          "got": "tomar pela manhã, com dose decrescente: 20mg por 5 dias, depois 10mg por 3 dias",
+          "error_type": "wrong_extraction",
+          "severity": "minor"
         }
       ]
     },
@@ -1241,19 +1335,19 @@
     "errors": [
       {
         "med_name": "Prednisona",
-        "field": "instructions",
-        "expected": "VO pela manhã, dose decrescente",
-        "got": "VO pela manhã, dose decrescente: 20mg por 5 dias, depois 10mg por 3 dias",
+        "field": "dosage",
+        "expected": "20mg por 5 dias, depois 10mg por 3 dias",
+        "got": "20mg",
         "error_type": "wrong_extraction",
-        "severity": "minor"
+        "severity": "major"
       },
       {
         "med_name": "Prednisona",
-        "field": "dosage",
-        "expected": "20mg por 5 dias, depois 10mg por 3 dias",
-        "got": null,
-        "error_type": "omission",
-        "severity": "major"
+        "field": "instructions",
+        "expected": "VO pela manhã, dose decrescente",
+        "got": "tomar pela manhã, com dose decrescente: 20mg por 5 dias, depois 10mg por 3 dias",
+        "error_type": "wrong_extraction",
+        "severity": "minor"
       }
     ]
   },
@@ -1308,12 +1402,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": null,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": null
       },
       "n_gt": 1,
       "n_pred": 1,
@@ -1352,9 +1446,9 @@
       },
       "doctor_name": {
         "expected": "Dr. Fernando Oliveira",
-        "got": "Fernando Oliveira",
+        "got": "Dr. Fernando Oliveira",
         "matched": true,
-        "similarity": 0.895,
+        "similarity": 1.0,
         "critical": false,
         "error_type": null,
         "severity": null
@@ -1374,12 +1468,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 3,
       "n_pred": 3,
@@ -1440,12 +1534,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 1,
       "n_pred": 1,
@@ -1506,12 +1600,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 4,
       "n_pred": 4,
@@ -1572,12 +1666,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 2,
       "n_pred": 2,
@@ -1638,12 +1732,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 4,
       "n_pred": 4,
@@ -1704,12 +1798,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 1.0,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 5,
       "n_pred": 5,
@@ -1770,54 +1864,20 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 0.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": null,
-        "frequency": 1.0,
-        "dosage": 0.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 1,
       "n_pred": 1,
       "n_matched": 1,
-      "errors": [
-        {
-          "med_name": "Nimesulida",
-          "field": "duration_days",
-          "expected": 5,
-          "got": null,
-          "error_type": "omission",
-          "severity": "major"
-        },
-        {
-          "med_name": "Nimesulida",
-          "field": "dosage",
-          "expected": "100mg",
-          "got": "500mg",
-          "error_type": "wrong_extraction",
-          "severity": "major"
-        }
-      ]
+      "errors": []
     },
-    "all_critical_ok": false,
-    "errors": [
-      {
-        "med_name": "Nimesulida",
-        "field": "duration_days",
-        "expected": 5,
-        "got": null,
-        "error_type": "omission",
-        "severity": "major"
-      },
-      {
-        "med_name": "Nimesulida",
-        "field": "dosage",
-        "expected": "100mg",
-        "got": "500mg",
-        "error_type": "wrong_extraction",
-        "severity": "major"
-      }
-    ]
+    "all_critical_ok": true,
+    "errors": []
   },
   {
     "prescription_id": "P027",
@@ -1848,9 +1908,9 @@
       },
       "doctor_name": {
         "expected": "Dr. Thiago Ferreira",
-        "got": "Thiago Ferreira",
+        "got": "Dr. Thiago Ferreira",
         "matched": true,
-        "similarity": 0.882,
+        "similarity": 1.0,
         "critical": false,
         "error_type": null,
         "severity": null
@@ -1870,25 +1930,17 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 1.0,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 0.5,
-        "frequency": 1.0,
-        "dosage": 0.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 2,
       "n_pred": 2,
       "n_matched": 2,
       "errors": [
-        {
-          "med_name": "Tramadol",
-          "field": "dosage",
-          "expected": "50mg",
-          "got": "50 mg",
-          "error_type": "wrong_extraction",
-          "severity": "major"
-        },
         {
           "med_name": "Dipirona",
           "field": "route",
@@ -1896,27 +1948,11 @@
           "got": null,
           "error_type": "omission",
           "severity": "minor"
-        },
-        {
-          "med_name": "Dipirona",
-          "field": "dosage",
-          "expected": "1g",
-          "got": "1 g",
-          "error_type": "wrong_extraction",
-          "severity": "major"
         }
       ]
     },
-    "all_critical_ok": false,
+    "all_critical_ok": true,
     "errors": [
-      {
-        "med_name": "Tramadol",
-        "field": "dosage",
-        "expected": "50mg",
-        "got": "50 mg",
-        "error_type": "wrong_extraction",
-        "severity": "major"
-      },
       {
         "med_name": "Dipirona",
         "field": "route",
@@ -1924,14 +1960,6 @@
         "got": null,
         "error_type": "omission",
         "severity": "minor"
-      },
-      {
-        "med_name": "Dipirona",
-        "field": "dosage",
-        "expected": "1g",
-        "got": "1 g",
-        "error_type": "wrong_extraction",
-        "severity": "major"
       }
     ]
   },
@@ -1986,12 +2014,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 0.5,
-        "instructions": 1.0,
-        "name": 1.0,
-        "route": 0.0,
         "frequency": 1.0,
-        "dosage": 1.0
+        "dosage": 1.0,
+        "name": 1.0,
+        "route": 1.0,
+        "duration_days": 0.5,
+        "instructions": 0.5
       },
       "n_gt": 2,
       "n_pred": 2,
@@ -2001,24 +2029,16 @@
           "med_name": "Amoxicilina + Clavulanato",
           "field": "duration_days",
           "expected": 10,
-          "got": 5,
+          "got": 7,
           "error_type": "wrong_extraction",
           "severity": "major"
         },
         {
           "med_name": "Amoxicilina + Clavulanato",
-          "field": "route",
-          "expected": "oral",
-          "got": null,
-          "error_type": "omission",
-          "severity": "minor"
-        },
-        {
-          "med_name": "Ibuprofeno",
-          "field": "route",
-          "expected": "oral",
-          "got": null,
-          "error_type": "omission",
+          "field": "instructions",
+          "expected": "mesmo se melhorar",
+          "got": "completar os 7 dias mesmo se melhorar",
+          "error_type": "wrong_extraction",
           "severity": "minor"
         }
       ]
@@ -2029,24 +2049,16 @@
         "med_name": "Amoxicilina + Clavulanato",
         "field": "duration_days",
         "expected": 10,
-        "got": 5,
+        "got": 7,
         "error_type": "wrong_extraction",
         "severity": "major"
       },
       {
         "med_name": "Amoxicilina + Clavulanato",
-        "field": "route",
-        "expected": "oral",
-        "got": null,
-        "error_type": "omission",
-        "severity": "minor"
-      },
-      {
-        "med_name": "Ibuprofeno",
-        "field": "route",
-        "expected": "oral",
-        "got": null,
-        "error_type": "omission",
+        "field": "instructions",
+        "expected": "mesmo se melhorar",
+        "got": "completar os 7 dias mesmo se melhorar",
+        "error_type": "wrong_extraction",
         "severity": "minor"
       },
       {
@@ -2110,12 +2122,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 0.0,
-        "name": 1.0,
-        "route": 1.0,
         "frequency": 1.0,
-        "dosage": 1.0
+        "dosage": 1.0,
+        "name": 1.0,
+        "route": 0.0,
+        "duration_days": 1.0,
+        "instructions": 0.0
       },
       "n_gt": 3,
       "n_pred": 3,
@@ -2135,6 +2147,14 @@
           "expected": "manhã",
           "got": "tomar de manhã",
           "error_type": "wrong_extraction",
+          "severity": "minor"
+        },
+        {
+          "med_name": "Hidroclorotiazida",
+          "field": "route",
+          "expected": "oral",
+          "got": null,
+          "error_type": "omission",
           "severity": "minor"
         },
         {
@@ -2163,6 +2183,14 @@
         "expected": "manhã",
         "got": "tomar de manhã",
         "error_type": "wrong_extraction",
+        "severity": "minor"
+      },
+      {
+        "med_name": "Hidroclorotiazida",
+        "field": "route",
+        "expected": "oral",
+        "got": null,
+        "error_type": "omission",
         "severity": "minor"
       },
       {
@@ -2226,12 +2254,12 @@
       "precision": 1.0,
       "f1": 1.0,
       "field_recall": {
-        "duration_days": 1.0,
-        "instructions": 1.0,
+        "frequency": 0.833,
+        "dosage": 1.0,
         "name": 1.0,
         "route": 1.0,
-        "frequency": 0.833,
-        "dosage": 1.0
+        "duration_days": 1.0,
+        "instructions": 1.0
       },
       "n_gt": 6,
       "n_pred": 6,

@@ -4,7 +4,7 @@
   "api_successful": 30,
   "api_failed": 0,
   "overall": {
-    "prescription_success_rate_pct": 80.0,
+    "prescription_success_rate_pct": 83.3,
     "med_recall": 1.0,
     "med_precision": 1.0,
     "med_f1": 1.0,
@@ -12,11 +12,11 @@
     "date_accuracy_pct": 100.0,
     "doctor_crm_accuracy_pct": 100.0,
     "name_recall": 1.0,
-    "dosage_recall": 0.917,
-    "route_recall": 0.935,
-    "frequency_recall": 0.978,
-    "instructions_recall": 0.931,
-    "duration_days_recall": 0.95
+    "dosage_recall": 0.983,
+    "route_recall": 0.924,
+    "frequency_recall": 0.969,
+    "instructions_recall": 0.853,
+    "duration_days_recall": 0.983
   },
   "by_production_method": {
     "canva_manual": {
@@ -28,14 +28,14 @@
     },
     "script": {
       "n": 15,
-      "prescription_success_rate": 93.3,
+      "prescription_success_rate": 86.7,
       "med_recall": 1.0,
       "med_precision": 1.0,
       "med_f1": 1.0
     },
     "manuscrita_real": {
       "n": 5,
-      "prescription_success_rate": 20.0,
+      "prescription_success_rate": 60.0,
       "med_recall": 1.0,
       "med_precision": 1.0,
       "med_f1": 1.0
